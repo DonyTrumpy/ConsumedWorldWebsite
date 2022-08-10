@@ -1,0 +1,257 @@
+  /* GENERAL SETTINGS */
+
+  * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family:sans-serif;
+  }
+
+  body{
+    margin:0; padding:0; height:100vh;overflow-x: hidden;background:#fff;color:#40683F;
+    font-family: 'Poppins', sans-serif;
+  }
+
+
+  ::selection{
+  background-color:#40683F;
+  color:#DBF9D8;
+  }
+
+
+  ::-webkit-scrollbar {
+  	background: #ddd;
+  	width: 12px;
+  }
+
+  ::-webkit-scrollbar-track {
+  	box-shadow: inset 0 0 10px #00000070;
+  }
+
+  ::-webkit-scrollbar-thumb {
+  	background: #40683F;
+  }
+
+  /* HEADER */
+
+  header{ position:fixed;top:0;left:0;width:100%;background:#DBF9D8;z-index: 300;}
+  #Logo{position:absolute; top:10px; left:30px;height:48px;}
+  header ul{display:flex;justify-content: flex-end; max-width:1200px;margin: 0 auto;padding:0;}
+  header ul li{list-style:none;position:relative;padding:10px 15px;transition:0.5s; box-sizing: border-box; border-right: 1px solid rgba(255,255,255,.2);}
+  header ul li:hover{background:#0FA833;}
+  header ul li:last-child{border-right:none;}
+  header ul li a{text-decoration:none;padding: 0 20px;color:#40683F;}
+
+  header ul li ul{position:absolute;top:38px;left:0;background:#0FA833;display:block;width:200px;
+    transition:0.5s;opacity:0;visibility:hidden;}
+  header ul li:hover ul{opacity:1;visibility:visible;background:#DBF9D8;}
+  header ul li ul li{border-right:none;border-bottom:1px solid rgba(255,255,255,0.2);}
+
+
+  /* JOURNEY */
+  .HomeSale{position: relative;top: 0;height:800px;width:100%;
+  background-size: cover;background-clip: border-box;background-repeat: no-repeat;
+   z-index: 0;background-attachment: fixed;background-image: url("../images/explore.jpg");
+  }
+
+
+  .Awesomeness{ position:relative;top:90px;left:50px;color:#0FA833;z-index: -10;}
+  .Awesomeness h1{font-size:88px; color:#fff;z-index:-2;position: absolute;top:150px;left:20%; }
+  .Awesomeness a{text-decoration: none;color:#f9f9fa;padding: 10px;padding-right: 20px;padding-left:20px;background-color:#0FA833;border-radius: 36px;
+    position: absolute;top:330px;left:20%;}
+  .Awesomeness a:hover{transition: 0.3s;background-color: #40683F;}
+
+
+
+
+  /* SHAPE DIVIDER */
+  .custom-shape-divider-bottom-1652709788 {
+      position: absolute;
+      top: 750px;
+      left: 0;
+      width: 101%;
+      overflow: hidden;
+      line-height: 0;
+      transform: rotate(180deg);
+  }
+
+  .custom-shape-divider-bottom-1652709788 svg {
+      position: relative;
+      display: block;
+      width: calc(181% + 1.3px);
+      height: 95px;
+      transform: rotateY(180deg);
+  }
+
+  .custom-shape-divider-bottom-1652709788 .shape-fill {
+      fill: #fff;
+  }
+/* DESCRIPTION OF THE WEBSITE AND IT'S GOALS */
+
+  .Description{width:100%;height:140px;position: relative;}
+  .Description h4{position: absolute;top:70px;left:12%;}
+  .Text{position: absolute;top:160px;left:12%;}
+  #text2{top:235px;}#text3{top:310px;}
+
+  .ExtraWord{position: relative;width:75%;top:250px;left:12%;}
+
+
+
+
+  /* CONTACT ME */
+  .Contact{position: relative;height:700px;top:260px;color:#f0f0f5;}
+  .containerr{
+                  position: relative;
+  								top:50px;
+                  width:80%;
+                  margin:5vw;
+                  height:600px;
+                  background:#40683F;
+                  display:flex;
+                  justify-content: space-between;
+                  align-items:center;
+                  border-radius: 12px;
+                  left: 5vw;
+  								box-shadow: 5px 5px 15px #fff;
+              }
+
+              .FormBox{
+                  margin:0;
+                  padding:0;
+                  font-family:sans-serif;
+                  box-sizing: border-box;
+                  width:50%;
+                  display:flex;
+                  justify-content:center;
+                  align-items:center;
+              }
+
+              form {
+                  position:relative;
+                  width: 100%;
+                  padding: 0 0 0 75px;
+              }
+
+              #h2 {
+                  color: #fff;
+                  font-weight:500;
+                  font-size:2em;
+                  text-transform:uppercase;
+                  letter-spacing:2px;
+                  margin-bottom:40px;
+              }
+
+              .InputBox{
+                  position:relative;
+                  margin-bottom:40px;
+              }
+
+              #Submit{
+                  margin-bottom:0px;
+              }
+
+              input, textarea{
+                  position:relative;
+                  background:transparent;
+                  outline:none;
+                  border:none;
+                  width: 30vw;
+                  color:#fff;
+                  padding-bottom:10px;
+                  font-size:16px;
+                  letter-spacing:1px;
+                  font-weight:300;
+                  border-bottom:2px solid rgba(255,255,255,0.5);
+                  font-family: sans-serif;
+              }
+
+              textarea{
+                  height: 100px;
+                  width: 40vw;
+              }
+
+              #submittt{
+                  padding:8px 20px;
+                  margin-top: 10px;
+                  width:150px;
+                  cursor:pointer;
+                  background:#0FA833;
+                  color:#fff;
+                  font-size:18px;
+                  font-weight:400;
+                  border:none;
+                  text-transform: uppercase;
+                  letter-spacing: 4px;
+                  border-radius: 15px;
+              }
+
+              #submittt:hover{
+      					transition: 0.3s;filter: brightness(1.15);
+              }
+
+              .spann{
+                  position: absolute;
+                  left:0;
+                  font-size:16px;
+                  font-weight: 300;
+                  display: inline-block;
+                  pointer-events: none;
+                  letter-spacing: 1px;
+                  color:rgba(255,255,255,0.5);
+                  transition: all 0.2s;
+              }
+
+              input:focus~span, textarea:focus~span,
+              input:valid~span, textarea:valid~span{
+                  transform: translateY(-24px);
+                  color:#fff;
+                  font-size:14px;
+              }
+
+              input:focus, textarea:focus,
+              input:valid, textarea:valid{
+                  border-bottom-color: #fff;
+              }
+
+              .aa{position: absolute;left:55%;}
+                  .ab{position: absolute;left:63%;}
+                  .ac{position: absolute;left:71%;}
+
+
+          #success{position: absolute;top:48%;left:60vw;width: 25vw;}
+          #failed{position: absolute;top:48%;left:60vw;}
+
+
+@media screen and (max-width:1050px){
+  .Awesomeness h1{font-size: 68px;top:200px;}
+  .Awesomeness a{top:350px;}
+}
+
+@media screen and (max-width:900px){
+  .Awesomeness h1{left:10%}
+  .Awesomeness a{left:10%;}
+}
+
+@media screen and (max-width:768px) {
+    #Logo{top:60px;left:50%;}
+    header ul{display:block;}header ul li{display:block;}header ul li ul{width:100%;z-index:1;}
+    .Awesomeness h1{top:280px;left:2%;font-size:50px;}
+    .Awesomeness a{top:400px;}
+    }
+
+@media screen and (max-width:600px){
+  .Awesomeness h1{left:0;font-size:40px;}
+  .Description{height:300px;}
+}
+
+@media screen and (max-width:450px){
+  .Awesomeness h1{font-size:32px;}
+  .Text{top:180px;left:12%;}
+  #text2{top:300px;}#text3{top:420px;}
+  #h2{font-size: 1em;margin-bottom: 20px;}
+}
+
+@media screen and (max-width:370px){
+  .Awesomeness h1{left:-25px;}
+  .Awesomeness a{left:7%;}
+}

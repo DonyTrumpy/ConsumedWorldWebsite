@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../images/PPIcon.png">
+    <title>Healthy Life</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="../css/css_findings.css">
+
+    <style media="screen">
+      .text{position: relative;width:80%;left:15%;}
+      .long{position: relative;top:100px;}
+      .long h3{margin-bottom:30px;}
+      .long p{margin-bottom:20px;}
+      .life_expectancy_long{margin-bottom:50px;}
+      .carousel{position:relative;top:200px;margin-bottom:200px;}
+      .first_carousel{left:10%;}
+      .second_carousel{left:10%;}
+      .fourth_carousel{left:10%;}
+      .fifth_carousel{left:10%;}
+      .slider{width:90vw;}
+      .slider_fourth{width:90vw;}
+      .chart_container{position: relative;top:200px;left:5%;width:90%;}
+      .foot{position: relative;top:100px;height:300px;width:100%;}
+
+
+      #radio7:checked ~ .first{
+        margin-left: -60%;
+      }
+
+    </style>
+
+  </head>
+  <body>
+
+    <!--  HEADER  -->
+
+    <header>
+      <img src="../images/logo_black.png" alt="Logo" id="Logo" onclick="window.location='../index.php'">
+      <ul>
+        <li> <a href="../index.php">Home</a> </li>
+        <li> <a href="#">Health</a> <ul>
+          <li> <a href="../health/findings.html">Findings</a> </li>
+          <li> <a href="../health/bmi.html">BMI</a> </li>
+          <li> <a href="../health/lifestyle.html">Lifestyle</a> </li>
+          <li> <a href="../health/diseases.html">Diseases</a> </li>
+          <li> <a href="../health/healthy_life.html">Healthy life</a> </li>
+          <li> <a href="../health/air_pollution.html">Air pollution</a> </li>
+          <li> <a href="../health/DataCleaning.html">Data cleaning</a> </li>
+        </ul> </li>
+        <li> <a href="#">Coming soon</a>
+          <ul>
+            <li> <a href="#">Consumption</a> </li>
+            <li> <a href="#">Production</a> </li>
+            <li> <a href="#">Wealth</a> </li>
+            <li> <a href="#">Going green</a> </li>
+          </ul>
+        </li>
+        <li> <a href="../index.php#Contact">Contact</a> </li>
+      </ul>
+    </header>
+
+    <!-- LITTLE ALERT WHEN LANDING ON THE PAGE TO MAKE SURE USER SEE IMPORTANT MESSAGE  -->
+
+    <div class="alert">
+      <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+    <p> <strong>Attention!</strong> The information displayed on this website is only a superficial glimpse at the data.
+    <br><br> If you wish to see the PowerBi reports with the full dashboards, better visuals, better experience and drill through the data, do not hesitate to contact me!</p>
+    <p>Also, the user experience for phone users on this website is limited. So, if you desire to see the visuals in their full shape please consider using a tablet or computer.</p>  <br><br> <a href="../index.php#Contact">Contact</a>
+    </div>
+
+    <!--  INTRODUCTION  -->
+
+    <div class="life_expectancy long text">
+      <h2>Let's talk about habits in consumption!</h2>
+      <br>
+      <h3>To start, we can discuss alcohol consumption:</h3>
+      <br>
+      <p>As we can see here below, Northern- and Western Europe absolutely love alcohol, while Eastern- and Southern Europe are less enthousiastic about this drug.</p>
+      <p>The most alcoholic countries include: Finland, Norway, Denmark and Luxembourg.</p>
+      <p>While the most sober countries include Italy, Greece and Spain. This surprised me since those countries include many "party" travel destinations, but I guess the locals themselves tend to be more reserved.</p>
+      <p>Maybe it is time to let go the cliché of the drunk Polish guy with his vodka.</p>
+      <br>
+      <p>What should be said, is how shocking the Norway's data looks; They have almost 85% of their population drinking heavily at least once per month! I hope this does not include children. Apparently there is 0% people drinking heavily less than once per month, which might point to an anomaly.</p>
+      <p>Maybe this is the correct data, maybe there was a difference in collecting the data or maybe a typing error. The total percentages add up to 100% so I will be waiting for newer results to compare.</p>
+      <p>In all cases, if Norway's government needs additional tax money, I believe we have here a pretty good revenue source.</p>
+      <br>
+      <p>Populations in which people drink heavily on a more frequent basis tend to show less cases of deaths because of diabetes (-0.52).</p>
+      <p>This does not consider the number of people with diabetes, only the death toll. It might not actually be that heavy drinking cures diabetes, but rather a better healthcare system or other factors.</p>
+    </div>
+
+    <!--  FIRST SLIDER WITH GRAPHS TO LOOK AT ALCOHOL CONSUMPTION  -->
+
+    <div class="first_carousel carousel">
+
+<!--image slider start-->
+    <div class="slider">
+      <div class="slides">
+        <!--radio buttons start-->
+        <input type="radio" name="radio-btn" id="radio1">
+        <input type="radio" name="radio-btn" id="radio2">
+        <input type="radio" name="radio-btn" id="radio3">
+        <input type="radio" name="radio-btn" id="radio7">
+        <!--radio buttons end-->
+        <!--slide images start-->
+        <div class="slide first" id="slide1">
+          <div class="chart_container_week">
+            <canvas id="myWeeklyDrinkingChart"></canvas>
+          </div>
+        </div>
+        <div class="slide" id="slide2">
+          <div class="chart_container_month">
+            <canvas id="myMonthlyDrinkingChart"></canvas>
+          </div>
+        </div>
+        <div class="slide" id="slide3">
+          <div class="chart_container_year">
+            <canvas id="myYearlyDrinkingChart"></canvas>
+          </div>
+        </div>
+        <div class="slide" id="slide7">
+          <div class="chart_container_never">
+            <canvas id="myNeverDrinkingChart"></canvas>
+          </div>
+        </div>
+
+        <!--slide images end-->
+
+      </div>
+      <!--manual navigation start-->
+      <div class="navigation-manual radios_first_carousel">
+        <label for="radio1" class="manual-btn">Once a week or more</label>
+        <label for="radio2" class="manual-btn">Once a month or more</label>
+        <label for="radio3" class="manual-btn">Once a year or more</label>
+        <label for="radio7" class="manual-btn">Never</label>
+      </div>
+      <!--manual navigation end-->
+    </div>
+    <!--image slider end-->
+    </div>
+
+
+<script>
+  const labels_weekly_drinking = ["Finland","Norway","Luxembourg","United Kingdom","Denmark","Belgium",
+"Netherlands","Ireland","Germany","Slovenia","France","Portugal","Czechia","Sweden","Hungary",
+"Estonia","Latvia","Lithuania","Spain","Iceland","Slovakia","Poland","Italy","Greece"];
+
+const labels_monthly_drinking = ["Norway","Denmark","Germany","Luxembourg","Finland","Iceland",
+"Belgium","Ireland","Slovenia","Czechia","France","Poland","Sweden","Lithuania","Netherlands","United Kingdom",
+"Latvia","Estonia","Portugal","Slovakia","Hungary","Greece","Spain","Italy"];
+
+const labels_yearly_drinking = ["Denmark","Czechia","Iceland","Finland","Poland","Sweden","Ireland",
+"United Kingdom","Estonia","Lithuania","Germany","Luxembourg","Slovenia","Belgium","Slovakia","Hungary",
+"France","Latvia","Portugal","Spain","Italy","Greece","Netherlands","Norway"];
+
+const labels_never_drinking = ["Italy","Greece","Spain","Netherlands","Portugal","Latvia","Slovakia",
+"Hungary","Estonia","France","Lithuania","Slovenia","Poland","United Kingdom","Sweden","Belgium",
+"Ireland","Czechia","Germany","Iceland","Luxembourg","Finland","Denmark","Norway"];
+
+  const data_weekly_drinking = {
+    labels: labels_weekly_drinking,
+    datasets: [{
+      label: "Percentage of people drinking heavily at least once a week.",
+      barThickness: 8,
+      data: [11.0,11.0,10.5,9.7,9.1,7.6,5.9,5.6,5.0,4.5,4.1,4.0,3.9,3.8,3.7,2.9,2.7,2.5,
+1.6,1.5,1.4,1.1,0.9,0.3],
+      backgroundColor: ["#EA961C","#EA961C","#EA961C","#EA961C","#EA961C","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED", "#ECF1ED","#ECF1ED","#ECF1ED", "#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED",
+      "#ECF1ED","#ECF1ED","#ECF1ED","#00C57C","#00C57C","#00C57C" ]
+    }]
+  };
+
+  const data_monthly_drinking = {
+    labels: labels_monthly_drinking,
+    datasets: [{
+      label: "Percentage of people drinking heavily at least once a month.",
+      barThickness: 8,
+      data: [73.4,28.7,25.4,23.8,22.9,21.8,19.9,18.8,18.2,16.9,16.4,15.8,15.0,13.4,13.3,
+12.4,11.5,11.3,10.6,10.5,9.6,5.7,4.4,3.4],
+      backgroundColor: ["#EA961C","#EA961C","#EA961C","#EA961C","#EA961C","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED", "#ECF1ED","#ECF1ED","#ECF1ED", "#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED",
+      "#ECF1ED","#ECF1ED","#ECF1ED","#00C57C","#00C57C","#00C57C" ]
+    }]
+  };
+
+  const data_yearly_drinking = {
+    labels: labels_yearly_drinking,
+    datasets: [{
+      label: "Percentage of people drinking heavily at least once a year.",
+      barThickness: 8,
+      data: [33.9,30.2,29.9,28.9,28.4,27.3,25.5,23.6,22.9,22.5,22.4,22.2,20.6,19.0,19.0,18.2,
+17.3,16.4,15.8,10.8,9.5,9.3,4.8,0],
+      backgroundColor: ["#EA961C","#EA961C","#EA961C","#EA961C","#EA961C","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED", "#ECF1ED","#ECF1ED","#ECF1ED", "#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED",
+      "#ECF1ED","#ECF1ED","#ECF1ED","#00C57C","#00C57C","#00C57C" ]
+    }]
+  };
+
+  const data_never_drinking = {
+    labels: labels_never_drinking,
+    datasets: [{
+      label: "Percentage of people who never drank heavily in the last year.",
+      barThickness: 8,
+      data: [86.3,84.7,83.1,75.9,69.6,69.4,69.1,68.4,62.9,62.3,61.6,56.7,54.7,54.4,53.8,53.4,
+50.1,49.0,47.2,46.8,43.5,37.3,28.3,15.6],
+      backgroundColor: ["#00C57C","#00C57C","#00C57C","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED", "#ECF1ED","#ECF1ED","#ECF1ED", "#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED",
+      "#ECF1ED","#ECF1ED","#ECF1ED","#EA961C","#EA961C","#EA961C","#EA961C","#EA961C"]
+    }]
+  };
+
+
+  const config_weekly_drinking = {
+    type: 'bar',
+    data: data_weekly_drinking,
+    options: {
+      indexAxis: 'y',
+      scales: {
+  x: {
+    grid: {
+      display: false
+    }
+  },
+  y: {
+    grid: {
+      display: false
+    }
+  }
+}
+    },
+
+  };
+
+  const config_monthly_drinking = {
+    type: 'bar',
+    data: data_monthly_drinking,
+    options: {
+      indexAxis: 'y',
+      scales: {
+  x: {
+    grid: {
+      display: false
+    }
+  },
+  y: {
+    grid: {
+      display: false
+    }
+  }
+}
+    },
+
+  };
+
+  const config_yearly_drinking = {
+    type: 'bar',
+    data: data_yearly_drinking,
+    options: {
+      indexAxis: 'y',
+      scales: {
+  x: {
+    grid: {
+      display: false
+    }
+  },
+  y: {
+    grid: {
+      display: false
+    }
+  }
+}
+    },
+
+  };
+
+  const config_never_drinking = {
+    type: 'bar',
+    data: data_never_drinking,
+    options: {
+      indexAxis: 'y',
+      scales: {
+  x: {
+    grid: {
+      display: false
+    }
+  },
+  y: {
+    grid: {
+      display: false
+    }
+  }
+}
+    },
+
+  };
+
+
+  const myWeeklyDrinkingChart = new Chart(
+    document.getElementById('myWeeklyDrinkingChart'),
+    config_weekly_drinking
+  );
+
+  const myMonthlyDrinkingChart = new Chart(
+    document.getElementById('myMonthlyDrinkingChart'),
+    config_monthly_drinking
+  );
+
+  const myYearlyDrinkingChart = new Chart(
+    document.getElementById('myYearlyDrinkingChart'),
+    config_yearly_drinking
+  );
+
+  const myNeverDrinkingChart = new Chart(
+    document.getElementById('myNeverDrinkingChart'),
+    config_never_drinking
+  );
+
+
+</script>
+
+
+
+<!--  THIS IS THE SECOND GRAPH SLIDER TO LOOK AT THE LEVEL OF SMOKING OF EACH COUNTRY  -->
+
+<div class="life_expectancy_long long text">
+  <h3>Eastern Europe's prefered drug:</h3>
+  <p>As have just seen, Southern- and Eastern Europe were not that enthousiastic about alcohol, but this does not mean they do not have another drug at heart: cigarettes.</p>
+  <p>Here, the table turns as we see Western- and Northern Europe being very limited smokers, while Southern- and Eastern Europe have about 20% their population smoking.</p>
+  <p>When I say, the table turns, it is almost like a mirror; Countries that love to drink heavily tend not to smoke and the inverse is also true. Heavy smokers and heavy drinkers have a -0.58 correlation. Also, populations with a higher percentage of heavy smokers have a 0.65 correlation with never drinking.</p>
+</div>
+
+<div class="second_carousel carousel">
+
+
+<!--image slider start-->
+<div class="slider">
+  <div class="slides">
+    <!--radio buttons start-->
+    <input type="radio" name="radio-btn" id="radio4">
+    <input type="radio" name="radio-btn" id="radio5">
+    <input type="radio" name="radio-btn" id="radio6">
+    <!--radio buttons end-->
+    <!--slide images start-->
+    <div class="slide second" id="slide4">
+      <div class="chart_container_total_smoking">
+        <canvas id="myTotalSmokingChart"></canvas>
+      </div>
+    </div>
+    <div class="slide" id="slide5">
+      <div class="chart_container_less_smoking">
+        <canvas id="myLessSmokingChart"></canvas>
+      </div>
+    </div>
+    <div class="slide" id="slide6">
+      <div class="chart_container_more_smoking">
+        <canvas id="myMoreSmokingChart"></canvas>
+      </div>
+    </div>
+
+    <!--slide images end-->
+
+  </div>
+  <!--manual navigation start-->
+  <div class="navigation-manual-two radios_first_carousel">
+    <label for="radio4" class="manual-btn-two">Total smoking percentage</label>
+    <label for="radio5" class="manual-btn-two">Lighter smokers</label>
+    <label for="radio6" class="manual-btn-two">Heavy smokers</label>
+  </div>
+  <!--manual navigation end-->
+</div>
+<!--image slider end-->
+</div>
+
+  <script type="text/javascript">
+  const labels_total_smoking = ["Greece","Latvia","Germany","Slovakia","Spain","Hungary","Czechia",
+"Estonia","Poland","Lithuania","France","Slovenia","Italy","Belgium","Netherlands","Ireland","United Kingdom",
+"Denmark","Portugal","Luxembourg","Norway","Finland","Iceland","Sweden"];
+
+  const labels_less_smoking = ["Slovakia","Latvia","Spain","Germany","Czechia","France","Estonia",
+"Lithuania","Greece","Hungary","Italy","Netherlands","Slovenia","United Kingdom","Poland","Ireland",
+"Belgium","Denmark","Norway","Portugal","Luxembourg","Finland","Iceland","Sweden"];
+
+  const labels_more_smoking = ["Greece","Poland","Germany","Latvia","Hungary","Slovenia","Czechia",
+"Estonia","Slovakia","Lithuania","Belgium","Spain","Italy","France","Ireland","Portugal","United Kingdom","Denmark",
+"Luxembourg","Netherlands","Finland","Iceland","Norway","Sweden"];
+
+
+  const data_total_smoking = {
+  labels: labels_total_smoking,
+  datasets: [{
+    label: "Total percentage of smoking people",
+    barThickness: 8,
+    data: [23.6,22.1,21.9,20.4,19.7,19.3,19.3,18.9,18.4,18.4,17.8,16.6,16.5,14.6,14.6,13.8,
+13.7,11.7,11.5,10.5,10.2,9.9,7.5,6.4],
+    backgroundColor: ["#EA961C","#EA961C","#EA961C","#EA961C", "#EA961C","#9BB0A5","#9BB0A5","#9BB0A5", "#9BB0A5","#9BB0A5", "#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5",
+    "#00C57C","#00C57C", "#00C57C"]
+  }]
+  };
+
+  const data_less_smoking = {
+  labels: labels_less_smoking,
+  datasets: [{
+    label: "Percentage of people smoking less than 20 cigarettes per day",
+    barThickness: 8,
+    data: [84.7,84.3,80.6,80.3,80.1,79.7,78.5,77.8,77.6,77.4,77.0,76.0,75.8,74.8,74.4,74.0,72.8,
+  70.8,70.5,70.2,69.8,69.0,66.0,65.7,65.4,64.9,64.6,61.3,55.7,54.7,49.5],
+
+    backgroundColor: ["#EA961C","#EA961C","#EA961C","#EA961C", "#EA961C","#9BB0A5","#9BB0A5","#9BB0A5", "#9BB0A5","#9BB0A5", "#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5",
+    "#00C57C","#00C57C", "#00C57C"]
+  }]
+  };
+
+  const data_more_smoking = {
+  labels: labels_more_smoking,
+  datasets: [{
+    label: "Percentage of people smoking 20 cigarettes or more per day",
+    barThickness: 8,
+    data: [10.8,8.6,7.8,7.2,6.5,5.9,5.4,5.4,5.3,5.2,4.9,4.9,4.7,4.1,4.1,4.0,3.6,3.1,3.0,
+2.9,2.8,2.0,1.8,1.0],
+
+    backgroundColor: ["#EA961C","#EA961C","#EA961C","#EA961C", "#EA961C","#9BB0A5","#9BB0A5","#9BB0A5", "#9BB0A5","#9BB0A5", "#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5",
+    "#00C57C","#00C57C", "#00C57C"]
+  }]
+  };
+
+
+
+
+
+  const config_total_smoking = {
+  type: 'bar',
+  data: data_total_smoking,
+  options: {
+    indexAxis: 'y',
+    scales: {
+            x: {
+              grid: {
+                display: false
+              }
+            },
+            y: {
+              grid: {
+                display: false
+              }
+            }
+          }
+      },
+
+    };
+
+    const config_less_smoking = {
+      type: 'bar',
+      data: data_less_smoking,
+      options: {
+        indexAxis: 'y',
+        scales: {
+                x: {
+                  grid: {
+                    display: false
+                  }
+                },
+                y: {
+                  grid: {
+                    display: false
+                  }
+                }
+              }
+          },
+
+        };
+
+        const config_more_smoking = {
+          type: 'bar',
+          data: data_more_smoking,
+          options: {
+            indexAxis: 'y',
+            scales: {
+                    x: {
+                      grid: {
+                        display: false
+                      }
+                    },
+                    y: {
+                      grid: {
+                        display: false
+                      }
+                    }
+                  }
+              },
+
+            };
+
+
+
+  const myTotalSmokingChart = new Chart(
+  document.getElementById('myTotalSmokingChart'),
+  config_total_smoking
+  );
+
+  const myLessSmokingChart = new Chart(
+  document.getElementById('myLessSmokingChart'),
+  config_less_smoking
+  );
+
+  const myMoreSmokingChart = new Chart(
+  document.getElementById('myMoreSmokingChart'),
+  config_more_smoking
+  );
+
+  </script>
+
+
+<!--  THE THIRD CAROUSEL NOW TAKES A LOOK AT FRUITS AND VEGIES' CONSUMPTION  -->
+
+<div class="life_expectancy_long long text">
+  <h3>Who actually follows the rule: 5 fruits and vegies a day keep the doctor away?</h3>
+  <p>As we can see, Eastern- and Northern Europe have a large portion of their population not eating their fruits and vegetables. On top of the list
+  we get: Latvia, Czech Republic, and Luxembourg.</p>
+  <p>The 'better' countries here include Belgium, Spain and Ireland.</p>
+  <br><br>
+  <p>There are some interesting countries, such as the Netherlands,
+    that have as many people eating all their fruits and vegetables as poeple only eating them partially. This larger share of 'eating all their fruits and vegies' explains how the Netherlands scores so poorly on 'eating 1 to 4 portions'.</p>
+    <br>
+    <p>There are small correlations with eating its fruits and vegetables on the population scale such as: </p>
+    <p>Smoking populations are inversely correlated with eating fruits and vegetables (-0.4).</p>
+    <br>
+    <p>The most note worthy correlation though is: Eating more fruits and vegetables is correlated with a healthier liver (0.52).</p>
+</div>
+
+
+<!--  i HAVE NAMED IT FOURTH CAROUSEL SO IT CAN TAKE THE CSS CODE FROM ANOTHER PAGE (CODE OPTIMIZATION) EVEN IF UNDERSTADNING THE CODE BECOMES A BIT MORE AWKWARD  -->
+<div class="fourth_carousel carousel">
+
+
+  <!--image slider start-->
+      <div class="slider_third">
+        <div class="slides_third">
+          <!--radio buttons start-->
+          <input type="radio" name="radio-btn-third" id="radio8">
+          <input type="radio" name="radio-btn-third" id="radio9">
+          <input type="radio" name="radio-btn-third" id="radio10">
+          <!--radio buttons end-->
+          <!--slide images start-->
+          <div class="slide_third third" id="slide8">
+            <div class="chart_container_zero_fruits">
+              <canvas id="myZeroFruitsChart"></canvas>
+            </div>
+          </div>
+          <div class="slide_third" id="slide9">
+            <div class="chart_container_medium_fruits">
+              <canvas id="myMediumFruitsChart"></canvas>
+            </div>
+          </div>
+          <div class="slide_third" id="slide10">
+            <div class="chart_container_yeey_fruits">
+              <canvas id="myYeeyFruitsChart"></canvas>
+            </div>
+          </div>
+
+          <!--slide images end-->
+
+        </div>
+        <!--manual navigation start-->
+        <div class="navigation-manual-third radios_first_carousel">
+          <label for="radio8" class="manual-btn-third">Eating 0 portions</label>
+          <label for="radio9" class="manual-btn-third">Eating 1 to 4 portions</label>
+          <label for="radio10" class="manual-btn-third">Eating 5 or more portions</label>
+        </div>
+        <!--manual navigation end-->
+      </div>
+      <!--image slider end-->
+      </div>
+<script type="text/javascript">
+const labels_zero_fruits = ["Latvia","Czechia","Luxembourg","United Kingdom","Netherlands","Slovakia",
+"Lithuania","Estonia","Denmark","Sweden","Finland","Poland","Hungary","Iceland","Germany","Greece",
+"Slovenia","Norway","Portugal","France","Italy","Spain","Ireland","Belgium"];
+
+const labels_medium_fruits = ["Belgium","Italy","Spain","Slovenia","Norway","Portugal","Iceland",
+"Germany","Hungary","France","Sweden","Greece","Poland","Slovakia","Finland","Ireland","Estonia",
+"Czechia","Lithuania","Latvia","Denmark","United Kingdom","Luxembourg","Netherlands"];
+
+const labels_yeey_fruits = ["Ireland","Netherlands","Denmark","France","United Kingdom","Lithuania",
+"Belgium","Portugal","Luxembourg","Finland","Estonia","Greece","Germany","Spain","Italy","Iceland",
+"Norway","Poland","Slovakia","Hungary","Czechia","Sweden","Latvia","Slovenia"];
+
+
+const data_zero_fruits = {
+labels: labels_zero_fruits,
+datasets: [{
+  label: "Percentage of people eating less than a portion of fruits and vegetables daily.",
+  barThickness: 8,
+  data: [53.9,48.2,48.1,43.3,41.8,41.3,41.0,39.4,38.6,37.7,37.5,37.5,36.3,34.1,33.2,33.1,
+31.9,29.2,27.4,25.2,23.8,23.4,19.0,17.4],
+  backgroundColor: ["#EA961C","#EA961C","#EA961C","#EA961C", "#EA961C","#9BB0A5","#9BB0A5","#9BB0A5", "#9BB0A5","#9BB0A5", "#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5",
+  "#00C57C","#00C57C", "#00C57C"]
+}]
+};
+
+const data_medium_fruits = {
+labels: labels_medium_fruits,
+datasets: [{
+  label: "Percentage of people eating one to four portions of fruits and vegetables daily.",
+  barThickness: 8,
+  data: [67.5,65.7,65.7,62.8,62.2,58.2,56.7,55.9,55.5,55.3,54.6,54.5,53.9,50.2,49.0,48.1,47.3,
+44.1,43.1,38.9,38.5,38.4,38.3,28.7],
+
+  backgroundColor: ["#00C57C","#00C57C", "#00C57C","#9BB0A5","#9BB0A5","#9BB0A5", "#9BB0A5","#9BB0A5", "#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5",
+  "#EA961C","#EA961C","#EA961C","#EA961C", "#EA961C"]
+}]
+};
+
+const data_yeey_fruits = {
+labels: labels_yeey_fruits,
+datasets: [{
+  label: "Percentage of people eating more than five portions of fruits and vegetables daily.",
+  barThickness: 8,
+  data: [32.9,29.5,22.9,19.5,18,15.9,15.1,14.4,13.6,13.5,13.3,12.4,10.9,10.9,10.5,9.1,
+8.6,8.6,8.5,8.2,7.7,7.6,7.2,5.3],
+
+  backgroundColor: ["#00C57C","#00C57C", "#00C57C","#9BB0A5","#9BB0A5","#9BB0A5", "#9BB0A5","#9BB0A5", "#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5",
+  "#EA961C","#EA961C","#EA961C","#EA961C", "#EA961C"]
+}]
+};
+
+
+
+
+
+const config_zero_fruits = {
+type: 'bar',
+data: data_zero_fruits,
+options: {
+  indexAxis: 'y',
+  scales: {
+          x: {
+            grid: {
+              display: false
+            }
+          },
+          y: {
+            grid: {
+              display: false
+            }
+          }
+        }
+    },
+
+  };
+
+  const config_medium_fruits = {
+    type: 'bar',
+    data: data_medium_fruits,
+    options: {
+      indexAxis: 'y',
+      scales: {
+              x: {
+                grid: {
+                  display: false
+                }
+              },
+              y: {
+                grid: {
+                  display: false
+                }
+              }
+            }
+        },
+
+      };
+
+      const config_yeey_fruits = {
+        type: 'bar',
+        data: data_yeey_fruits,
+        options: {
+          indexAxis: 'y',
+          scales: {
+                  x: {
+                    grid: {
+                      display: false
+                    }
+                  },
+                  y: {
+                    grid: {
+                      display: false
+                    }
+                  }
+                }
+            },
+
+          };
+
+
+
+const myZeroFruitsChart = new Chart(
+document.getElementById('myZeroFruitsChart'),
+config_zero_fruits
+);
+
+const myMediumFruitsChart = new Chart(
+document.getElementById('myMediumFruitsChart'),
+config_medium_fruits
+);
+
+const myYeeyFruitsChart = new Chart(
+document.getElementById('myYeeyFruitsChart'),
+config_yeey_fruits
+);
+
+</script>
+
+
+<div class="foot">
+</div>
+
+  </body>
+</html>

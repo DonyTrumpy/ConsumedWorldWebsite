@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../images/PPIcon.png">
+    <title>Data Cleaning</title>
+    <link rel="stylesheet" href="../css/css_findings.css">
+  </head>
+
+<style>
+  .Intro{position:relative; top:150px;width:90%;left:6%;margin-bottom:100px;}
+  .Intro h2{margin-bottom:70px;}
+  .Intro p{margin-top:20px;}
+  .OECD{position:relative; top:150px;width:90%;left:6%;margin-bottom:100px;}
+  .OECD h3{margin-bottom:50px;}
+  .OECD p{margin-top:20px;}
+  .Eurostats{position:relative; top:150px;width:90%;left:6%;margin-bottom:100px;}
+  .Eurostats h3{margin-bottom:50px;}
+  .Eurostats p{margin-top:20px;}
+  .foot{position:relative;top:200px;height:50px;width:100%;}
+</style>
+
+  <body>
+
+     <!--  NAVBAR  -->
+
+    <header>
+      <img src="../images/logo_black.png" alt="Logo" id="Logo" onclick="window.location='../index.php'">
+      <ul>
+        <li> <a href="../index.php">Home</a> </li>
+        <li> <a href="#">Health</a> <ul>
+          <li> <a href="../health/findings.html">Findings</a> </li>
+          <li> <a href="../health/bmi.html">BMI</a> </li>
+          <li> <a href="../health/lifestyle.html">Lifestyle</a> </li>
+          <li> <a href="../health/diseases.html">Diseases</a> </li>
+          <li> <a href="../health/healthy_life.html">Healthy life</a> </li>
+          <li> <a href="../health/air_pollution.html">Air pollution</a> </li>
+          <li> <a href="../health/DataCleaning.html">Data cleaning</a> </li>
+        </ul> </li>
+        <li> <a href="#">Coming soon</a>
+          <ul>
+            <li> <a href="#">Consumption</a> </li>
+            <li> <a href="#">Production</a> </li>
+            <li> <a href="#">Wealth</a> </li>
+            <li> <a href="#">Going green</a> </li>
+          </ul>
+        </li>
+        <li> <a href="../index.php#Contact">Contact</a> </li>
+      </ul>
+    </header>
+
+     <!-- LITTLE TEXT TO INTRODUCE THE DATA SOURCES   -->
+
+    <div class="Intro">
+      <h2>Where is all this data coming from?</h2>
+      <p>First of all, I decided to compare only European because of the lack of consistent worldwide data.</p>
+      <p>I only have 4 big sources: Eurostats, World Bank, OECD, and FAO.</p>
+      <p>These sources provide numerous datasets that are being updated over time. In the future, for the other topics coming (that you can see in the coming soon tab),
+        I will continue to only those 4 sources since I have already seen that they have all the necessary data to dive into.</p>
+      <p>An important note is that I often kept all the good data for my visuals, but made separate datasets with only the matching European countries when trying to make statistical research with the values.</p>
+      <p>Also, there were different datasets, with different time scales with some for example only having 2014 and 2019. For this reason, I only compared datasets on matching scales when comparing countries over time.</p>
+    </div>
+
+    <div class="OECD">
+      <h3>Data from the OECD</h3>
+      <p>From the OECD I decided to take the datasets concerning the life expectancy at 65 years old, the deaths due to diseases, and the level of air pollution.</p>
+      <p>The life expectancy dataset was pretty complete, but they were still a few things to clean.</p>
+      <p>First of all, there was missing data in 2017-2018 for Norway, New-Zealand, Ireland, United Kingdom, Belgium, and France. Since it was not too much data, that there was data in the years afterwards, and that I needed those countries in my search for correlations, I decided to use their 2016 values.</p>
+      <p>Slovakia on the other hand was missing a lot of data (2015-2018), so I decided to drop it. Russia and South Africa also missed some data (2016-2018), but because of their weight on the international level, I decided not to use their data but still keep it on the side with the missing values filled with the dates of the year before.</p>
+      <p>In the end, this dataset was not used, as I found a better and more complete dataset on Eurostats. I still mention it since I kept it on the side to see if the two sets differed much.</p>
+      <br>
+      <br>
+      <p>I also used the dataset concerning the number of deaths by kind disease; For this dataset, there was not enough data for 2020 so I decided to drop it. I do not know if it was because some countries still needed to send in their data or if it was because of perturbations during the pandemic.</p>
+      <p>There was also very little data around influenza and since it is not a very present disease in Europe, I decided to drop it as well.</p>
+      <br>
+      <p>In order to get a scaled comparison of the countries, I only kept the data with the number of deaths per 100 000; I thus dropped the total number of cases and the crude rates.</p>
+      <p>Finally, I removed Turkey because they had a different methodology for every metric.</p>
+      <br>
+      <br>
+      <p>The last dataset I used from the OECD was the number of deaths due to air pollution (again scaled per 100 000).</p>
+      <p>This dataset was ppretty complete, but only had the bigger international countries in addition to Europe.</p>
+      <p>I saw this as something positive and kept it for the visual analysis but made a different dataset solely with European countries so that I could perform statistical research.</p>
+    </div>
+
+    <div class="Eurostats">
+      <h3>Data from Eurostats</h3>
+      <p>This was my bread and butter! I used a lot of datasets from this source since they tended to be complete, included consistently the same countries, the different datasets were on the same time scale and were being updated accordingly.</p>
+      <br>
+      <p>First of all, I used their BMI data.</p>
+      <p>In this dataset, there was no North Macedonia, Montenegro, Albania or Lichtenstein.</p>
+      <p>The rest of the dataset was complete with the exception of Serbia and Turkey. I decided to keep those two since they had good recent data and it was mostly some missing data in the older dates.</p>
+      <p>I thus filled their older missing data with the oldest data value they had. Looking at the other countries and their evolution, together with the latest evolution of those two countries, we can imagine lower percentages than what I filled.</p>
+      <br><br>
+      <p>As mentioned above, I used their dataset around life expectancy at the age of 65 over the one provided by the OECD (which I kept for comparison).</p>
+      <p>Here, the data was perfect with the exception of Croatia: Croatia did not provide any data until 2009, but since 2010 it has provided good values I decided to keep them in.</p>
+      <br><br>
+      <p>Next is the data set around the amount of daily smokers. There was only data for 2014 and 2019. All values were complete for the exception of Serbia and the United Kingdom.</p>
+      <p>Serbia had values for 2019, that I used to fill in for 2014. Inversely, the United Kingdom had values for 2014 that I used to fill in for 2019.</p>
+      <br><br>
+      <p>I encountered the same issue for the data around heavy drinking; Everything was perfect, but there was only data for 2014 and 2019.</p>
+      <p>Here there was missing data for France and the Netherlands in 2014 (so I filled with their 2019 values), and for Finland in 2019 (so I filled with its 2014 values).</p>
+      <br><br>
+      <p>To finish, I had two perfect datasets: the dataset with the share of people being good health, and the dataset around the share of people eating their fruits and vegies</p>
+      <p>The dataset around the cause of death was almost perfect, but there was a ton of missing data for Lichtenstein, Montenegro, Albania, North Macedonia. So, I kept the data with the exception of those countries.</p>
+    </div>
+
+    <div class="foot"></div>
+  </body>
+</html>

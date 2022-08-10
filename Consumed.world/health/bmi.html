@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../images/PPIcon.png">
+    <title>BMI</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="../css/css_findings.css">
+
+    <style media="screen">
+      .text{position: relative;width:80%;left:10%;}
+      .intro{top:100px;} .intro h2{margin-bottom: 30px;}
+      .slider{width:80%;}
+      .first_carousel{top:150px;}
+      .possibilities{top:250px;}
+      .second_carousel{top:350px;}
+
+      .chart_container{position: relative;top:200px;left:5%;width:90%;}
+      .foot{position: relative;top:300px;height:300px;width:100%;}
+
+      @media only screen and (max-width:500px) {.navigation-manual{width:80%;left:10%;}.manual-btn{padding:3px;padding-left:4px;padding-right:4px;}}
+    </style>
+
+  </head>
+  <body>
+
+    <!--  NAVIGATION  -->
+
+    <header>
+      <img src="../images/logo_black.png" alt="Logo" id="Logo" onclick="window.location='../index.php'">
+      <ul>
+        <li> <a href="../index.php">Home</a> </li>
+        <li> <a href="#">Health</a> <ul>
+          <li> <a href="../health/findings.html">Findings</a> </li>
+          <li> <a href="../health/bmi.html">BMI</a> </li>
+          <li> <a href="../health/lifestyle.html">Lifestyle</a> </li>
+          <li> <a href="../health/diseases.html">Diseases</a> </li>
+          <li> <a href="../health/healthy_life.html">Healthy life</a> </li>
+          <li> <a href="../health/air_pollution.html">Air pollution</a> </li>
+          <li> <a href="../health/DataCleaning.html">Data cleaning</a> </li>
+        </ul> </li>
+        <li> <a href="#">Coming soon</a>
+          <ul>
+            <li> <a href="#">Consumption</a> </li>
+            <li> <a href="#">Production</a> </li>
+            <li> <a href="#">Wealth</a> </li>
+            <li> <a href="#">Going green</a> </li>
+          </ul>
+        </li>
+        <li> <a href="../index.php#Contact">Contact</a> </li>
+      </ul>
+    </header>
+
+    <!--  LITTLE MESSAGE TO MAKE SURE THE USERS ARE AWRE OF CERTAIN FEATURES  -->
+
+    <div class="alert">
+      <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+    <p> <strong>Attention!</strong> The information displayed on this website is only a superficial glimpse at the data.
+    <br><br> If you wish to see the PowerBi reports with the full dashboards, better visuals, better experience and drill through the data, do not hesitate to contact me!</p>
+    <p>Also, the user experience for phone users on this website is limited. So, if you desire to see the visuals in their full shape please consider using a tablet or computer</p>  <br><br> <a href="../index.php#Contact">Contact</a>
+    </div>
+
+    <!--  INTRODUCTION ABOUT WHAT BMI IS ALL ABOUT  -->
+
+    <div class="intro text">
+
+    <h2>BMI</h2>
+    <p>The indicator measures the share of obese people based on their body mass index (BMI). BMI is defined as the weight in kilos divided by the square of the height in meters. People aged 18 years or over are considered obese with a BMI equal or greater than 30. Other categories are: underweight (BMI less than 18.5), normal weight (BMI between 18.5 and less than 25), and pre-obese (BMI between 25 and less than 30). The category overweight (BMI equal or greater than 25) combines the two categories pre-obese and obese.</p>
+
+    <p><br>BMI is not a perfect measure. In particular, it can sometimes give a "false positive" score to athletic individuals, whose high BMIs are due not to excess body fat, but to excess muscle. <br>For example, extremely fit NFL quarterback Russell Wilson measured 1,80m tall and 97,5 kg in 2016, which gave him a BMI of 30.0, or obese. <br> NBA superstar and wellness enthusiast Lebron James had a BMI of 27.5 in 2012, which qualified as overweight—a clear misdiagnosis. <br><br> As a result of this inaccuracy, many medical experts are switching to waist-to-height ratio, or WHtR, which compares the circumference of a person's waist to their height. If the waist is more than half the height, (or more than 6/10 the height for those over 50), that person is obese. WHtR is considered much more accurate than BMI, but is also much newer. Over time, as it is adopted by more countries, WHtR could easily replace BMI as the de facto measure of a person's weight health.</p>
+
+    </div>
+
+    <!-- THIS IS THE FIRST SLIDE OF GRAPHS SHOWING THE DIFFERENT DEGREES OF OBESITY BETWEEN COUNTRIES IN THE LAST PUBLISHED YEAR. -->
+
+    <div class="first_carousel">
+
+<!--image slider start-->
+    <div class="slider">
+      <div class="slides">
+        <!--radio buttons start-->
+        <input type="radio" name="radio-btn" id="radio1">
+        <input type="radio" name="radio-btn" id="radio2">
+        <input type="radio" name="radio-btn" id="radio3">
+        <!--radio buttons end-->
+        <!--slide images start-->
+        <div class="slide first" id="slide1">
+          <div class="chart_container_overweight">
+            <canvas id="myOverweightChart"></canvas>
+          </div>
+        </div>
+        <div class="slide" id="slide2">
+          <div class="chart_container_preobese">
+            <canvas id="myPreObeseChart"></canvas>
+          </div>
+        </div>
+        <div class="slide" id="slide3">
+          <div class="chart_container_obese">
+            <canvas id="myObeseChart"></canvas>
+          </div>
+        </div>
+
+        <!--slide images end-->
+
+      </div>
+      <!--manual navigation start-->
+      <div class="navigation-manual radios_first_carousel">
+        <label for="radio1" class="manual-btn">Overweight</label>
+        <label for="radio2" class="manual-btn">Pre-obese</label>
+        <label for="radio3" class="manual-btn">Obese</label>
+      </div>
+      <!--manual navigation end-->
+    </div>
+    <!--image slider end-->
+    </div>
+
+
+<script>
+  const labels_overweight = ["Croatia","Malta","Iceland","Czechia","Hungary","Finland","Turkey","Romania",
+"Slovakia","Latvia","Poland","Slovenia","Greece","Lithuania","Estonia","United Kingdom","Portugal",
+"North Macedonia","Bulgaria","Ireland","Spain","Serbia","Germany","Austria","Sweden","Norway","Denmark",
+"Belgium","Netherlands","Cyprus","Luxembourg","France","Italy"];
+
+const labels_preobese = ["Romania","North Macedonia","Croatia","Bulgaria","Greece","Czechia",
+"Iceland","Poland","Slovakia","Portugal","Slovenia","Finland","Lithuania","Spain","Norway","Turkey",
+"Serbia","Malta","Sweden","Hungary","Netherlands","Latvia","United Kingdom","Austria","Estonia",
+"Cyprus","Germany","Denmark","Belgium","Italy","France","Luxembourg","Ireland"];
+
+const labels_obese = ["Croatia","Malta","Iceland","Czechia","Hungary","Finland","Turkey","Romania",
+"Slovakia","Latvia","Poland","Slovenia","Greece","Lithuania","Estonia","United Kingdom","Portugal",
+"North Macedonia","Bulgaria","Ireland","Spain","Serbia","Germany","Austria","Sweden","Norway","Denmark",
+"Belgium","Netherlands","Cyprus","Luxembourg","France","Italy"];
+
+  const data_overweight = {
+    labels: labels_overweight,
+    datasets: [{
+      label: "Share of overweight people",
+      barThickness: 8,
+      data: [64.8,64.8,62.0,60.0,59.9,59.0,58.8,58.7,58.7,58.3,58.1,58.1,57.6,56.8,56.7,56.1,55.9,
+55.7,54.9,54.4,53.7,53.6,53.5,52.2,51.3,50.6,50.4,50.2,50.0,49.8,48.4,47.2,45.7],
+      backgroundColor: ["#EA961C","#EA961C","#EA961C","#EA961C","#EA961C","#ECF1ED","#ECF1ED","#ECF1ED", "#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED", "#ECF1ED","#ECF1ED","#ECF1ED", "#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED",
+      "#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#00C57C","#00C57C","#00C57C" ]
+    }]
+  };
+
+  const data_preobese = {
+    labels: labels_preobese,
+    datasets: [{
+      label: "Share of pre-obese people",
+      barThickness: 8,
+      data: [47.7,45.2,41.7,41.2,41.0,40.1,39.7,39.1,38.9,38.2,38.2,38.1,37.9,37.8,36.5,36.5,
+36.3,36.1,36.0,35.4,35.4,35.3,35.2,35.0,34.9,34.6,34.5,34.0,33.9,33.9,32.1,31.9,28.6],
+      backgroundColor: ["#EA961C","#EA961C","#EA961C","#EA961C","#EA961C","#ECF1ED","#ECF1ED","#ECF1ED", "#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED", "#ECF1ED","#ECF1ED","#ECF1ED", "#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED",
+      "#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#00C57C","#00C57C","#00C57C" ]
+    }]
+  };
+
+  const data_obese = {
+    labels: labels_obese,
+    datasets: [{
+      label: "Share of obese people",
+      barThickness: 8,
+      data: [28.7,25.9,24.5,23.0,23.0,22.3,22.3,21.8,21.0,20.9,19.9,19.8,19.7,19.0,19.0,18.9,
+17.7,17.3,17.1,16.7,16.5,16.5,16.3,16.0,15.3,15.2,15.0,14.7,14.1,13.6,11.7,10.9,10.5],
+      backgroundColor: ["#EA961C","#EA961C","#EA961C","#EA961C","#EA961C","#ECF1ED","#ECF1ED","#ECF1ED", "#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED", "#ECF1ED","#ECF1ED","#ECF1ED", "#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED",
+      "#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#00C57C","#00C57C","#00C57C" ]
+    }]
+  };
+
+
+  const config_overweight = {
+    type: 'bar',
+    data: data_overweight,
+    options: {
+      indexAxis: 'y',
+      scales: {
+  x: {
+    grid: {
+      display: false
+    }
+  },
+  y: {
+    grid: {
+      display: false
+    }
+  }
+}
+    },
+
+  };
+
+  const config_preobese = {
+    type: 'bar',
+    data: data_preobese,
+    options: {
+      indexAxis: 'y',
+      scales: {
+  x: {
+    grid: {
+      display: false
+    }
+  },
+  y: {
+    grid: {
+      display: false
+    }
+  }
+}
+    },
+
+  };
+
+  const config_obese = {
+    type: 'bar',
+    data: data_obese,
+    options: {
+      indexAxis: 'y',
+      scales: {
+  x: {
+    grid: {
+      display: false
+    }
+  },
+  y: {
+    grid: {
+      display: false
+    }
+  }
+}
+    },
+
+  };
+
+
+
+
+  const myOverweightChart = new Chart(
+    document.getElementById('myOverweightChart'),
+    config_overweight
+  );
+
+  const myPreObeseChart = new Chart(
+    document.getElementById('myPreObeseChart'),
+    config_preobese
+  );
+
+  const myObeseChart = new Chart(
+    document.getElementById('myObeseChart'),
+    config_obese
+  );
+
+
+</script>
+
+
+<!--  lITTLE ASSUMPTIONS ON WHY SOME COUNTRIES SCORE BETTER OR WORSE  -->
+
+<div class="possibilities text">
+
+<p>Obesity rates vary significantly by country as a result of different lifestyles and diets. There is no direct correlation between the obesity rate of a country and its economic status; however, wealthier countries tend to have more resources to implement programs, campaigns, and initiatives to raise awareness and education people about what they are consuming. These are among the healthiest countries globally.</p>
+<p>From the graph above, we can see that the European countries with higher BMI's tend to be located in Eastern Europe.</p>
+<br><br>
+<p>Despite some countries implementing programs, we can observe that the BMI of all countries tends to go up. </p>
+<br><p>Here we can see the top 3 European countries with the highest BMI and the top 3 with the lowest BMI since 2008.</p>
+<br><br><p>There is probably an issue in the way data was classified or collected; As we can see, countries such as Ireland that do not have good BMI scores see a sudden 13.3% cut in pre-obese people in 2019 compared to 2017.</p>
+<br><p>This can be due to 3 things.<br>First possibility, we are dealing with incorrect data. Second possibility, all the pre-obese people got upgraded to being obese. Third possibility and most likely, different countries interpreted differently how to classify the data.
+  <br> Some may have classified obese people as also being pre-obese and overweight, while others may have not mixed the data: you can only be part of one group.</p>
+<br><br> <p>This leeds us to seeing countries, such as Ireland, having a very small share of pre-obese people with a very large share of obese people, and inversely countries, such as Romania and North North Macedonia, having almost no obese people but a lot of pre-obesity.</p>
+</div>
+
+
+<!-- THIS IS THE SECOND GRAPH SLIDE WHERE THE TOP/WORSE COUNTRIES ARE BEING DISPLAYED OVER TIME -->
+
+<div class="second_carousel">
+
+<!--image slider start-->
+<div class="slider">
+  <div class="slides">
+    <!--radio buttons start-->
+    <input type="radio" name="radio-btn" id="radio4">
+    <input type="radio" name="radio-btn" id="radio5">
+    <input type="radio" name="radio-btn" id="radio6">
+    <!--radio buttons end-->
+    <!--slide images start-->
+    <div class="slide second" id="slide4">
+      <div class="chart_container_overweight_overtime">
+        <canvas id="myOverweightTimeChart"></canvas>
+      </div>
+    </div>
+    <div class="slide" id="slide5">
+      <div class="chart_container_preobese_overtime">
+        <canvas id="myPreObeseTimeChart"></canvas>
+      </div>
+    </div>
+    <div class="slide" id="slide6">
+      <div class="chart_container_obese_overtime">
+        <canvas id="myObeseTimeChart"></canvas>
+      </div>
+    </div>
+
+    <!--slide images end-->
+
+  </div>
+  <!--manual navigation start-->
+  <div class="navigation-manual-two radios_first_carousel">
+    <label for="radio4" class="manual-btn-two">Overweight</label>
+    <label for="radio5" class="manual-btn-two">Pre-obese</label>
+    <label for="radio6" class="manual-btn-two">Obese</label>
+  </div>
+  <!--manual navigation end-->
+</div>
+<!--image slider end-->
+</div>
+
+<script>
+
+  const BMI_numbers_overweight_time=[
+    {year:'2008', data:{Croatia:57.4,Malta:59.7,Iceland:57.6,Luxembourg:48.0,France:43.6,Italy:44.9}},
+    {year:'2014', data:{Croatia:57.4,Malta:61.0,Iceland:57.6,Luxembourg:48.0,France:47.2,Italy:44.9}},
+    {year:'2017', data:{Croatia:60.9,Malta:62.2,Iceland:62.0,Luxembourg:49.3,France:46.1,Italy:45.7}},
+    {year:'2019', data:{Croatia:64.8,Malta:64.8,Iceland:62.0,Luxembourg:48.4,France:47.2,Italy:45.7}},
+  ]
+
+  const BMI_numbers_preobese_time=[
+    {year:'2008', data:{Romania:42.4,North_Macedonia:43.6,Croatia:38.7,France:31.4,Luxembourg:32.4,Ireland:37.0}},
+    {year:'2014', data:{Romania:46.4,North_Macedonia:43.6,Croatia:38.7,France:31.9,Luxembourg:32.4,Ireland:37.0}},
+    {year:'2017', data:{Romania:52.5,North_Macedonia:45.2,Croatia:42.6,France:30.7,Luxembourg:33.3,Ireland:41.9}},
+    {year:'2019', data:{Romania:47.7,North_Macedonia:45.2,Croatia:41.7,France:32.1,Luxembourg:31.9,Ireland:28.6}},
+  ]
+
+  const BMI_numbers_obese_time=[
+    {year:'2008', data:{Malta:22.9,Ireland:18.7,Hungary:20.0,Italy:10.8,Romania:7.9,North_Macedonia:9.7}},
+    {year:'2014', data:{Malta:26.0,Ireland:18.7,Hungary:21.2,Italy:10.8,Romania:9.4,North_Macedonia:9.7}},
+    {year:'2017', data:{Malta:25.7,Ireland:15.2,Hungary:20.0,Italy:11.7,Romania:10.4,North_Macedonia:10.5}},
+    {year:'2019', data:{Malta:28.7,Ireland:25.9,Hungary:24.5,Italy:11.7,Romania:10.9,North_Macedonia:10.5}},
+  ]
+
+
+
+  const data_overweight_time = {
+    datasets: [{
+      label: "Croatia's share of overweight people",
+      backgroundColor: '#CB3A13',
+      borderColor: '#CB3A13',
+      data: BMI_numbers_overweight_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Croatia'
+      }
+    },
+
+    {
+      label: "Malta's share of overweight people",
+      backgroundColor: '#CE6548',
+      borderColor: '#CE6548',
+      data: BMI_numbers_overweight_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Malta'
+      }
+    },
+
+    {
+      label: "Iceland's share of overweight people",
+      backgroundColor: '#D18773',
+      borderColor: '#D18773',
+      data: BMI_numbers_overweight_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Iceland'
+      }
+    },
+
+    {
+      label: "Luxembourg's share of overweight people",
+      backgroundColor: '#6FEB85',
+      borderColor: '#6FEB85',
+      data: BMI_numbers_overweight_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Luxembourg'
+      }
+    },
+
+    {
+      label: "France's share of overweight people",
+      backgroundColor: '#3DC255',
+      borderColor: '#3DC255',
+      data: BMI_numbers_overweight_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.France'
+      }
+    },
+
+    {
+      label: "Italy's share of overweight people",
+      backgroundColor: '#05A923',
+      borderColor: '#05A923',
+      data: BMI_numbers_overweight_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Italy'
+      }
+    }
+  ]
+  };
+
+
+  const data_preobese_time = {
+    datasets: [{
+      label: "Romania's share of pre-obese people",
+      backgroundColor: '#CB3A13',
+      borderColor: '#CB3A13',
+      data: BMI_numbers_preobese_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Romania'
+      }
+    },
+
+    {
+      label: "North-Macedonia's share of pre-obese people",
+      backgroundColor: '#CE6548',
+      borderColor: '#CE6548',
+      data: BMI_numbers_preobese_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.North_Macedonia'
+      }
+    },
+
+    {
+      label: "Croatia's share of pre-obese people",
+      backgroundColor: '#D18773',
+      borderColor: '#D18773',
+      data: BMI_numbers_preobese_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Croatia'
+      }
+    },
+
+    {
+      label: "France's share of pre-obese people",
+      backgroundColor: '#6FEB85',
+      borderColor: '#6FEB85',
+      data: BMI_numbers_preobese_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.France'
+      }
+    },
+
+    {
+      label: "Luxembourg's share of pre-obese people",
+      backgroundColor: '#3DC255',
+      borderColor: '#3DC255',
+      data: BMI_numbers_preobese_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Luxembourg'
+      }
+    },
+
+    {
+      label: "Ireland's share of pre-obese people",
+      backgroundColor: '#05A923',
+      borderColor: '#05A923',
+      data: BMI_numbers_preobese_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Ireland'
+      }
+    }
+  ]
+  };
+
+
+  const data_obese_time = {
+    datasets: [{
+      label: "Malta's share of obese people",
+      backgroundColor: '#CB3A13',
+      borderColor: '#CB3A13',
+      data: BMI_numbers_obese_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Malta'
+      }
+    },
+
+    {
+      label: "Ireland's share of obese people",
+      backgroundColor: '#CE6548',
+      borderColor: '#CE6548',
+      data: BMI_numbers_obese_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Ireland'
+      }
+    },
+
+    {
+      label: "Hungary's share of obese people",
+      backgroundColor: '#D18773',
+      borderColor: '#D18773',
+      data: BMI_numbers_obese_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Hungary'
+      }
+    },
+
+    {
+      label: "Italy's share of obese people",
+      backgroundColor: '#6FEB85',
+      borderColor: '#6FEB85',
+      data: BMI_numbers_obese_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Italy'
+      }
+    },
+
+    {
+      label: "Romania's share of obese people",
+      backgroundColor: '#3DC255',
+      borderColor: '#3DC255',
+      data: BMI_numbers_obese_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Romania'
+      }
+    },
+
+    {
+      label: "North-Macedonia's share of obese people",
+      backgroundColor: '#05A923',
+      borderColor: '#05A923',
+      data: BMI_numbers_obese_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.North_Macedonia'
+      }
+    }
+  ]
+  };
+
+  const config_overweight_time = {
+    type: 'line',
+    data: data_overweight_time,
+    options: {}
+  };
+
+  const config_preobese_time = {
+    type: 'line',
+    data: data_preobese_time,
+    options: {}
+  };
+
+  const config_obese_time = {
+    type: 'line',
+    data: data_obese_time,
+    options: {}
+  };
+
+  const myOverweightTimeChart = new Chart(
+    document.getElementById('myOverweightTimeChart'),
+    config_overweight_time
+  );
+
+  const myPreObeseTimeChart = new Chart(
+    document.getElementById('myPreObeseTimeChart'),
+    config_preobese_time
+  );
+
+  const myObeseTimeChart = new Chart(
+    document.getElementById('myObeseTimeChart'),
+    config_obese_time
+  );
+</script>
+
+<div class="foot">
+</div>
+
+  </body>
+</html>

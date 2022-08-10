@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../images/PPIcon.png">
+    <title>Air pollution</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="../css/css_findings.css">
+
+    <style media="screen">
+      .text{position: relative;width:80%;left:10%;}
+      .intro{top:100px;}
+      .possibilities{top:320px;}
+
+      .chart_container{position: relative;top:200px;left:5%;width:90%;}
+      .foot{position: relative;top:300px;height:300px;width:100%;}
+    </style>
+
+  </head>
+  <body>
+
+    <!--  NAVBAR  -->
+
+    <header>
+      <img src="../images/logo_black.png" alt="Logo" id="Logo" onclick="window.location='../index.php'">
+      <ul>
+        <li> <a href="../index.php">Home</a> </li>
+        <li> <a href="#">Health</a> <ul>
+          <li> <a href="../health/findings.html">Findings</a> </li>
+          <li> <a href="../health/bmi.html">BMI</a> </li>
+          <li> <a href="../health/lifestyle.html">Lifestyle</a> </li>
+          <li> <a href="../health/diseases.html">Diseases</a> </li>
+          <li> <a href="../health/healthy_life.html">Healthy life</a> </li>
+          <li> <a href="../health/air_pollution.html">Air pollution</a> </li>
+          <li> <a href="../health/DataCleaning.html">Data cleaning</a> </li>
+        </ul> </li>
+        <li> <a href="#">Coming soon</a>
+          <ul>
+            <li> <a href="#">Consumption</a> </li>
+            <li> <a href="#">Production</a> </li>
+            <li> <a href="#">Wealth</a> </li>
+            <li> <a href="#">Going green</a> </li>
+          </ul>
+        </li>
+        <li> <a href="../index.php#Contact">Contact</a> </li>
+      </ul>
+    </header>
+
+    <!--  LITTLE ALERT TO MAKE SURE THE USERS ARE AWARE OF CERTAIN FEATURES  -->
+
+    <div class="alert">
+      <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+    <p> <strong>Attention!</strong> The information displayed on this website is only a superficial glimpse at the data.
+    <br><br> If you wish to see the PowerBi reports with the full dashboards, better visuals, better experience and drill through the data, do not hesitate to contact me!</p>
+    <p>Also, the user experience for phone users on this website is limited. So, if you desire to see the visuals in their full shape please consider using a tablet or computer.</p>  <br><br> <a href="../index.php#Contact">Contact</a>
+    </div>
+
+    <!--  INTRODUCTION ABOUT AIR POLLUTION  -->
+
+    <div class="intro text">
+
+    <h2>Number of deaths (per 100 000) due to pollution by country</h2>
+    <p><br>The data of the graph below, who has been extracted from the OECD's website, <br>
+    clearly shows how there are more deaths due to pollution in the <strong>bigger Asian countries and Eastern Europe.</strong></p>
+
+    <p>In comparison, <strong>Western countries and Oceania</strong> show way better results.</p>
+    <br>
+    <p>Altogether, there is a -0.45 correlation between air pollution and the share of people being in good health; This means that higher air pollution tends to lead towards people being in worse health.</p>
+    <p>This inverse correlation is not the strongest and should be seen as being part of an environment leading towards worse health.</p>
+    </div>
+
+    <!--  ACTUAL GRAPH  -->
+
+    <div class="chart_container">
+      <canvas id="myChart"></canvas>
+    </div>
+
+
+<script>
+  const labels = ["China","Poland","India","Hungary","Slovak Republic","Latvia","Czech Republic","Greece",
+"Russia","Turkey","Lithuania","Korea","South Africa","Italy","Slovenia","Indonesia","Germany",
+"Japan","Chile","Belgium","Mexico","Israel","Netherlands","Austria","Colombia","Denmark","United Kingdom",
+"Brazil","Portugal","France","Spain","Costa Rica","Switzerland","Luxembourg","United States","Estonia",
+"Ireland","Canada","Norway","Australia","Finland","Sweden","New Zealand","Iceland"];
+
+  const data = {
+    labels: labels,
+    datasets: [{
+      label: "Pollution's deaths per 100 000",
+      barThickness: 8,
+      data: [99.4,73.3,71.7,71.7,63.6,58.6,58.5,54.6,50.7,49.9,45.7,42.7,42.3,40.8,39.6,39.4,
+32.4,31.3,30.8,30.3,28.7,26.8,26.7,26.7,26.0,22.5,21.4,20.7,20.4,20.3,19.0,18.6,16.0,14.8,14.5,
+12.0,11.0,10.1,7.3,7.1,7.0,6.5,6.3,4.6],
+      backgroundColor: ["#EA961C","#EA961C","#EA961C","#EA961C","#EA961C","#ECF1ED","#ECF1ED","#ECF1ED", "#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED", "#ECF1ED","#ECF1ED","#ECF1ED", "#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED",
+      "#ECF1ED", "#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED", "#ECF1ED","#ECF1ED", "#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#00C57C","#00C57C","#00C57C" ]
+    }]
+  };
+
+
+  const config = {
+    type: 'bar',
+    data: data,
+    options: {
+      indexAxis: 'y',
+      scales: {
+  x: {
+    grid: {
+      display: false
+    }
+  },
+  y: {
+    grid: {
+      display: false
+    }
+  }
+}
+    },
+
+  };
+
+
+
+
+  const myChart = new Chart(
+    document.getElementById('myChart'),
+    config
+  );
+
+
+</script>
+
+<!-- ASSUMPTIONS ON VISUALIZATION   -->
+
+<div class="possibilities text">
+
+<h4>There are multiple possible explanations: </h4>
+<p><br>First, there is population density; <br> This might help understand China's and India's case, but Eastern Europe isn't that particularly dense. Therefore, we should think of density as being a boosting factor but not a cause.</p>
+<p><br>What might make more sense is the level of industrialization, <br> with more developed countries showing less pollution than lagging countries.</p>
+<p><br>Further, there is the population's mentality; <br> While Oceania and Western countries try to move towards 'greener consumption', poorer countries might tend to see it more as a luxury or have a different educational view.
+  Also, as we can see it during the G20 meetings, countries such as China try to defend their 'right to pollute' since Western countries polluted without limits before the last decades.</p>
+<p><br>Another thing that could strengthen this last assumption is that poorer populations would be more concerned about survival of their own, rather than survival of the planet (which is a more distant thought). </p>
+
+
+<p>Many hypotheses are possible, and it probably is a mix of different reasons. <br> Unfortunately, I do not have the data or the knowledge yet to make clear assumptions. <br>My goal is to identify where the countries in trouble are in order to dig deeper and answer those assumptions later on. </p>
+
+</div>
+
+<div class="foot">
+</div>
+
+  </body>
+</html>

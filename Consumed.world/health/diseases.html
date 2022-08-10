@@ -1,0 +1,4504 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../images/PPIcon.png">
+    <title>Diseases</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="../css/css_findings.css">
+
+    <style media="screen">
+
+       /*  LITTLE DIMENSION ADJUSTMENTS */
+      html {scroll-behavior: smooth;}
+      .text{position: relative;width:80%;left:10%;}
+      .disease_text{top:100px;}.disease_text h3{margin-top: 10px;margin-bottom: 20px;}.disease_text p{margin-bottom: 10px;}
+      .longterm h3{margin-top:220px;}
+      .possibilities{top:320px;}
+
+      /* THERE ARE 51 CHARTS IN TOTAL WITH CUSTOM CODE FOR EACH BECAUSE OF THE CHOICE OF LIBRARY (CHARTJS) */
+      /*  FOR ALL OF THESE CHARTS' SUBJECTS I HAVE MADE A CUSTOM CAROUSEL */
+      .all_carousels{position: relative;top:150px;}
+      .second_carousel{left:0;}
+      .fourth_carousel{left:0;}
+      .fifth_carousel{left:0;}
+      .eighth_carousel{left:0;}
+      .tenth_carousel{left:10vw;}
+      .eleventh_carousel{}
+      .twelve_carousel{left:5vw;}
+      .thirteen_carousel{}
+      .fourteen_carousel{}
+      .fifteen_carousel{}
+      .sixteen_carousel{left:5vw;}
+      .seventeen_carousel{}
+      .eighteen_carousel{left:5vw;}
+
+      .sliderr{width:86%;}
+
+
+      .chart_container{position: relative;top:200px;left:5%;width:90%;}
+
+      .navigator{position:fixed;bottom:5%;right:1%;}
+      .navigator_style{text-decoration: none;color:#40683F;background-color:#DBF9D8;padding-left: 15px;padding-right: 15px;padding-top: 5px;padding-bottom: 5px;}
+
+      .foot{position: relative;top:200px;height:300px;width:100%;}
+
+
+      .slider_tenth{position: relative;
+        max-width: 1500px;
+        max-height: 1500px;
+        overflow: hidden;
+        padding-top:100px;
+      }
+
+      .slides_tenth{
+        width: 500%;
+        height:100%;  display: flex;
+      }
+
+      .slides_tenth input{
+        display: none;
+      }
+
+      .slide_tenth{
+        width: 20%;
+        transition: 2s;
+      }
+
+      .slide_tenth img{
+        width: 70%;
+        height: 100%;
+      }
+
+      .slider_eleventh{position: relative;left:5vw;
+        width: 100vw;
+        max-width: 1500px;
+        max-height: 1500px;
+        overflow: hidden;
+        padding-top:100px;
+      }
+
+      .slides_eleventh{
+        width: 500%;
+        height:100%;  display: flex;
+      }
+
+      .slides_eleventh input{
+        display: none;
+      }
+
+      .slide_eleventh{
+        width: 20%;
+        transition: 2s;
+      }
+
+      .slide_eleventh img{
+        width: 70%;
+        height: 100%;
+      }
+
+      .slider_twelve{position: relative;left:5vw;
+        max-width: 1500px;
+        max-height: 1500px;
+        overflow: hidden;
+        padding-top:100px;
+      }
+
+      .slides_twelve{
+        width: 500%;
+        height:100%;  display: flex;
+      }
+
+      .slides_twelve input{
+        display: none;
+      }
+
+      .slide_twelve{
+        width: 20%;
+        transition: 2s;
+      }
+
+      .slide_twelve img{
+        width: 70%;
+        height: 100%;
+      }
+
+      .slider_thirteen{position: relative;left:5vw;
+        width: 95vw;
+        max-width: 1500px;
+        max-height: 1500px;
+        overflow: hidden;
+        padding-top:100px;
+      }
+
+      .slides_thirteen{
+        width: 500%;
+        height:100%;  display: flex;
+      }
+
+      .slides_thirteen input{
+        display: none;
+      }
+
+      .slide_thirteen{
+        width: 20%;
+        transition: 2s;
+      }
+
+      .slide_thirteen img{
+        width: 70%;
+        height: 100%;
+      }
+
+      .slider_fourteen{position: relative;left:10vw;
+        max-width: 1500px;
+        max-height: 1500px;
+        overflow: hidden;
+        padding-top:100px;
+      }
+
+      .slides_fourteen{
+        width: 500%;
+        height:100%;  display: flex;
+      }
+
+      .slides_fourteen input{
+        display: none;
+      }
+
+      .slide_fourteen{
+        width: 20%;
+        transition: 2s;
+      }
+
+      .slide_fourteen img{
+        width: 70%;
+        height: 100%;
+      }
+
+      .slider_fifteen{position: relative;left:5vw;
+        width: 95vw;
+        max-width: 1500px;
+        max-height: 1500px;
+        overflow: hidden;
+        padding-top:100px;
+      }
+
+      .slides_fifteen{
+        width: 500%;
+        height:100%;  display: flex;
+      }
+
+      .slides_fifteen input{
+        display: none;
+      }
+
+      .slide_fifteen{
+        width: 20%;
+        transition: 2s;
+      }
+
+      .slide_fifteen img{
+        width: 70%;
+        height: 100%;
+      }
+
+      .slider_sixteen{position: relative;left:5vw;
+        max-width: 1500px;
+        max-height: 1500px;
+        overflow: hidden;
+        padding-top:100px;
+      }
+
+      .slides_sixteen{
+        width: 500%;
+        height:100%;  display: flex;
+      }
+
+      .slides_sixteen input{
+        display: none;
+      }
+
+      .slide_sixteen{
+        width: 20%;
+        transition: 2s;
+      }
+
+      .slide_sixteen img{
+        width: 70%;
+        height: 100%;
+      }
+
+      .slider_seventeen{position: relative;left:5vw;
+        width: 95vw;
+        max-width: 1500px;
+        max-height: 1500px;
+        overflow: hidden;
+        padding-top:100px;
+      }
+
+      .slides_seventeen{
+        width: 500%;
+        height:100%;  display: flex;
+      }
+
+      .slides_seventeen input{
+        display: none;
+      }
+
+      .slide_seventeen{
+        width: 20%;
+        transition: 2s;
+      }
+
+      .slide_seventeen img{
+        width: 70%;
+        height: 100%;
+      }
+
+      .slider_eighteen{position: relative;left:5vw;
+        max-width: 1500px;
+        max-height: 1500px;
+        overflow: hidden;
+        padding-top:100px;
+      }
+
+      .slides_eighteen{
+        width: 500%;
+        height:100%;  display: flex;
+      }
+
+      .slides_eighteen input{
+        display: none;
+      }
+
+      .slide_eighteen{
+        width: 20%;
+        transition: 2s;
+      }
+
+      .slide_eighteen img{
+        width: 70%;
+        height: 100%;
+      }
+
+      .navigation-manual-tenth{
+        position: absolute;
+        width: 100%;
+        margin-top: -350px;
+        display: flex;
+        justify-content: center;
+      }
+
+      .navigation-manual-eleventh{
+        position: absolute;
+        width: 100%;
+        margin-top: -350px;
+        display: flex;
+        justify-content: center;
+      }
+
+      .navigation-manual-twelve{
+        position: absolute;
+        width: 100%;
+        margin-top: -350px;
+        display: flex;
+        justify-content: center;
+      }
+
+      .navigation-manual-thirteen{
+        position: absolute;
+        width: 100%;
+        margin-top: -350px;
+        display: flex;
+        justify-content: center;
+      }
+
+      .navigation-manual-fourteen{
+        position: absolute;
+        width: 100%;
+        margin-top: -350px;
+        display: flex;
+        justify-content: center;
+      }
+
+      .navigation-manual-fifteen{
+        position: absolute;
+        width: 100%;
+        margin-top: -350px;
+        display: flex;
+        justify-content: center;
+      }
+
+      .navigation-manual-sixteen{
+        position: absolute;
+        width: 100%;
+        margin-top: -350px;
+        display: flex;
+        justify-content: center;
+      }
+
+      .navigation-manual-seventeen{
+        position: absolute;
+        width: 100%;
+        margin-top: -350px;
+        display: flex;
+        justify-content: center;
+      }
+
+      .navigation-manual-eighteen{
+        position: absolute;
+        width: 100%;
+        margin-top: -350px;
+        display: flex;
+        justify-content: center;
+      }
+
+      .manual-btn-tenth{
+        border: 2px solid #ffce2f;
+        padding: 7px;padding-left:25px;padding-right:25px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: 0.8s;
+        font-size: 14px;
+      }
+
+      .manual-btn-tenth:not(:last-child){
+        margin-right: 40px;
+      }
+
+      .manual-btn-tenth:hover{
+        background: #ffce2f;
+      }
+
+      .manual-btn-eleventh{
+        border: 2px solid #ffce2f;
+        padding: 7px;padding-left:25px;padding-right:25px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: 0.8s;
+        font-size: 14px;
+      }
+
+      .manual-btn-eleventh:not(:last-child){
+        margin-right: 40px;
+      }
+
+      .manual-btn-eleventh:hover{
+        background: #ffce2f;
+      }
+
+      .manual-btn-twelve{
+        border: 2px solid #ffce2f;
+        padding: 7px;padding-left:25px;padding-right:25px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: 0.8s;
+        font-size: 14px;
+      }
+
+      .manual-btn-twelve:not(:last-child){
+        margin-right: 40px;
+      }
+
+      .manual-btn-twelve:hover{
+        background: #ffce2f;
+      }
+
+      .manual-btn-thirteen{
+        border: 2px solid #ffce2f;
+        padding: 7px;padding-left:25px;padding-right:25px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: 0.8s;
+        font-size: 14px;
+      }
+
+      .manual-btn-thirteen:not(:last-child){
+        margin-right: 40px;
+      }
+
+      .manual-btn-thirteen:hover{
+        background: #ffce2f;
+      }
+
+      .manual-btn-fourteen{
+        border: 2px solid #ffce2f;
+        padding: 7px;padding-left:25px;padding-right:25px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: 0.8s;
+        font-size: 14px;
+      }
+
+      .manual-btn-fourteen:not(:last-child){
+        margin-right: 40px;
+      }
+
+      .manual-btn-fourteen:hover{
+        background: #ffce2f;
+      }
+
+      .manual-btn-fifteen{
+        border: 2px solid #ffce2f;
+        padding: 7px;padding-left:25px;padding-right:25px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: 0.8s;
+        font-size: 14px;
+      }
+
+      .manual-btn-fifteen:not(:last-child){
+        margin-right: 40px;
+      }
+
+      .manual-btn-fifteen:hover{
+        background: #ffce2f;
+      }
+
+      .manual-btn-sixteen{
+        border: 2px solid #ffce2f;
+        padding: 7px;padding-left:25px;padding-right:25px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: 0.8s;
+        font-size: 14px;
+      }
+
+      .manual-btn-sixteen:not(:last-child){
+        margin-right: 40px;
+      }
+
+      .manual-btn-sixteen:hover{
+        background: #ffce2f;
+      }
+
+      .manual-btn-seventeen{
+        border: 2px solid #ffce2f;
+        padding: 7px;padding-left:25px;padding-right:25px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: 0.8s;
+        font-size: 14px;
+      }
+
+      .manual-btn-seventeen:not(:last-child){
+        margin-right: 40px;
+      }
+
+      .manual-btn-seventeen:hover{
+        background: #ffce2f;
+      }
+
+      .manual-btn-eighteen{
+        border: 2px solid #ffce2f;
+        padding: 7px;padding-left:25px;padding-right:25px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: 0.8s;
+        font-size: 14px;
+      }
+
+      .manual-btn-eighteen:not(:last-child){
+        margin-right: 40px;
+      }
+
+      .manual-btn-eighteen:hover{
+        background: #ffce2f;
+      }
+
+      #radio22:checked ~ .seventh{
+        margin-left: 0;
+      }
+
+      #radio23:checked ~ .seventh{
+        margin-left: -20%;
+      }
+
+      #radio24:checked ~ .seventh{
+        margin-left: -40%;;
+      }
+
+      #radio25:checked ~ .tenth{
+        margin-left: 0;
+      }
+
+      #radio26:checked ~ .tenth{
+        margin-left: -20%;
+      }
+
+      #radio27:checked ~ .tenth{
+        margin-left: -40%;;
+      }
+
+      #radio28:checked ~ .eleventh{
+        margin-left: 0;
+      }
+
+      #radio29:checked ~ .eleventh{
+        margin-left: -20%;
+      }
+
+      #radio30:checked ~ .eleventh{
+        margin-left: -40%;;
+      }
+
+      #radio31:checked ~ .twelve{
+        margin-left: 0;
+      }
+
+      #radio32:checked ~ .twelve{
+        margin-left: -20%;
+      }
+
+      #radio33:checked ~ .twelve{
+        margin-left: -40%;;
+      }
+
+      #radio34:checked ~ .thirteen{
+        margin-left: 0;
+      }
+
+      #radio35:checked ~ .thirteen{
+        margin-left: -20%;
+      }
+
+      #radio36:checked ~ .thirteen{
+        margin-left: -40%;;
+      }
+
+      #radio37:checked ~ .fourteen{
+        margin-left: 0;
+      }
+
+      #radio38:checked ~ .fourteen{
+        margin-left: -20%;
+      }
+
+      #radio39:checked ~ .fourteen{
+        margin-left: -40%;;
+      }
+
+      #radio40:checked ~ .fifteen{
+        margin-left: 0;
+      }
+
+      #radio41:checked ~ .fifteen{
+        margin-left: -20%;
+      }
+
+      #radio42:checked ~ .fifteen{
+        margin-left: -40%;;
+      }
+
+      #radio43:checked ~ .sixteen{
+        margin-left: 0;
+      }
+
+      #radio44:checked ~ .sixteen{
+        margin-left: -20%;
+      }
+
+      #radio45:checked ~ .sixteen{
+        margin-left: -40%;;
+      }
+
+      #radio46:checked ~ .seventeen{
+        margin-left: 0;
+      }
+
+      #radio47:checked ~ .seventeen{
+        margin-left: -20%;
+      }
+
+      #radio48:checked ~ .seventeen{
+        margin-left: -40%;;
+      }
+
+      #radio49:checked ~ .eighteen{
+        margin-left: 0;
+      }
+
+      #radio50:checked ~ .eighteen{
+        margin-left: -20%;
+      }
+
+      #radio51:checked ~ .eighteen{
+        margin-left: -40%;;
+      }
+
+    </style>
+
+  </head>
+  <body>
+
+
+     <!-- NAVIGATION BAR   -->
+    <header>
+      <img src="../images/logo_black.png" alt="Logo" id="Logo" onclick="window.location='../index.php'">
+      <ul>
+        <li> <a href="../index.php">Home</a> </li>
+        <li> <a href="#">Health</a> <ul>
+          <li> <a href="../health/findings.html">Findings</a> </li>
+          <li> <a href="../health/bmi.html">BMI</a> </li>
+          <li> <a href="../health/lifestyle.html">Lifestyle</a> </li>
+          <li> <a href="../health/diseases.html">Diseases</a> </li>
+          <li> <a href="../health/healthy_life.html">Healthy life</a> </li>
+          <li> <a href="../health/air_pollution.html">Air pollution</a> </li>
+          <li> <a href="../health/DataCleaning.html">Data cleaning</a> </li>
+        </ul> </li>
+        <li> <a href="#">Coming soon</a>
+          <ul>
+            <li> <a href="#">Consumption</a> </li>
+            <li> <a href="#">Production</a> </li>
+            <li> <a href="#">Wealth</a> </li>
+            <li> <a href="#">Going green</a> </li>
+          </ul>
+        </li>
+        <li> <a href="../index.php#Contact">Contact</a> </li>
+      </ul>
+    </header>
+
+
+     <!--  LITTLE ALERT TO MAKE SURE THE USERS ARE AWARE OF CERTAIN FEATURES  -->
+
+    <div class="alert">
+      <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+    <p> <strong>Attention!</strong> The information displayed on this website is only a superficial glimpse at the data.
+    <br><br> If you wish to see the PowerBi reports with the full dashboards, better visuals, better experience and drill through the data, do not hesitate to contact me!</p>
+    <p>Also, the user experience for phone users on this website is limited. So, if you desire to see the visuals in their full shape please consider using a tablet or computer.</p>  <br><br> <a href="../index.php#Contact">Contact</a>
+    </div>
+
+     <!--  THIS IS THE 1ST CAROUSEL AROUND DIABETES MELLITUS IN THE LAST YEAR OF DATA  -->
+
+    <div class="disease_text text last" id="Diabetes">
+      <h3>Diabetes mellitus' last results</h3>
+      <p>Let's start with diabetes!</p>
+      <p>As we can see, there is no clear trend of where the most deaths due to diabetes (type II) are located. What can be said is how strong the top 4 is; For Croatia, Cyprus, Czech Republic and Malta it is clear that it is becoming problematic, especially for men.</p>
+      <br>
+      <p>There is a significant correlation of 0.52 (mainly for women) between diabetes and never drinking heavily in the last year. Inversely there is also a -0.52 correlation between diabetes and people drinking heavily at least once per month.</p>
+      <p>This means that there are less deaths due to diabetes in countries that drink more heavily (Western- and Northern Europe). This is a good example of something being correlated but not being a cause; Both just tend to come in opposite environments.</p>
+      <br>
+      <p>With this in mind, we also see that diabetes type II deaths tend to be higher in smoking countries (Eastern Europe) with a 0.52 correlation.</p>
+      <p>This correlation is even stronger when smoking more than 20 cigarettes per day (0.57).</p>
+    </div>
+
+    <div class="first_carousel all_carousels">
+
+<!--image slider start-->
+    <div class="slider sliderr">
+      <div class="slides">
+        <!--radio buttons start-->
+        <input type="radio" name="radio-btn" id="radio1">
+        <input type="radio" name="radio-btn" id="radio2">
+        <input type="radio" name="radio-btn" id="radio3">
+        <!--radio buttons end-->
+        <!--slide images start-->
+        <div class="slide first" id="slide1">
+          <div class="chart_container_overweight">
+            <canvas id="myDiabetesTotalChart"></canvas>
+          </div>
+        </div>
+        <div class="slide" id="slide2">
+          <div class="chart_container_preobese">
+            <canvas id="myDiabetesMenChart"></canvas>
+          </div>
+        </div>
+        <div class="slide" id="slide3">
+          <div class="chart_container_obese">
+            <canvas id="myDiabetesWomenChart"></canvas>
+          </div>
+        </div>
+
+        <!--slide images end-->
+
+      </div>
+      <!--manual navigation start-->
+      <div class="navigation-manual radios_first_carousel">
+        <label for="radio1" class="manual-btn">Total</label>
+        <label for="radio2" class="manual-btn">Men</label>
+        <label for="radio3" class="manual-btn">Women</label>
+      </div>
+      <!--manual navigation end-->
+    </div>
+    <!--image slider end-->
+    </div>
+
+
+<script>
+  const labels_diabetes_total = ["Croatia","Cyprus","Malta","Czechia","Hungary","Latvia","Portugal",
+"Austria","Italy","Poland","Germany","Denmark","Bulgaria","Lithuania","Sweden","Slovenia","Greece",
+"Estonia","Spain","Luxembourg","Netherlands","France","Slovakia","Romania","Ireland","Switzerland",
+"Norway","Belgium","United Kingdom","Iceland","Finland"];
+
+const labels_diabetes_men = ["Croatia","Cyprus","Czechia","Malta","Hungary","Latvia","Portugal",
+"Austria","Italy","Denmark","Poland","Germany","Sweden","Lithuania","Bulgaria","Slovenia","France",
+"Spain","Ireland","Greece","Estonia","Netherlands","Luxembourg","Iceland","Slovakia","Switzerland",
+"Romania","Norway","United Kingdom","Belgium","Finland"];
+
+const labels_diabetes_women = ["Croatia","Cyprus","Malta","Czechia","Portugal","Hungary","Latvia",
+"Austria","Poland","Italy","Germany","Bulgaria","Denmark","Lithuania","Greece","Slovenia","Sweden",
+"Estonia","Luxembourg","Spain","Netherlands","Romania","Slovakia","France","Ireland","Belgium","Switzerland",
+"United Kingdom","Norway","Finland","Iceland"];
+
+  const data_diabetes_total = {
+    labels: labels_diabetes_total,
+    datasets: [{
+      label: "Total diabetes mellitus deaths per 100 000 people",
+      barThickness: 8,
+      data: [96.05,56.06,47.18,45.55,32.99,32.29,32.11,29.84,27.72,27.53,24.9,24.21,20.82,20.1,
+19.99,19.19,18.32,18,17.89,17.63,16.89,16.39,15.87,15.52,15.33,13.5,12.62,12.39,11.99,11.63,10.08],
+      backgroundColor: ["#EA961C","#EA961C","#EA961C","#EA961C","#EA961C","#ECF1ED","#ECF1ED","#ECF1ED", "#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED", "#ECF1ED","#ECF1ED","#ECF1ED", "#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED",
+      "#ECF1ED","#ECF1ED","#ECF1ED","#00C57C","#00C57C","#00C57C" ]
+    }]
+  };
+
+  const data_diabetes_men = {
+    labels: labels_diabetes_men,
+    datasets: [{
+      label: "Men's diabetes mellitus deaths per 100 000 people",
+      barThickness: 8,
+      data: [106.97,60.75,53.86,49.02,38.93,38.26,36.71,36.46,33.23,32.4,31.32,29.59,25.14,
+24.16,23.92,23.83,21.26,21.2,21.15,21.12,20.47,19.59,19.21,18.88,18.05,17.96,17.24,16.81,14.73,14.25,12.89],
+      backgroundColor: ["#EA961C","#EA961C","#EA961C","#EA961C","#EA961C","#ECF1ED","#ECF1ED","#ECF1ED", "#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED", "#ECF1ED","#ECF1ED","#ECF1ED", "#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED",
+      "#ECF1ED","#ECF1ED","#ECF1ED","#00C57C","#00C57C","#00C57C" ]
+    }]
+  };
+
+  const data_diabetes_women = {
+    labels: labels_diabetes_women,
+    datasets: [{
+      label: "Women's diabetes mellitus deaths per 100 000 people",
+      barThickness: 8,
+      data: [86.56,51.22,44.55,39.36,28.83,28.74,28.48,24.65,24.06,23.52,20.95,18.47,18.18,
+17.35,15.92,15.78,15.76,15.68,15.63,15.3,14.5,13.98,13.86,12.87,11,10.62,10.26,9.85,9.49,8,6.3],
+      backgroundColor: ["#EA961C","#EA961C","#EA961C","#EA961C","#EA961C","#ECF1ED","#ECF1ED","#ECF1ED", "#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED", "#ECF1ED","#ECF1ED","#ECF1ED", "#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED",
+      "#ECF1ED","#ECF1ED","#ECF1ED","#00C57C","#00C57C","#00C57C" ]
+    }]
+  };
+
+
+  const config_diabetes_total = {
+    type: 'bar',
+    data: data_diabetes_total,
+    options: {
+      indexAxis: 'y',
+      scales: {
+  x: {
+    grid: {
+      display: false
+    }
+  },
+  y: {
+    grid: {
+      display: false
+    }
+  }
+}
+    },
+
+  };
+
+  const config_diabetes_men = {
+    type: 'bar',
+    data: data_diabetes_men,
+    options: {
+      indexAxis: 'y',
+      scales: {
+  x: {
+    grid: {
+      display: false
+    }
+  },
+  y: {
+    grid: {
+      display: false
+    }
+  }
+}
+    },
+
+  };
+
+  const config_diabetes_women = {
+    type: 'bar',
+    data: data_diabetes_women,
+    options: {
+      indexAxis: 'y',
+      scales: {
+  x: {
+    grid: {
+      display: false
+    }
+  },
+  y: {
+    grid: {
+      display: false
+    }
+  }
+}
+    },
+
+  };
+
+
+
+
+  const myDiabetesTotalChart = new Chart(
+    document.getElementById('myDiabetesTotalChart'),
+    config_diabetes_total
+  );
+
+  const myDiabetesMenChart = new Chart(
+    document.getElementById('myDiabetesMenChart'),
+    config_diabetes_men
+  );
+
+  const myDiabetesWomenChart = new Chart(
+    document.getElementById('myDiabetesWomenChart'),
+    config_diabetes_women
+  );
+
+
+</script>
+
+ <!--  2ND CAROUSEL FOR DIABETES MELLITUS OVER TIME  -->
+
+<div class="disease_text text longterm">
+  <h3>Diabetes long-term</h3>
+  <p>Cyprus has been dealing with this issue in a better way than in the past, but it remains a slow progress. </p>
+  <p>What is the most terrifying, is how rapidly the yearly death toll for some countries rises; As we can see the death toll of both Malta and Croatia tripled in less than 10 years! This problem is especially important for Croatia because from what we can see, it seems like the growth of it is entering a parabolic curve, while it seems to stabilize for Malta.  </p>
+  <p>Some better news is that the top countries (United Kingdom, Iceland, Finland and others) have been able to keep their death toll at a low point and stabilize it.</p>
+</div>
+
+
+<div class="second_carousel all_carousels">
+
+<!--image slider start-->
+<div class="slider sliderr">
+  <div class="slides">
+    <!--radio buttons start-->
+    <input type="radio" name="radio-btn" id="radio4">
+    <input type="radio" name="radio-btn" id="radio5">
+    <input type="radio" name="radio-btn" id="radio6">
+    <!--radio buttons end-->
+    <!--slide images start-->
+    <div class="slide second" id="slide4">
+      <div class="chart_container_overweight_overtime">
+        <canvas id="myDiabetesTotalTimeChart"></canvas>
+      </div>
+    </div>
+    <div class="slide" id="slide5">
+      <div class="chart_container_preobese_overtime">
+        <canvas id="myDiabetesMenTimeChart"></canvas>
+      </div>
+    </div>
+    <div class="slide" id="slide6">
+      <div class="chart_container_obese_overtime">
+        <canvas id="myDiabetesWomenTimeChart"></canvas>
+      </div>
+    </div>
+
+    <!--slide images end-->
+
+  </div>
+  <!--manual navigation start-->
+  <div class="navigation-manual-two radios_first_carousel">
+    <label for="radio4" class="manual-btn-two">Total</label>
+    <label for="radio5" class="manual-btn-two">Men</label>
+    <label for="radio6" class="manual-btn-two">Women</label>
+  </div>
+  <!--manual navigation end-->
+</div>
+<!--image slider end-->
+</div>
+
+<script>
+
+  const Diabetes_total_time=[
+    {year:'2011', data:{Croatia:31.67,Cyprus:73.54,Malta:14.02,United_Kingdom:10.46,Iceland:9.26,Finland:9.5}},
+    {year:'2012', data:{Croatia:34.84,Cyprus:70.75,Malta:11.05,United_Kingdom:10.36,Iceland:10.54,Finland:9.53}},
+    {year:'2013', data:{Croatia:32.26,Cyprus:69.7,Malta:30.33,United_Kingdom:10.21,Iceland:13.85,Finland:9.12}},
+    {year:'2014', data:{Croatia:34.52,Cyprus:72.36,Malta:45.38,United_Kingdom:10.8,Iceland:12.78,Finland:9.24}},
+    {year:'2015', data:{Croatia:42.38,Cyprus:65.48,Malta:45.83,United_Kingdom:10.95,Iceland:10.1,Finland:8.87}},
+    {year:'2016', data:{Croatia:47.62,Cyprus:53.3,Malta:44.57,United_Kingdom:11.2,Iceland:13.06,Finland:9.66}},
+    {year:'2017', data:{Croatia:57.45,Cyprus:58.01,Malta:45.14,United_Kingdom:11.85,Iceland:14.83,Finland:9.94}},
+    {year:'2018', data:{Croatia:69.71,Cyprus:55.25,Malta:50.75,United_Kingdom:11.99,Iceland:14.53,Finland:9.32}},
+    {year:'2019', data:{Croatia:96.0,Cyprus:56.0,Malta:47.1,United_Kingdom:11.9,Iceland:11.6,Finland:10.0}},
+  ]
+
+  const Diabetes_men_time=[
+    {year:'2011', data:{Croatia:36.07,Cyprus:79.52,Czechia:31.48,United_Kingdom:12.56,Belgium:17.28,Finland:13.52}},
+    {year:'2012', data:{Croatia:39.12,Cyprus:80.9,Czechia:30.83,United_Kingdom:12.3,Belgium:18.02,Finland:12.8}},
+    {year:'2013', data:{Croatia:38.02,Cyprus:74.64,Czechia:51.33,United_Kingdom:12,Belgium:17.48,Finland:11.91}},
+    {year:'2014', data:{Croatia:36.8,Cyprus:79.51,Czechia:47.86,United_Kingdom:12.45,Belgium:15.88,Finland:12.6}},
+    {year:'2015', data:{Croatia:46.09,Cyprus:71.44,Czechia:51.58,United_Kingdom:13.16,Belgium:15.28,Finland:11.33}},
+    {year:'2016', data:{Croatia:51.18,Cyprus:67.44,Czechia:50.34,United_Kingdom:13.76,Belgium:15.23,Finland:13.02}},
+    {year:'2017', data:{Croatia:59.97,Cyprus:61.59,Czechia:49.21,United_Kingdom:14.23,Belgium:16.41,Finland:14.13}},
+    {year:'2018', data:{Croatia:77.27,Cyprus:56.79,Czechia:52.86,United_Kingdom:14.73,Belgium:15.61,Finland:12.73}},
+    {year:'2019', data:{Croatia:106.97,Cyprus:60.75,Czechia:53.86,United_Kingdom:14.73,Belgium:14.25,Finland:12.89}},
+  ]
+
+  const Diabetes_women_time=[
+    {year:'2011', data:{Croatia:28.22,Cyprus:68.15,Malta:10.11,Norway:14.13,Finland:6.86,Iceland:7.82}},
+    {year:'2012', data:{Croatia:31.05,Cyprus:62.23,Malta:9.71,Norway:14.13,Finland:6.82,Iceland:7.33}},
+    {year:'2013', data:{Croatia:28.29,Cyprus:64.86,Malta:25.71,Norway:12.74,Finland:7.01,Iceland:13.77}},
+    {year:'2014', data:{Croatia:32.31,Cyprus:66.04,Malta:37.94,Norway:11.47,Finland:6.94,Iceland:8.38}},
+    {year:'2015', data:{Croatia:38.91,Cyprus:59.49,Malta:35.02,Norway:10.47,Finland:7.15,Iceland:5.97}},
+    {year:'2016', data:{Croatia:44.21,Cyprus:41.61,Malta:44.76,Norway:11.38,Finland:7.18,Iceland:7.25}},
+    {year:'2017', data:{Croatia:54.39,Cyprus:53.95,Malta:43.55,Norway:11.59,Finland:7.04,Iceland:11.47}},
+    {year:'2018', data:{Croatia:63.92,Cyprus:52.31,Malta:43.92,Norway:9.17,Finland:6.75,Iceland:8.2}},
+    {year:'2019', data:{Croatia:86.56,Cyprus:51.22,Malta:44.55,Norway:9.49,Finland:8,Iceland:6.3}},
+  ]
+
+
+
+  const data_diabetes_total_time = {
+    datasets: [{
+      label: "Croatia's male deaths per 100 000 due to diabetes mellitus",
+      backgroundColor: '#CB3A13',
+      borderColor: '#CB3A13',
+      data: Diabetes_total_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Croatia'
+      }
+    },
+
+    {
+      label: "Cyprus's total deaths per 100 000 due to diabetes mellitus",
+      backgroundColor: '#CE6548',
+      borderColor: '#CE6548',
+      data: Diabetes_total_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Cyprus'
+      }
+    },
+
+    {
+      label: "Malta's total deaths per 100 000 due to diabetes mellitus",
+      backgroundColor: '#D18773',
+      borderColor: '#D18773',
+      data: Diabetes_total_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Malta'
+      }
+    },
+
+    {
+      label: "United Kingdom's total deaths per 100 000 due to diabetes mellitus",
+      backgroundColor: '#6FEB85',
+      borderColor: '#6FEB85',
+      data: Diabetes_total_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.United_Kingdom'
+      }
+    },
+
+    {
+      label: "Iceland's total deaths per 100 000 due to diabetes mellitus",
+      backgroundColor: '#3DC255',
+      borderColor: '#3DC255',
+      data:Diabetes_total_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Iceland'
+      }
+    },
+
+    {
+      label: "Finland's total deaths per 100 000 due to diabetes mellitus",
+      backgroundColor: '#05A923',
+      borderColor: '#05A923',
+      data: Diabetes_total_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Finland'
+      }
+    }
+  ]
+  };
+
+
+  const data_diabetes_men_time = {
+    datasets: [{
+      label: "Croatia's male deaths per 100 000 due to diabetes mellitus",
+      backgroundColor: '#CB3A13',
+      borderColor: '#CB3A13',
+      data: Diabetes_men_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Croatia'
+      }
+    },
+
+    {
+      label: "Cyprus's male deaths per 100 000 due to diabetes mellitus",
+      backgroundColor: '#CE6548',
+      borderColor: '#CE6548',
+      data: Diabetes_men_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Cyprus'
+      }
+    },
+
+    {
+      label: "Czechia's male deaths per 100 000 due to diabetes mellitus",
+      backgroundColor: '#D18773',
+      borderColor: '#D18773',
+      data: Diabetes_men_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Czechia'
+      }
+    },
+
+    {
+      label: "United_Kingdom's male deaths per 100 000 due to diabetes mellitus",
+      backgroundColor: '#6FEB85',
+      borderColor: '#6FEB85',
+      data: Diabetes_men_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.United_Kingdom'
+      }
+    },
+
+    {
+      label: "Belgium's male deaths per 100 000 due to diabetes mellitus",
+      backgroundColor: '#3DC255',
+      borderColor: '#3DC255',
+      data: Diabetes_men_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Belgium'
+      }
+    },
+
+    {
+      label: "Finland's male deaths per 100 000 due to diabetes mellitus",
+      backgroundColor: '#05A923',
+      borderColor: '#05A923',
+      data: Diabetes_men_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Finland'
+      }
+    }
+  ]
+  };
+
+
+  const data_diabetes_women_time = {
+    datasets: [{
+      label: "Croatia's female deaths per 100 000 due to diabetes mellitus",
+      backgroundColor: '#CB3A13',
+      borderColor: '#CB3A13',
+      data: Diabetes_women_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Croatia'
+      }
+    },
+
+    {
+      label: "Cyprus's female deaths per 100 000 due to diabetes mellitus",
+      backgroundColor: '#CE6548',
+      borderColor: '#CE6548',
+      data: Diabetes_women_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Cyprus'
+      }
+    },
+
+    {
+      label: "Malta's female deaths per 100 000 due to diabetes mellitus",
+      backgroundColor: '#D18773',
+      borderColor: '#D18773',
+      data: Diabetes_women_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Malta'
+      }
+    },
+
+    {
+      label: "Norway's female deaths per 100 000 due to diabetes mellitus",
+      backgroundColor: '#6FEB85',
+      borderColor: '#6FEB85',
+      data: Diabetes_women_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Norway'
+      }
+    },
+
+    {
+      label: "Finland's female deaths per 100 000 due to diabetes mellitus",
+      backgroundColor: '#3DC255',
+      borderColor: '#3DC255',
+      data: Diabetes_women_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Finland'
+      }
+    },
+
+    {
+      label: "Iceland's female deaths per 100 000 due to diabetes mellitus",
+      backgroundColor: '#05A923',
+      borderColor: '#05A923',
+      data: Diabetes_women_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Iceland'
+      }
+    }
+  ]
+  };
+
+  const config_diabetes_total_time = {
+    type: 'line',
+    data: data_diabetes_total_time,
+    options: {}
+  };
+
+  const config_diabetes_men_time = {
+    type: 'line',
+    data: data_diabetes_men_time,
+    options: {}
+  };
+
+  const config_diabetes_women_time = {
+    type: 'line',
+    data: data_diabetes_women_time,
+    options: {}
+  };
+
+  const myLifeTotalTimeChart = new Chart(
+    document.getElementById('myDiabetesTotalTimeChart'),
+    config_diabetes_total_time
+  );
+
+  const myLifeMenTimeChart = new Chart(
+    document.getElementById('myDiabetesMenTimeChart'),
+    config_diabetes_men_time
+  );
+
+  const myLifeWomenTimeChart = new Chart(
+    document.getElementById('myDiabetesWomenTimeChart'),
+    config_diabetes_women_time
+  );
+</script>
+
+
+ <!-- 3RD CAROUSEL AROUND CANCER WITH THE LAST AVAILABLE DATA   -->
+ <!-- AS YOU CAN SEE, IT IS CALLED 4TH CAROUSEL, THIS IS BECAUSE I AM RE-USING CSS FROM THE FINDINGS PAGE   -->
+
+<div class="disease_text text longterm" id="Cancer">
+  <h3>Cancer's last results</h3>
+  <p>Eastern Europe seems to be the region struggling the most against cancer with Hungary, Croatia, and Slovakia at the top. Men seem to be more vulnerable. The best countries against cancer are Cyprus, Switzerland, Malta, and Finland.</p>
+  <br>
+  <p>As one would expect, deaths from diseases is inversely correlated with life expectancy at the age of 65. In the case of cancer I mention it because it has a -0.74 correlation;</p>
+  <p>This means that for countries struggling with getting higher life expectancies, cancer is one of the main problems.</p>
+  <p>Some other deaths due to other diseases tend to come in the same environment as cancer; This is the case for ischemic heart diseases in men (0.65), deaths due to alcohol (0.43), and chronic liver diseases in men (0.66).</p>
+  <br>
+  <p>There is some correlation (0.4) among smoking men and cancer deaths; This correlation is even stronger when smoking more than 20 cigarettes per day. Also correlated but not very significant is that cancer deaths tend to occur in countries where women have never drunk heavily in the last year (0.38).</p>
+</div>
+
+
+<div class="fourth_carousel all_carousels">
+  <!--image slider start-->
+      <div class="slider_third sliderr">
+        <div class="slides_third">
+          <!--radio buttons start-->
+          <input type="radio" name="radio-btn-third" id="radio8">
+          <input type="radio" name="radio-btn-third" id="radio9">
+          <input type="radio" name="radio-btn-third" id="radio10">
+          <!--radio buttons end-->
+          <!--slide images start-->
+          <div class="slide_third third" id="slide8">
+            <div class="chart_container_health_total">
+              <canvas id="myCancerTotalChart"></canvas>
+            </div>
+          </div>
+          <div class="slide_third" id="slide9">
+            <div class="chart_container_health_men">
+              <canvas id="myCancerMenChart"></canvas>
+            </div>
+          </div>
+          <div class="slide_third" id="slide10">
+            <div class="chart_container_health_women">
+              <canvas id="myCancerWomenChart"></canvas>
+            </div>
+          </div>
+
+          <!--slide images end-->
+
+        </div>
+        <!--manual navigation start-->
+        <div class="navigation-manual-third radios_first_carousel">
+          <label for="radio8" class="manual-btn-third">Total</label>
+          <label for="radio9" class="manual-btn-third">Men</label>
+          <label for="radio10" class="manual-btn-third">Women</label>
+        </div>
+        <!--manual navigation end-->
+      </div>
+      <!--image slider end-->
+      </div>
+<script type="text/javascript">
+const labels_cancer_total = ["Hungary","Croatia","Slovakia","Latvia","Slovenia","Poland","Denmark","Estonia","Czechia",
+"Lithuania","Netherlands","United Kingdom","Romania","Ireland","Portugal","Germany","Bulgaria","Greece","France","Iceland",
+"Italy","Austria","Belgium","Norway","Luxembourg","Spain","Sweden","Finland","Malta","Switzerland","Cyprus"];
+
+const labels_cancer_men = ["Latvia","Croatia","Hungary","Estonia","Lithuania","Slovakia","Slovenia","Poland","Romania","Czechia",
+"Portugal","Denmark","Bulgaria","Netherlands","Greece","France","United Kingdom","Ireland","Spain","Germany","Italy","Belgium",
+"Austria","Iceland","Norway","Finland","Luxembourg","Switzerland","Sweden","Cyprus","Malta"];
+
+const labels_cancer_women = ["Hungary","Denmark","Croatia","Netherlands","United Kingdom","Poland","Slovenia","Ireland",
+"Slovakia","Latvia","Czechia","Iceland","Estonia","Germany","Norway","Lithuania","Romania","Sweden","Austria","Belgium","Italy",
+"Luxembourg","France","Bulgaria","Finland","Malta","Greece","Portugal","Switzerland","Cyprus","Spain"];
+
+
+const data_cancer_total = {
+labels: labels_cancer_total,
+datasets: [{
+  label: "Total cancer deaths per 100 000 people",
+  barThickness: 8,
+  data: [327.7,310.96,293.29,292.61,290.1,283.37,282.5,279.45,272.38,271.5,266.58,264.33,264,261.47,244.81,243.74,242.15,
+        240.99,238.91,235.3,230.9,229.62,229.04,228.04,218.52,218.26,216.65,214.54,203.48,202.79,195.35],
+  backgroundColor: ["#EA961C","#EA961C","#EA961C","#EA961C", "#EA961C","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5", "#9BB0A5","#9BB0A5", "#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5",
+  "#00C57C","#00C57C", "#00C57C"]
+}]
+};
+
+const data_cancer_men = {
+labels: labels_cancer_men,
+datasets: [{
+  label: "Male cancer deaths per 100 000 people",
+  barThickness: 8,
+  data: [454.62,446.2,445.71,440.2,424.03,413.71,399.65,384.29,364.12,362.14,353.46,338.18,335.34,327.56,327.47,323.37,
+          319.97,316.31,308.88,307.12,302.69,295,291.8,277.97,277.51,274.3,269.57,255.85,255.35,246.63,246.15],
+
+  backgroundColor: ["#EA961C","#EA961C","#EA961C","#EA961C", "#EA961C","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5", "#9BB0A5","#9BB0A5", "#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5",
+  "#00C57C","#00C57C", "#00C57C"]
+}]
+};
+
+const data_cancer_women = {
+labels: labels_cancer_women,
+datasets: [{
+  label: "Female cancer deaths per 100 000 people",
+  barThickness: 8,
+  data: [252.97,242.34,224.76,224.24,223.99,220.56,218.82,218.53,218.19,212.71,212.06,207.45,201.81,198.71,194.66,191.76,
+        191.42,191.22,187.17,182.62,180.23,179.51,178.76,178.07,175.17,172.47,171.93,170.55,165.85,154.71,150.85],
+
+  backgroundColor: ["#EA961C","#EA961C","#EA961C","#EA961C", "#EA961C","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5", "#9BB0A5","#9BB0A5", "#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5",
+  "#00C57C","#00C57C", "#00C57C"]
+}]
+};
+
+
+
+
+
+const config_cancer_total = {
+type: 'bar',
+data: data_cancer_total,
+options: {
+  indexAxis: 'y',
+  scales: {
+          x: {
+            grid: {
+              display: false
+            }
+          },
+          y: {
+            grid: {
+              display: false
+            }
+          }
+        }
+    },
+
+  };
+
+  const config_cancer_men = {
+    type: 'bar',
+    data: data_cancer_men,
+    options: {
+      indexAxis: 'y',
+      scales: {
+              x: {
+                grid: {
+                  display: false
+                }
+              },
+              y: {
+                grid: {
+                  display: false
+                }
+              }
+            }
+        },
+
+      };
+
+      const config_cancer_women = {
+        type: 'bar',
+        data: data_cancer_women,
+        options: {
+          indexAxis: 'y',
+          scales: {
+                  x: {
+                    grid: {
+                      display: false
+                    }
+                  },
+                  y: {
+                    grid: {
+                      display: false
+                    }
+                  }
+                }
+            },
+
+          };
+
+
+
+const myCancerTotalChart = new Chart(
+document.getElementById('myCancerTotalChart'),
+config_cancer_total
+);
+
+const myCancerMenChart = new Chart(
+document.getElementById('myCancerMenChart'),
+config_cancer_men
+);
+
+const myCancerWomenChart = new Chart(
+document.getElementById('myCancerWomenChart'),
+config_cancer_women
+);
+
+</script>
+
+
+ <!--  4TH CAROUSEL AROUND CANCER OVER TIME  -->
+
+
+<div class="disease_text text longterm">
+  <h3>Cancer's long-term results</h3>
+  <p>There are multiple types of cancer; they can come under different forms, be located differently, and spread differently which makes this disease very complicated to treat. In addition to being one of the largest death causes, the big unknown surrounding it makes it even scarier. </p>
+  <p>The good news is that for all countries and genders, the trend seems to lead towards lesser deaths. Let’s hope this continues!!</p>
+</div>
+
+<div class="fifth_carousel all_carousels">
+
+<!--image slider start-->
+<div class="slider_fourth sliderr">
+  <div class="slides_fourth">
+    <!--radio buttons start-->
+    <input type="radio" name="radio-btn-fourth" id="radio11">
+    <input type="radio" name="radio-btn-fourth" id="radio12">
+    <input type="radio" name="radio-btn-fourth" id="radio13">
+    <!--radio buttons end-->
+    <!--slide images start-->
+    <div class="slide_fourth fourth" id="slide11">
+      <div class="chart_container_cancer_total_overtime">
+        <canvas id="myCancerTotalTimeChart"></canvas>
+      </div>
+    </div>
+    <div class="slide_fourth" id="slide12">
+      <div class="chart_container_cancer_men_overtime">
+        <canvas id="myCancerMenTimeChart"></canvas>
+      </div>
+    </div>
+    <div class="slide_fourth" id="slide13">
+      <div class="chart_container_cancer_women_overtime">
+        <canvas id="myCancerWomenTimeChart"></canvas>
+      </div>
+    </div>
+
+    <!--slide images end-->
+
+  </div>
+  <!--manual navigation start-->
+  <div class="navigation-manual-fourth radios_first_carousel">
+    <label for="radio11" class="manual-btn-fourth">Total</label>
+    <label for="radio12" class="manual-btn-fourth">Men</label>
+    <label for="radio13" class="manual-btn-fourth">Women</label>
+  </div>
+  <!--manual navigation end-->
+</div>
+<!--image slider end-->
+</div>
+
+<script>
+
+  const Cancer_total_time=[
+    {year:'2011', data:{Hungary:357.53,Croatia:341.3,Slovakia:325.78,Malta:246.62,Switzerland:229.75,Cyprus:194.52}},
+    {year:'2012', data:{Hungary:361.08,Croatia:336.51,Slovakia:319.62,Malta:254.83,Switzerland:225.09,Cyprus:205.86}},
+    {year:'2013', data:{Hungary:352.59,Croatia:333.81,Slovakia:327.06,Malta:230.1,Switzerland:223.51,Cyprus:202.34}},
+    {year:'2014', data:{Hungary:348.14,Croatia:336.42,Slovakia:324.07,Malta:232.66,Switzerland:219.58,Cyprus:200.39}},
+    {year:'2015', data:{Hungary:345.95,Croatia:335.71,Slovakia:320.16,Malta:224.55,Switzerland:221.64,Cyprus:206.72}},
+    {year:'2016', data:{Hungary:345.33,Croatia:333.86,Slovakia:315.13,Malta:220.95,Switzerland:216.24,Cyprus:193.8}},
+    {year:'2017', data:{Hungary:341.04,Croatia:321.84,Slovakia:311.36,Malta:221.14,Switzerland:212.74,Cyprus:208.47}},
+    {year:'2018', data:{Hungary:335.64,Croatia:323.86,Slovakia:310.64,Malta:237.28,Switzerland:209.26,Cyprus:204.56}},
+    {year:'2019', data:{Hungary:327.7,Croatia:310.96,Slovakia:293.29,Malta:203.48,Switzerland:202.79,Cyprus:195.35}},
+  ]
+
+  const Cancer_men_time=[
+  {year:'2011', data:{Latvia:472.99,Croatia:494.52,Hungary:501.5,Sweden:290.36,Cyprus:252.37,Malta:314.93}},
+  {year:'2012', data:{Latvia:486.69,Croatia:486.4,Hungary:504.43,Sweden:288.39,Cyprus:278.04,Malta:326.14}},
+  {year:'2013', data:{Latvia:476.09,Croatia:477.02,Hungary:487.91,Sweden:282.4,Cyprus:266.57,Malta:294.63}},
+  {year:'2014', data:{Latvia:476.86,Croatia:474.29,Hungary:478.7,Sweden:282.37,Cyprus:274.57,Malta:308.78}},
+  {year:'2015', data:{Latvia:449.66,Croatia:481.13,Hungary:471.77,Sweden:277.94,Cyprus:266.16,Malta:284.69}},
+  {year:'2016', data:{Latvia:466.12,Croatia:477.51,Hungary:478.12,Sweden:277.99,Cyprus:254.68,Malta:270.24}},
+  {year:'2017', data:{Latvia:473.14,Croatia:454.08,Hungary:467.64,Sweden:271.26,Cyprus:269.95,Malta:283}},
+  {year:'2018', data:{Latvia:457.74,Croatia:464.8,Hungary:457.29,Sweden:264.53,Cyprus:256.11,Malta:292.91}},
+  {year:'2019', data:{Latvia:454.62,Croatia:446.2,Hungary:445.71,Sweden:255.35,Cyprus:246.63,Malta:246.15}},
+  ]
+
+  const Cancer_women_time=[
+  {year:'2011', data:{Hungary:268.09,Denmark:270.23,Croatia:245.12,Switzerland:177.3,Cyprus:149.65,Spain:162.23}},
+  {year:'2012', data:{Hungary:271.44,Denmark:272.75,Croatia:241.45,Switzerland:178.62,Cyprus:148.2,Spain:159.98}},
+  {year:'2013', data:{Hungary:268.56,Denmark:258.44,Croatia:242.5,Switzerland:176.4,Cyprus:151.02,Spain:160.37}},
+  {year:'2014', data:{Hungary:266.47,Denmark:258.31,Croatia:247.05,Switzerland:173.13,Cyprus:140.36,Spain:155.94}},
+  {year:'2015', data:{Hungary:267.25,Denmark:250.08,Croatia:243.35,Switzerland:175.41,Cyprus:159.52,Spain:155.51}},
+  {year:'2016', data:{Hungary:262.2,Denmark:255.41,Croatia:240.69,Switzerland:174.51,Cyprus:145.81,Spain:155.34}},
+  {year:'2017', data:{Hungary:263,Denmark:242.98,Croatia:236.49,Switzerland:170.04,Cyprus:159.61,Spain:155.09}},
+  {year:'2018', data:{Hungary:258.25,Denmark:239.45,Croatia:231.24,Switzerland:168.25,Cyprus:164.45,Spain:151.38}},
+  {year:'2019', data:{Hungary:252.97,Denmark:242.34,Croatia:224.76,Switzerland:165.85,Cyprus:154.71,Spain:150.85}},
+  ]
+
+
+
+  const data_cancer_total_time = {
+    datasets: [{
+      label: "Hungary's cancer deaths per 100 000 people",
+      backgroundColor: '#CB3A13',
+      borderColor: '#CB3A13',
+      data:  Cancer_total_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Hungary'
+      }
+    },
+
+    {
+      label: "Croatia's cancer deaths per 100 000 people",
+      backgroundColor: '#CE6548',
+      borderColor: '#CE6548',
+      data:  Cancer_total_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Croatia'
+      }
+    },
+
+    {
+      label: "Slovakia's cancer deaths per 100 000 people",
+      backgroundColor: '#D18773',
+      borderColor: '#D18773',
+      data: Cancer_total_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Slovakia'
+      }
+    },
+
+    {
+      label: "Malta's cancer deaths per 100 000 people",
+      backgroundColor: '#6FEB85',
+      borderColor: '#6FEB85',
+      data:  Cancer_total_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Malta'
+      }
+    },
+
+    {
+      label: "Switzerland's cancer deaths per 100 000 people",
+      backgroundColor: '#3DC255',
+      borderColor: '#3DC255',
+      data:  Cancer_total_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Switzerland'
+      }
+    },
+
+    {
+      label: "Cyprus's cancer deaths per 100 000 people",
+      backgroundColor: '#05A923',
+      borderColor: '#05A923',
+      data:  Cancer_total_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Cyprus'
+      }
+    }
+  ]
+  };
+
+
+  const data_cancer_men_time = {
+    datasets: [{
+      label: "Latvia's male cancer deaths per 100 000 people",
+      backgroundColor: '#CB3A13',
+      borderColor: '#CB3A13',
+      data:  Cancer_men_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Latvia'
+      }
+    },
+
+    {
+      label: "Croatia's male cancer deaths per 100 000 people",
+      backgroundColor: '#CE6548',
+      borderColor: '#CE6548',
+      data:  Cancer_men_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Croatia'
+      }
+    },
+
+    {
+      label: "Hungary's male cancer deaths per 100 000 people",
+      backgroundColor: '#D18773',
+      borderColor: '#D18773',
+      data:  Cancer_men_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Hungary'
+      }
+    },
+
+    {
+      label: "Sweden's male cancer deaths per 100 000 people",
+      backgroundColor: '#6FEB85',
+      borderColor: '#6FEB85',
+      data:  Cancer_men_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Sweden'
+      }
+    },
+
+    {
+      label: "Cyprus's male cancer deaths per 100 000 people",
+      backgroundColor: '#3DC255',
+      borderColor: '#3DC255',
+      data:  Cancer_men_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Cyprus'
+      }
+    },
+
+    {
+      label: "Malta's male cancer deaths per 100 000 people",
+      backgroundColor: '#05A923',
+      borderColor: '#05A923',
+      data:  Cancer_men_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Malta'
+      }
+    }
+  ]
+  };
+
+
+  const data_cancer_women_time = {
+    datasets: [{
+      label: "Hungary's female cancer deaths per 100 000 people",
+      backgroundColor: '#CB3A13',
+      borderColor: '#CB3A13',
+      data:  Cancer_women_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Hungary'
+      }
+    },
+
+    {
+      label: "Denmark's female cancer deaths per 100 000 people",
+      backgroundColor: '#CE6548',
+      borderColor: '#CE6548',
+      data:  Cancer_women_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Denmark'
+      }
+    },
+
+    {
+      label: "Croatia's female cancer deaths per 100 000 people",
+      backgroundColor: '#D18773',
+      borderColor: '#D18773',
+      data:  Cancer_women_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Croatia'
+      }
+    },
+
+    {
+      label: "Switzerland's female cancer deaths per 100 000 people",
+      backgroundColor: '#6FEB85',
+      borderColor: '#6FEB85',
+      data:  Cancer_women_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Switzerland'
+      }
+    },
+
+    {
+      label: "Cyprus's female cancer deaths per 100 000 people",
+      backgroundColor: '#3DC255',
+      borderColor: '#3DC255',
+      data:  Cancer_women_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Cyprus'
+      }
+    },
+
+    {
+      label: "Spain's female cancer deaths per 100 000 people",
+      backgroundColor: '#05A923',
+      borderColor: '#05A923',
+      data: Cancer_women_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Spain'
+      }
+    }
+  ]
+  };
+
+  const config_cancer_total_time = {
+    type: 'line',
+    data: data_cancer_total_time,
+    options: {}
+  };
+
+  const config_cancer_men_time = {
+    type: 'line',
+    data: data_cancer_men_time,
+    options: {}
+  };
+
+  const config_cancer_women_time = {
+    type: 'line',
+    data: data_cancer_women_time,
+    options: {}
+  };
+
+  const myCancerTotalTimeChart = new Chart(
+    document.getElementById('myCancerTotalTimeChart'),
+    config_cancer_total_time
+  );
+
+  const myCancerMenTimeChart = new Chart(
+    document.getElementById('myCancerMenTimeChart'),
+    config_cancer_men_time
+  );
+
+  const myCancerWomenTimeChart = new Chart(
+    document.getElementById('myCancerWomenTimeChart'),
+    config_cancer_women_time
+  );
+</script>
+
+
+ <!--  5TH CAROUSEL AROUND ISCHEMIC HEART DISEASES WITH THE DATA OF THE LAST YEAR OF PUBLISHMENT  -->
+
+<div class="disease_text text longterm" id="Heart">
+  <h3>Ischemic heart diseases' last results</h3>
+  <p>As we can see, we clearly have a big four! </p>
+  <p>Lithuania, Hungary, Latvia, and Slovakia together with the rest of Eastern Europe seem to be the ones struggling the most against ischemic heart diseases. </p>
+  <p>Again, men are on top! </p>
+  <p>The best countries against this type of disease are all located in Western Europe with Portugal, France and the Netherlands leading the way.</p>
+  <br>
+  <p>Deaths due to ischemic heart diseases tend to be higher in countries in which people smoke very heavily (more than 20 cigarettesper day), especially among women, with a correlation of 0.55.</p>
+  <br>
+  <p>Also, those heart deaths are correlated to not eating its fruits and vegies (0.4). This correlation disappears and even becomes negative (although not significant or bearily) as people eat their fruits and vegies (-0.3).</p>
+  <p>Finally, women dying of ischemic heart diseases are strongly correlated to women dying of liver diseases (0.68).</p>
+</div>
+
+<div class="eighth_carousel all_carousels">
+  <!--image slider start-->
+      <div class="slider_seventh sliderr">
+        <div class="slides_seventh">
+          <!--radio buttons start-->
+          <input type="radio" name="radio-btn-seventh" id="radio22">
+          <input type="radio" name="radio-btn-seventh" id="radio23">
+          <input type="radio" name="radio-btn-seventh" id="radio24">
+          <!--radio buttons end-->
+          <!--slide images start-->
+          <div class="slide_seventh seventh" id="slide22">
+            <div class="chart_container_heart_total">
+              <canvas id="myHeartTotalChart"></canvas>
+            </div>
+          </div>
+          <div class="slide_seventh" id="slide23">
+            <div class="chart_container_heart_men">
+              <canvas id="myHeartMenChart"></canvas>
+            </div>
+          </div>
+          <div class="slide_seventh" id="slide24">
+            <div class="chart_container_heart_women">
+              <canvas id="myHeartWomenChart"></canvas>
+            </div>
+          </div>
+
+          <!--slide images end-->
+
+        </div>
+        <!--manual navigation start-->
+        <div class="navigation-manual-third radios_first_carousel">
+          <label for="radio22" class="manual-btn-seventh">Total</label>
+          <label for="radio23" class="manual-btn-seventh">Men</label>
+          <label for="radio24" class="manual-btn-seventh">Women</label>
+        </div>
+        <!--manual navigation end-->
+      </div>
+      <!--image slider end-->
+      </div>
+<script type="text/javascript">
+const labels_heart_total = ["Lithuania","Hungary","Latvia","Slovakia","Czechia","Romania","Estonia",
+"Croatia","Bulgaria","Finland","Austria","Poland","Germany","Malta","Ireland","Iceland","United Kingdom",
+"Sweden","Greece","Switzerland","Italy","Denmark","Cyprus","Luxembourg","Slovenia","Norway",
+"Spain","France","Belgium","Portugal","Netherlands"];
+
+const labels_heart_men = ["Lithuania","Latvia","Hungary","Slovakia","Czechia","Romania","Estonia",
+"Finland","Bulgaria","Croatia","Austria","Poland","Germany","Malta","Ireland","Iceland","United Kingdom",
+"Sweden","Switzerland","Italy","Greece","Denmark","Cyprus","Luxembourg","Slovenia","Norway",
+"Spain","France","Belgium","Portugal","Netherlands"];
+
+const labels_heart_women = ["Lithuania","Slovakia","Hungary","Latvia","Czechia","Romania",
+"Croatia","Bulgaria","Estonia","Poland","Austria","Finland","Germany","Malta","Iceland","Ireland",
+"Italy","Greece","United Kingdom","Switzerland","Sweden","Slovenia","Denmark","Cyprus","Luxembourg",
+"Norway","Spain","Belgium","Portugal","France","Netherlands"];
+
+
+const data_heart_total = {
+labels: labels_heart_total,
+datasets: [{
+  label: "Total ischemic heart deaths per 100 000",
+  barThickness: 8,
+  data: [425.83,295.1,289.78,288.76,211.41,179.86,140.08,137.44,127.58,107.9,101.49,99.99,
+78.65,78.14,68.67,67.53,61.99,54.91,54.03,52.96,52.44,39.82,39.76,34.25,33.35,30.16,28.87,
+25.5,25.44,24.68,21.08],
+  backgroundColor: ["#EA961C","#EA961C","#EA961C","#EA961C", "#EA961C","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5", "#9BB0A5","#9BB0A5", "#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5",
+  "#00C57C","#00C57C", "#00C57C"]
+}]
+};
+
+const data_heart_men = {
+labels: labels_heart_men,
+datasets: [{
+  label: "Male ischemic heart deaths per 100 000",
+  barThickness: 8,
+  data: [558.28,404.24,361.91,337.56,266.44,206.44,205.87,165.64,157.15,153.96,136.7,132.36,
+112.11,108.89,97.65,93.48,92.71,78.92,76.62,73.36,72.59,57.06,56.37,55.64,45.16,44.67,44.27,41.93,38.99,37.71,32.57],
+
+  backgroundColor: ["#EA961C","#EA961C","#EA961C","#EA961C", "#EA961C","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5", "#9BB0A5","#9BB0A5", "#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5",
+  "#00C57C","#00C57C", "#00C57C"]
+}]
+};
+
+const data_heart_women = {
+labels: labels_heart_women,
+datasets: [{
+  label: "Female ischemic heart deaths per 100 000",
+  barThickness: 8,
+  data: [349.88,253.5,251.7,229.53,173.53,159.26,126.26,106.6,104.85,78.23,77.96,70.41,56.01,
+55.5,47.3,45.07,38.7,38.4,37.85,37.2,37.19,27.57,26.79,26.39,21.77,18.67,17.74,16.14,15.7,14.9,12.91],
+
+  backgroundColor: ["#EA961C","#EA961C","#EA961C","#EA961C", "#EA961C","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5", "#9BB0A5","#9BB0A5", "#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5",
+  "#00C57C","#00C57C", "#00C57C"]
+}]
+};
+
+
+
+
+
+const config_heart_total = {
+type: 'bar',
+data: data_heart_total,
+options: {
+  indexAxis: 'y',
+  scales: {
+          x: {
+            grid: {
+              display: false
+            }
+          },
+          y: {
+            grid: {
+              display: false
+            }
+          }
+        }
+    },
+
+  };
+
+  const config_heart_men = {
+    type: 'bar',
+    data: data_heart_men,
+    options: {
+      indexAxis: 'y',
+      scales: {
+              x: {
+                grid: {
+                  display: false
+                }
+              },
+              y: {
+                grid: {
+                  display: false
+                }
+              }
+            }
+        },
+
+      };
+
+      const config_heart_women = {
+        type: 'bar',
+        data: data_heart_women,
+        options: {
+          indexAxis: 'y',
+          scales: {
+                  x: {
+                    grid: {
+                      display: false
+                    }
+                  },
+                  y: {
+                    grid: {
+                      display: false
+                    }
+                  }
+                }
+            },
+
+          };
+
+
+
+const myHeartTotalChart = new Chart(
+document.getElementById('myHeartTotalChart'),
+config_heart_total
+);
+
+const myHeartMenChart = new Chart(
+document.getElementById('myHeartMenChart'),
+config_heart_men
+);
+
+const myHeartWomenChart = new Chart(
+document.getElementById('myHeartWomenChart'),
+config_heart_women
+);
+
+</script>
+
+
+ <!--  6TH CAROUSEL AROUND ISCHEMIC HEART DISEASES WHERE THE TOP COUNTRIES ARE COMPARED OVER TIME  -->
+
+<div class="disease_text text longterm">
+  <h3>Ischemic heart diseases' long-term results</h3>
+  <p>Even if the numbers in Eastern Europe are intimidating, the number of deaths (per 100 000) is going down over time. Additionally, the countries in better shape have been able to stabilize their death toll at a very low rate.</p>
+</div>
+
+
+<div class="tenth_carousel all_carousels">
+
+<!--image slider start-->
+<div class="slider_tenth sliderr">
+  <div class="slides_tenth">
+    <!--radio buttons start-->
+    <input type="radio" name="radio-btn-tenth" id="radio25">
+    <input type="radio" name="radio-btn-tenth" id="radio26">
+    <input type="radio" name="radio-btn-tenth" id="radio27">
+    <!--radio buttons end-->
+    <!--slide images start-->
+    <div class="slide_tenth tenth" id="slide25">
+      <div class="chart_container_cancer_total_overtime">
+        <canvas id="myHeartTotalTimeChart"></canvas>
+      </div>
+    </div>
+    <div class="slide_tenth" id="slide26">
+      <div class="chart_container_cancer_men_overtime">
+        <canvas id="myHeartMenTimeChart"></canvas>
+      </div>
+    </div>
+    <div class="slide_tenth" id="slide27">
+      <div class="chart_container_cancer_women_overtime">
+        <canvas id="myHeartWomenTimeChart"></canvas>
+      </div>
+    </div>
+
+    <!--slide images end-->
+
+  </div>
+  <!--manual navigation start-->
+  <div class="navigation-manual-tenth radios_first_carousel">
+    <label for="radio25" class="manual-btn-tenth">Total</label>
+    <label for="radio26" class="manual-btn-tenth">Men</label>
+    <label for="radio27" class="manual-btn-tenth">Women</label>
+  </div>
+  <!--manual navigation end-->
+</div>
+<!--image slider end-->
+</div>
+
+<script>
+
+  const Heart_total_time=[
+    {year:'2011', data:{Lithuania:544.93,Hungary:337.64,Latvia:412.23,Belgium:34.8,Portugal:23.77,Netherlands:26.04}},
+    {year:'2012', data:{Lithuania:546.08,Hungary:334.48,Latvia:419.25,Belgium:34.16,Portugal:23.45,Netherlands:26.2}},
+    {year:'2013', data:{Lithuania:543.65,Hungary:324.72,Latvia:397.38,Belgium:33.39,Portugal:22.72,Netherlands:26.06}},
+    {year:'2014', data:{Lithuania:523.83,Hungary:323.98,Latvia:382.12,Belgium:30.58,Portugal:26.9,Netherlands:25.33}},
+    {year:'2015', data:{Lithuania:540.27,Hungary:328.38,Latvia:376.85,Belgium:31.83,Portugal:27.64,Netherlands:24.9}},
+    {year:'2016', data:{Lithuania:522.2,Hungary:304.89,Latvia:340.81,Belgium:29.42,Portugal:26.95,Netherlands:24.18}},
+    {year:'2017', data:{Lithuania:490.96,Hungary:316.19,Latvia:313.09,Belgium:28.81,Portugal:24.57,Netherlands:22.33}},
+    {year:'2018', data:{Lithuania:460.23,Hungary:304.13,Latvia:315,Belgium:26.59,Portugal:22.96,Netherlands:21.29}},
+    {year:'2019', data:{Lithuania:425.83,Hungary:295.1,Latvia:289.78,Belgium:25.44,Portugal:24.68,Netherlands:21.08}},
+  ]
+
+  const Heart_men_time=[
+    {year:'2011', data:{Lithuania:714.4,Latvia:582.93,Hungary:405.11,Belgium:50.72,Portugal:30.3,Netherlands:40.89}},
+    {year:'2012', data:{Lithuania:707.14,Latvia:563.73,Hungary:398.72,Belgium:52.78,Portugal:29.94,Netherlands:41.81}},
+    {year:'2013', data:{Lithuania:700.69,Latvia:542.47,Hungary:395.65,Belgium:51.89,Portugal:29.81,Netherlands:40.03}},
+    {year:'2014', data:{Lithuania:684.52,Latvia:523.55,Hungary:392.41,Belgium:48.1,Portugal:37.44,Netherlands:39.93}},
+    {year:'2015', data:{Lithuania:688.88,Latvia:507.19,Hungary:389.77,Belgium:48.82,Portugal:38.1,Netherlands:39.49}},
+    {year:'2016', data:{Lithuania:690.82,Latvia:479.51,Hungary:375.74,Belgium:45.72,Portugal:37.89,Netherlands:37.68}},
+    {year:'2017', data:{Lithuania:636.88,Latvia:454.14,Hungary:386.96,Belgium:44.94,Portugal:35.64,Netherlands:35.13}},
+    {year:'2018', data:{Lithuania:600.43,Latvia:435.1,Hungary:375.86,Belgium:41.79,Portugal:33.12,Netherlands:34.37}},
+    {year:'2019', data:{Lithuania:558.28,Latvia:404.24,Hungary:361.91,Belgium:38.99,Portugal:37.71,Netherlands:32.57}},
+  ]
+
+  const Heart_women_time=[
+    {year:'2011', data:{Lithuania:447.5,Slovakia:344.42,Hungary:293.42,Portugal:19.07,France:18.28,Netherlands:16.54}},
+    {year:'2012', data:{Lithuania:451.02,Slovakia:334.95,Hungary:293.5,Portugal:18.85,France:18.48,Netherlands:16.2}},
+    {year:'2013', data:{Lithuania:455.43,Slovakia:332.17,Hungary:280.49,Portugal:17.42,France:17.6,Netherlands:16.88}},
+    {year:'2014', data:{Lithuania:435.15,Slovakia:297.53,Hungary:280.45,Portugal:19.17,France:16.9,Netherlands:15.82}},
+    {year:'2015', data:{Lithuania:452.35,Slovakia:304.7,Hungary:288.45,Portugal:19.62,France:16.38,Netherlands:15.43}},
+    {year:'2016', data:{Lithuania:427.24,Slovakia:270.44,Hungary:259.87,Portugal:18.91,France:15.46,Netherlands:15.1}},
+    {year:'2017', data:{Lithuania:408,Slovakia:276.33,Hungary:270.66,Portugal:16.77,France:14.9,Netherlands:13.42}},
+    {year:'2018', data:{Lithuania:381.51,Slovakia:251.11,Hungary:258.5,Portugal:15.57,France:14.9,Netherlands:12.31}},
+    {year:'2019', data:{Lithuania:349.88,Slovakia:253.5,Hungary:251.7,Portugal:15.7,France:14.9,Netherlands:12.91}},
+  ]
+
+
+
+  const data_heart_total_time = {
+    datasets: [{
+      label: "Lithuania's Ischemic heart deaths per 100 000 people",
+      backgroundColor: '#CB3A13',
+      borderColor: '#CB3A13',
+      data: Heart_total_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Lithuania'
+      }
+    },
+
+    {
+      label: "Hungary's Ischemic heart deaths per 100 000 people",
+      backgroundColor: '#CE6548',
+      borderColor: '#CE6548',
+      data: Heart_total_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Hungary'
+      }
+    },
+
+    {
+      label: "Latvia's Ischemic heart deaths per 100 000 people",
+      backgroundColor: '#D18773',
+      borderColor: '#D18773',
+      data: Heart_total_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Latvia'
+      }
+    },
+
+    {
+      label: "Belgium's Ischemic heart deaths per 100 000 people",
+      backgroundColor: '#6FEB85',
+      borderColor: '#6FEB85',
+      data: Heart_total_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Belgium'
+      }
+    },
+
+    {
+      label: "Portugal's Ischemic heart deaths per 100 000 people",
+      backgroundColor: '#3DC255',
+      borderColor: '#3DC255',
+      data: Heart_total_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Portugal'
+      }
+    },
+
+    {
+      label: "Netherlands's Ischemic heart deaths per 100 000 people",
+      backgroundColor: '#05A923',
+      borderColor: '#05A923',
+      data: Heart_total_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Netherlands'
+      }
+    }
+  ]
+  };
+
+
+  const data_heart_men_time = {
+    datasets: [{
+      label: "Lithuania's male Ischemic heart deaths per 100 000 people",
+      backgroundColor: '#CB3A13',
+      borderColor: '#CB3A13',
+      data: Heart_men_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Lithuania'
+      }
+    },
+
+    {
+      label: "Hungary's male Ischemic heart deaths per 100 000 people",
+      backgroundColor: '#CE6548',
+      borderColor: '#CE6548',
+      data: Heart_men_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Hungary'
+      }
+    },
+
+    {
+      label: "Latvia's male Ischemic heart deaths per 100 000 people",
+      backgroundColor: '#D18773',
+      borderColor: '#D18773',
+      data: Heart_men_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Latvia'
+      }
+    },
+
+    {
+      label: "Belgium's male Ischemic heart deaths per 100 000 people",
+      backgroundColor: '#6FEB85',
+      borderColor: '#6FEB85',
+      data: Heart_men_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Belgium'
+      }
+    },
+
+    {
+      label: "Portugal's male Ischemic heart deaths per 100 000 people",
+      backgroundColor: '#3DC255',
+      borderColor: '#3DC255',
+      data: Heart_men_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Portugal'
+      }
+    },
+
+    {
+      label: "Netherlands's male Ischemic heart deaths per 100 000 people",
+      backgroundColor: '#05A923',
+      borderColor: '#05A923',
+      data: Heart_men_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Netherlands'
+      }
+    }
+  ]
+  };
+
+
+  const data_heart_women_time = {
+    datasets: [{
+      label: "Lithuania's female Ischemic heart deaths per 100 000 people",
+      backgroundColor: '#CB3A13',
+      borderColor: '#CB3A13',
+      data: Heart_women_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Lithuania'
+      }
+    },
+
+    {
+      label: "Slovakia's female Ischemic heart deaths per 100 000 people",
+      backgroundColor: '#CE6548',
+      borderColor: '#CE6548',
+      data: Heart_women_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Slovakia'
+      }
+    },
+
+    {
+      label: "Hungary's female Ischemic heart deaths per 100 000 people",
+      backgroundColor: '#D18773',
+      borderColor: '#D18773',
+      data: Heart_women_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Hungary'
+      }
+    },
+
+    {
+      label: "Portugal's female Ischemic heart deaths per 100 000 people",
+      backgroundColor: '#6FEB85',
+      borderColor: '#6FEB85',
+      data: Heart_women_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Portugal'
+      }
+    },
+
+    {
+      label: "France's female Ischemic heart deaths per 100 000 people",
+      backgroundColor: '#3DC255',
+      borderColor: '#3DC255',
+      data: Heart_women_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.France'
+      }
+    },
+
+    {
+      label: "Netherlands's female Ischemic heart deaths per 100 000 people",
+      backgroundColor: '#05A923',
+      borderColor: '#05A923',
+      data: Heart_women_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Netherlands'
+      }
+    }
+  ]
+  };
+
+  const config_heart_total_time = {
+    type: 'line',
+    data: data_heart_total_time,
+    options: {}
+  };
+
+  const config_heart_men_time = {
+    type: 'line',
+    data: data_heart_men_time,
+    options: {}
+  };
+
+  const config_heart_women_time = {
+    type: 'line',
+    data: data_heart_women_time,
+    options: {}
+  };
+
+  const myHeartTotalTimeChart = new Chart(
+    document.getElementById('myHeartTotalTimeChart'),
+    config_heart_total_time
+  );
+
+  const myHeartMenTimeChart = new Chart(
+    document.getElementById('myHeartMenTimeChart'),
+    config_heart_men_time
+  );
+
+  const myHeartWomenTimeChart = new Chart(
+    document.getElementById('myHeartWomenTimeChart'),
+    config_heart_women_time
+  );
+</script>
+
+ <!--  7TH CAROUSEL ABOUT ALCOHOL WITH THE RESULTS OF THE LAST YEAR OF PUBLISHMENT  -->
+
+<div class="disease_text text longterm" id="Alcohol">
+  <h3>Alcohol's last results</h3>
+  <p>Again, Eastern Europe is leading the way but this time we have a clear champion: Slovenia. </p>
+  <p>Interestingly, the countries drinking very heavily on a frequent basis are not the ones showing more deaths due to alcohol.</p>
+  <p>Clearly, men win once again, while women’s the death toll (even if bigger in Eastern countries) seems to be relatively stable.</p>
+  <br>
+  <p>For men, drinking heavily (at least once per week) is correlated with having a higher life expectancy (0.31).</p>
+  <p>This is because Northern and Western countries, in which the living conditions tend to be higher, are according to the data pretty alcoholic.</p>
+  <p>Nevertheless, deaths due to alcohol are as one should expect correlated with binge drinking (0.5) and inversely for having never drank heavily in the past year (-0.6). These correlations are especially true for women.</p>
+</div>
+
+<div class="eleventh_carousel all_carousels">
+  <!--image slider start-->
+      <div class="slider_eleventh sliderr">
+        <div class="slides_eleventh">
+          <!--radio buttons start-->
+          <input type="radio" name="radio-btn-eleventh" id="radio28">
+          <input type="radio" name="radio-btn-eleventh" id="radio29">
+          <input type="radio" name="radio-btn-eleventh" id="radio30">
+          <!--radio buttons end-->
+          <!--slide images start-->
+          <div class="slide_eleventh eleventh" id="slide28">
+            <div class="chart_container_alcohol_total">
+              <canvas id="myAlcoholTotalChart"></canvas>
+            </div>
+          </div>
+          <div class="slide_eleventh" id="slide29">
+            <div class="chart_container_alcohol_men">
+              <canvas id="myAlcoholMenChart"></canvas>
+            </div>
+          </div>
+          <div class="slide_eleventh" id="slide30">
+            <div class="chart_container_alcohol_women">
+              <canvas id="myAlcoholWomenChart"></canvas>
+            </div>
+          </div>
+
+          <!--slide images end-->
+
+        </div>
+        <!--manual navigation start-->
+        <div class="navigation-manual-eleventh radios_first_carousel">
+          <label for="radio28" class="manual-btn-eleventh">Total</label>
+          <label for="radio29" class="manual-btn-eleventh">Men</label>
+          <label for="radio30" class="manual-btn-eleventh">Women</label>
+        </div>
+        <!--manual navigation end-->
+      </div>
+      <!--image slider end-->
+      </div>
+<script type="text/javascript">
+const labels_alcohol_total = ["Slovenia","Poland","Denmark","Croatia","Austria","Germany","Latvia","Slovakia","Hungary",
+"Finland","France","Estonia","Belgium","Sweden","Netherlands","Luxembourg","Switzerland","Iceland","Norway","Czechia",
+"United Kingdom","Romania","Portugal","Lithuania","Ireland","Spain","Bulgaria","Cyprus","Greece","Italy","Malta"];
+
+const labels_alcohol_men = ["Slovenia","Poland","Croatia","Denmark","Austria","Latvia","Germany","Hungary","Slovakia",
+"Finland","Estonia","France","Belgium","Sweden","Netherlands","Switzerland","Norway","Iceland","Luxembourg","Czechia",
+"Romania","United Kingdom","Lithuania","Portugal","Ireland","Spain","Bulgaria","Greece","Italy","Cyprus","Malta"];
+
+const labels_alcohol_women = ["Slovenia","Denmark","Poland","Austria","Germany","Luxembourg","Croatia","Finland","Belgium",
+"Latvia","France","Iceland","Hungary","Netherlands","Slovakia","Sweden","Switzerland","United Kingdom","Norway","Estonia",
+"Czechia","Romania","Cyprus","Portugal","Ireland","Lithuania","Italy","Bulgaria","Spain","Greece","Malta"];
+
+
+const data_alcohol_total = {
+labels: labels_alcohol_total,
+datasets: [{
+  label: "Total deaths due to alcohol",
+  barThickness: 8,
+  data: [21.39,8.58,7.29,7.08,5.6,5.29,4.57,4.44,4.42,4.28,3.76,3.58,3.26,3.08,2.76,2.47,2.3,2.22,2.17,1.57,1.56,
+1.26,0.88,0.86,0.5,0.45,0.44,0.38,0.37,0.36,0.21],
+  backgroundColor: ["#EA961C","#EA961C","#EA961C","#EA961C", "#EA961C","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5", "#9BB0A5","#9BB0A5", "#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5",
+  "#00C57C","#00C57C", "#00C57C"]
+}]
+};
+
+const data_alcohol_men = {
+labels: labels_alcohol_men,
+datasets: [{
+  label: "Male deaths due to alcohol",
+  barThickness: 8,
+  data: [40.25,15.55,13.95,11.32,9.55,8.68,8.67,8.46,8.14,7.45,7.18,6.42,5.2,5.16,4.39,3.78,3.67,3.34,2.87,2.69,
+          2.23,2.22,1.8,1.72,0.91,0.89,0.85,0.72,0.62,0.53,0.5],
+
+  backgroundColor: ["#EA961C","#EA961C","#EA961C","#EA961C", "#EA961C","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5", "#9BB0A5","#9BB0A5", "#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5",
+  "#00C57C","#00C57C", "#00C57C"]
+}]
+};
+
+const data_alcohol_women = {
+labels: labels_alcohol_women,
+datasets: [{
+  label: "Female deaths due to alcohol",
+  barThickness: 8,
+  data: [5.51,3.41,2.34,2.21,2.15,1.97,1.72,1.55,1.51,1.45,1.37,1.27,1.26,1.25,1.25,1.13,0.98,0.94,0.85,0.81,0.58,
+0.41,0.24,0.19,0.17,0.14,0.13,0.08,0.07,0.05,0],
+
+  backgroundColor: ["#EA961C","#EA961C","#EA961C","#EA961C", "#EA961C","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5", "#9BB0A5","#9BB0A5", "#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5",
+  "#00C57C","#00C57C", "#00C57C"]
+}]
+};
+
+
+
+
+
+const config_alcohol_total = {
+type: 'bar',
+data: data_alcohol_total,
+options: {
+  indexAxis: 'y',
+  scales: {
+          x: {
+            grid: {
+              display: false
+            }
+          },
+          y: {
+            grid: {
+              display: false
+            }
+          }
+        }
+    },
+
+  };
+
+  const config_alcohol_men = {
+    type: 'bar',
+    data: data_alcohol_men,
+    options: {
+      indexAxis: 'y',
+      scales: {
+              x: {
+                grid: {
+                  display: false
+                }
+              },
+              y: {
+                grid: {
+                  display: false
+                }
+              }
+            }
+        },
+
+      };
+
+      const config_alcohol_women = {
+        type: 'bar',
+        data: data_alcohol_women,
+        options: {
+          indexAxis: 'y',
+          scales: {
+                  x: {
+                    grid: {
+                      display: false
+                    }
+                  },
+                  y: {
+                    grid: {
+                      display: false
+                    }
+                  }
+                }
+            },
+
+          };
+
+
+
+const myAlcoholTotalChart = new Chart(
+document.getElementById('myAlcoholTotalChart'),
+config_alcohol_total
+);
+
+const myAlcoholMenChart = new Chart(
+document.getElementById('myAlcoholMenChart'),
+config_alcohol_men
+);
+
+const myAlcoholWomenChart = new Chart(
+document.getElementById('myAlcoholWomenChart'),
+config_alcohol_women
+);
+
+</script>
+
+
+ <!--  8TH CAROUSEL ABOUT ALCOHOL OVER TIME  -->
+
+<div class="disease_text text longterm">
+  <h3>Alcohol's long-term results</h3>
+  <p>The male death toll seems to be pretty stable as well in the best countries, but some countries have been struggling in the past years such as Poland (almost doubled in less than 10 years) but especially Slovenia! </p>
+  <p>Slovenia’s male death toll due to alcohol has quadrupled during the 2010’s! Even if alcohol consumption is heavily promoted, it is as well in other countries such as Belgium or Germany that are both on the higher half of the list as well, but do not even come close to Slovenia’s performance.</p>
+  <p>Other factors are in play. From what I have read there are political and social imbalances in Slovenia, but I do not have enough proof for it nor know enough about the country to make clear statements.</p>
+
+</div>
+
+
+<div class="twelve_carousel all_carousels">
+
+<!--image slider start-->
+<div class="slider_twelve sliderr">
+  <div class="slides_twelve">
+    <!--radio buttons start-->
+    <input type="radio" name="radio-btn-twelve" id="radio31">
+    <input type="radio" name="radio-btn-twelve" id="radio32">
+    <input type="radio" name="radio-btn-twelve" id="radio33">
+    <!--radio buttons end-->
+    <!--slide images start-->
+    <div class="slide_twelve twelve" id="slide31">
+      <div class="chart_container_alcohol_total_overtime">
+        <canvas id="myAlcoholTotalTimeChart"></canvas>
+      </div>
+    </div>
+    <div class="slide_twelve" id="slide32">
+      <div class="chart_container_alcohol_men_overtime">
+        <canvas id="myAlcoholMenTimeChart"></canvas>
+      </div>
+    </div>
+    <div class="slide_twelve" id="slide33">
+      <div class="chart_container_alcohol_women_overtime">
+        <canvas id="myAlcoholWomenTimeChart"></canvas>
+      </div>
+    </div>
+
+    <!--slide images end-->
+
+  </div>
+  <!--manual navigation start-->
+  <div class="navigation-manual-twelve radios_first_carousel">
+    <label for="radio31" class="manual-btn-twelve">Total</label>
+    <label for="radio32" class="manual-btn-twelve">Men</label>
+    <label for="radio33" class="manual-btn-twelve">Women</label>
+  </div>
+  <!--manual navigation end-->
+</div>
+<!--image slider end-->
+</div>
+
+<script>
+
+  const Alcohol_total_time=[
+    {year:'2011', data:{Slovenia:6.34,Poland:4.62,Denmark:12.61,Greece:0.27,Italy:0.36,Malta:0.5}},
+    {year:'2012', data:{Slovenia:7.88,Poland:4.24,Denmark:12.95,Greece:0.2,Italy:0.35,Malta:0.27}},
+    {year:'2013', data:{Slovenia:9.64,Poland:3.66,Denmark:12.58,Greece:0.12,Italy:0.33,Malta:0.59}},
+    {year:'2014', data:{Slovenia:9.67,Poland:3.55,Denmark:11.49,Greece:0.12,Italy:0.32,Malta:0.39}},
+    {year:'2015', data:{Slovenia:12.83,Poland:5.28,Denmark:12.24,Greece:0.3,Italy:0.33,Malta:0.27}},
+    {year:'2016', data:{Slovenia:13.88,Poland:6.95,Denmark:11.53,Greece:0.23,Italy:0.36,Malta:0.21}},
+    {year:'2017', data:{Slovenia:16.48,Poland:7.91,Denmark:9.25,Greece:0.34,Italy:0.3,Malta:0.94}},
+    {year:'2018', data:{Slovenia:16.47,Poland:8.13,Denmark:8.06,Greece:0.23,Italy:0.38,Malta:0.62}},
+    {year:'2019', data:{Slovenia:21.39,Poland:8.58,Denmark:7.29,Greece:0.37,Italy:0.36,Malta:0.21}},
+  ]
+
+  const Alcohol_men_time=[
+    {year:'2011', data:{Slovenia:11.64,Poland:8.56,Croatia:11.41,Italy:0.64,Cyprus:0.76,Malta:0.45}},
+    {year:'2012', data:{Slovenia:14.44,Poland:7.73,Croatia:11.65,Italy:0.61,Cyprus:0.67,Malta:0.53}},
+    {year:'2013', data:{Slovenia:16.57,Poland:6.62,Croatia:9.56,Italy:0.54,Cyprus:1.82,Malta:1.23}},
+    {year:'2014', data:{Slovenia:17.9,Poland:6.42,Croatia:9.92,Italy:0.58,Cyprus:1.56,Malta:0.38}},
+    {year:'2015', data:{Slovenia:22.93,Poland:9.78,Croatia:9.96,Italy:0.57,Cyprus:0.86,Malta:0.61}},
+    {year:'2016', data:{Slovenia:26.22,Poland:12.73,Croatia:9.76,Italy:0.65,Cyprus:0.52,Malta:0.41}},
+    {year:'2017', data:{Slovenia:28.92,Poland:14.54,Croatia:6.89,Italy:0.52,Cyprus:0.57,Malta:1.98}},
+    {year:'2018', data:{Slovenia:29.74,Poland:15.07,Croatia:9.07,Italy:0.68,Cyprus:0.56,Malta:0.84}},
+    {year:'2019', data:{Slovenia:40.25,Poland:15.55,Croatia:13.95,Italy:0.62,Cyprus:0.53,Malta:0.5}},
+  ]
+
+  const Alcohol_women_time=[
+    {year:'2011', data:{Slovenia:2.13,Denmark:5.96,Poland:1.16,Spain:0.19,Greece:0.08,Malta:0.57}},
+    {year:'2012', data:{Slovenia:2.04,Denmark:5.58,Poland:1.15,Spain:0.22,Greece:0.08,Malta:0.57}},
+    {year:'2013', data:{Slovenia:3.66,Denmark:5.95,Poland:1.05,Spain:0.13,Greece:0.02,Malta:0.57}},
+    {year:'2014', data:{Slovenia:2.93,Denmark:5,Poland:1.01,Spain:0.14,Greece:0.01,Malta:0.41}},
+    {year:'2015', data:{Slovenia:4.2,Denmark:5.23,Poland:1.33,Spain:0.13,Greece:0.07,Malta:0.41}},
+    {year:'2016', data:{Slovenia:3.48,Denmark:5.64,Poland:1.86,Spain:0.13,Greece:0.06,Malta:0.41}},
+    {year:'2017', data:{Slovenia:5.48,Denmark:4.22,Poland:2.03,Spain:0.13,Greece:0.12,Malta:0}},
+    {year:'2018', data:{Slovenia:5.31,Denmark:3.5,Poland:1.99,Spain:0.12,Greece:0.09,Malta:0.37}},
+    {year:'2019', data:{Slovenia:5.51,Denmark:3.41,Poland:2.34,Spain:0.07,Greece:0.05,Malta:0}},
+  ]
+
+
+
+  const data_alcohol_total_time = {
+    datasets: [{
+      label: "Slovenia's deaths per 100 000 people due to alcohol",
+      backgroundColor: '#CB3A13',
+      borderColor: '#CB3A13',
+      data: Alcohol_total_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Slovenia'
+      }
+    },
+
+    {
+      label: "Poland's deaths per 100 000 people due to alcohol",
+      backgroundColor: '#CE6548',
+      borderColor: '#CE6548',
+      data: Alcohol_total_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Poland'
+      }
+    },
+
+    {
+      label: "Denmark's deaths per 100 000 people due to alcohol",
+      backgroundColor: '#D18773',
+      borderColor: '#D18773',
+      data: Alcohol_total_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Denmark'
+      }
+    },
+
+    {
+      label: "Greece's deaths per 100 000 people due to alcohol",
+      backgroundColor: '#6FEB85',
+      borderColor: '#6FEB85',
+      data: Alcohol_total_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Greece'
+      }
+    },
+
+    {
+      label: "Italy's deaths per 100 000 people due to alcohol",
+      backgroundColor: '#3DC255',
+      borderColor: '#3DC255',
+      data: Alcohol_total_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Italy'
+      }
+    },
+
+    {
+      label: "Malta's deaths per 100 000 people due to alcohol",
+      backgroundColor: '#05A923',
+      borderColor: '#05A923',
+      data: Alcohol_total_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Malta'
+      }
+    }
+  ]
+  };
+
+
+  const data_alcohol_men_time = {
+    datasets: [{
+      label: "Slovenia's male deaths per 100 000 people due to alcohol",
+      backgroundColor: '#CB3A13',
+      borderColor: '#CB3A13',
+      data: Alcohol_men_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Slovenia'
+      }
+    },
+
+    {
+      label: "Poland's male deaths per 100 000 people due to alcohol",
+      backgroundColor: '#CE6548',
+      borderColor: '#CE6548',
+      data: Alcohol_men_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Poland'
+      }
+    },
+
+    {
+      label: "Croatia's male deaths per 100 000 people due to alcohol",
+      backgroundColor: '#D18773',
+      borderColor: '#D18773',
+      data: Alcohol_men_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Croatia'
+      }
+    },
+
+    {
+      label: "Italy's male deaths per 100 000 people due to alcohol",
+      backgroundColor: '#6FEB85',
+      borderColor: '#6FEB85',
+      data: Alcohol_men_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Italy'
+      }
+    },
+
+    {
+      label: "Cyprus's male deaths per 100 000 people due to alcohol",
+      backgroundColor: '#3DC255',
+      borderColor: '#3DC255',
+      data: Alcohol_men_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Cyprus'
+      }
+    },
+
+    {
+      label: "Malta's male deaths per 100 000 people due to alcohol",
+      backgroundColor: '#05A923',
+      borderColor: '#05A923',
+      data: Alcohol_men_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Malta'
+      }
+    }
+  ]
+  };
+
+
+  const data_alcohol_women_time = {
+    datasets: [{
+      label: "Slovenia's female deaths per 100 000 people due to alcohol",
+      backgroundColor: '#CB3A13',
+      borderColor: '#CB3A13',
+      data: Alcohol_women_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Slovenia'
+      }
+    },
+
+    {
+      label: "Denmark's female deaths per 100 000 people due to alcohol",
+      backgroundColor: '#CE6548',
+      borderColor: '#CE6548',
+      data: Alcohol_women_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Denmark'
+      }
+    },
+
+    {
+      label: "Poland's female deaths per 100 000 people due to alcohol",
+      backgroundColor: '#D18773',
+      borderColor: '#D18773',
+      data: Alcohol_women_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Poland'
+      }
+    },
+
+    {
+      label: "Spain's female deaths per 100 000 people due to alcohol",
+      backgroundColor: '#6FEB85',
+      borderColor: '#6FEB85',
+      data: Alcohol_women_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Spain'
+      }
+    },
+
+    {
+      label: "Greece's female deaths per 100 000 people due to alcohol",
+      backgroundColor: '#3DC255',
+      borderColor: '#3DC255',
+      data: Alcohol_women_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Greece'
+      }
+    },
+
+    {
+      label: "Malta's female deaths per 100 000 people due to alcohol",
+      backgroundColor: '#05A923',
+      borderColor: '#05A923',
+      data: Alcohol_women_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Malta'
+      }
+    }
+  ]
+  };
+
+  const config_alcohol_total_time = {
+    type: 'line',
+    data: data_alcohol_total_time,
+    options: {}
+  };
+
+  const config_alcohol_men_time = {
+    type: 'line',
+    data: data_alcohol_men_time,
+    options: {}
+  };
+
+  const config_alcohol_women_time = {
+    type: 'line',
+    data: data_alcohol_women_time,
+    options: {}
+  };
+
+  const myAlcoholTotalTimeChart = new Chart(
+    document.getElementById('myAlcoholTotalTimeChart'),
+    config_alcohol_total_time
+  );
+
+  const myAlcoholMenTimeChart = new Chart(
+    document.getElementById('myAlcoholMenTimeChart'),
+    config_alcohol_men_time
+  );
+
+  const myAlcoholWomenTimeChart = new Chart(
+    document.getElementById('myAlcoholWomenTimeChart'),
+    config_alcohol_women_time  );
+
+
+</script>
+
+
+ <!--  9TH CAROUSEL ABOUT LIVER DISEASES IN 2019  -->
+
+<div class="disease_text text longterm" id="Liver">
+  <h3>Liver diseases' last results</h3>
+  <p>Guess the region... Drumrolls… Eastern Europe once again with sadly Romania, Slovakia, and Hungary on the podium! </p>
+  <p>This is likely due to the general diet as we saw in other graphs or in the findings that those Eastern countries do not binge drink on a frequent basis nor have a high death toll due to alcohol. Generally Eastern countries have lower incomes and have a diet rich in carbohydrates, meat, cream, and sugar which might not be the best on the long term.</p>
+  <p>AGAIN, men are leading the deaths.</p>
+  <br>
+  <p>Countries in which people die due to chronic liver diseases tend to be smoking countries (0.45).</p>
+  <p>Also, countries more vulnerable to this kind of diseases tend to not eat their fruits and vegies (0.52). Inversely, eating some fruits and vegies is inversely correlated with chronic liver deaths (-0.33). These findings are mildly stronger among women.</p>
+
+</div>
+
+
+<div class="thirteen_carousel all_carousels">
+  <!--image slider start-->
+      <div class="slider_thirteen sliderr">
+        <div class="slides_thirteen">
+          <!--radio buttons start-->
+          <input type="radio" name="radio-btn-thirteen" id="radio34">
+          <input type="radio" name="radio-btn-thirteen" id="radio35">
+          <input type="radio" name="radio-btn-thirteen" id="radio36">
+          <!--radio buttons end-->
+          <!--slide images start-->
+          <div class="slide_thirteen thirteen" id="slide34">
+            <div class="chart_container_liver_total">
+              <canvas id="myLiverTotalChart"></canvas>
+            </div>
+          </div>
+          <div class="slide_thirteen" id="slide35">
+            <div class="chart_container_liver_men">
+              <canvas id="myLiverMenChart"></canvas>
+            </div>
+          </div>
+          <div class="slide_thirteen" id="slide36">
+            <div class="chart_container_liver_women">
+              <canvas id="myLiverWomenChart"></canvas>
+            </div>
+          </div>
+
+          <!--slide images end-->
+
+        </div>
+        <!--manual navigation start-->
+        <div class="navigation-manual-thirteen radios_first_carousel">
+          <label for="radio34" class="manual-btn-thirteen">Total</label>
+          <label for="radio35" class="manual-btn-thirteen">Men</label>
+          <label for="radio36" class="manual-btn-thirteen">Women</label>
+        </div>
+        <!--manual navigation end-->
+      </div>
+      <!--image slider end-->
+      </div>
+<script type="text/javascript">
+const labels_liver_total = ["Romania","Slovakia","Hungary","Bulgaria","Estonia","Croatia",
+"Lithuania","Poland","Finland","Czechia","Slovenia","Latvia","Germany","Austria","Luxembourg",
+"Denmark","United Kingdom","Belgium","France","Portugal","Spain","Cyprus","Italy","Sweden",
+"Ireland","Switzerland","Greece","Malta","Netherlands","Norway","Iceland"];
+
+const labels_liver_men = ["Romania","Slovakia","Hungary","Bulgaria","Croatia","Estonia","Lithuania",
+"Poland","Slovenia","Finland","Czechia","Latvia","Luxembourg","Germany","Austria","Portugal",
+"Denmark","United Kingdom","France","Belgium","Spain","Cyprus","Italy","Sweden","Ireland","Switzerland",
+"Greece","Netherlands","Malta","Norway","Iceland"];
+
+const labels_liver_women = ["Romania","Slovakia","Hungary","Lithuania","Estonia","Czechia","Latvia",
+"Finland","Poland","Slovenia","Bulgaria","Germany","United Kingdom","Denmark","Austria","Croatia",
+"Belgium","France","Switzerland","Italy","Malta","Ireland","Sweden","Luxembourg","Cyprus",
+"Portugal","Spain","Netherlands","Norway","Greece","Iceland"];
+
+
+const data_liver_total = {
+labels: labels_liver_total,
+datasets: [{
+  label: "total chronic liver deaths",
+  barThickness: 8,
+  data: [46.79,31.57,30.36,24.99,24.64,22.12,21.52,19.91,19.67,19.35,18.72,17.03,15.22,14.29,
+13.38,12.39,12.24,11.27,10.3,9.99,8.2,7.37,7.35,7.29,7.25,7.14,5.69,5.24,5.02,4.43,2.81],
+  backgroundColor: ["#EA961C","#EA961C","#EA961C","#EA961C", "#EA961C","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5", "#9BB0A5","#9BB0A5", "#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5",
+  "#00C57C","#00C57C", "#00C57C"]
+}]
+};
+
+const data_liver_men = {
+labels: labels_liver_men,
+datasets: [{
+  label: "chronic liver deaths men",
+  barThickness: 8,
+  data: [68.47,49.93,49.42,43.24,39.32,36.59,30.5,29.61,28.59,28.19,27.23,24.09,22.88,21.86,
+21.15,17.2,16.59,16.17,16.1,15.47,13.28,10.99,10.57,10.23,10.22,9.85,9.04,6.71,6.13,5.9,4.31],
+
+  backgroundColor: ["#EA961C","#EA961C","#EA961C","#EA961C", "#EA961C","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5", "#9BB0A5","#9BB0A5", "#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5",
+  "#00C57C","#00C57C", "#00C57C"]
+}]
+};
+
+const data_liver_women = {
+labels: labels_liver_women,
+datasets: [{
+  label: "chronic liver deaths women",
+  barThickness: 8,
+  data: [28.2,15.67,15.08,14.39,14.36,12.2,11.71,11.63,11.32,10.4,9.36,9.29,8.58,8.32,
+8.21,7.72,7.52,5.29,4.81,4.58,4.57,4.52,4.5,4.2,4.09,3.96,3.75,3.48,2.94,2.75,1.41],
+
+  backgroundColor: ["#EA961C","#EA961C","#EA961C","#EA961C", "#EA961C","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5", "#9BB0A5","#9BB0A5", "#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5",
+  "#00C57C","#00C57C", "#00C57C"]
+}]
+};
+
+
+
+
+
+const config_liver_total = {
+type: 'bar',
+data: data_liver_total,
+options: {
+  indexAxis: 'y',
+  scales: {
+          x: {
+            grid: {
+              display: false
+            }
+          },
+          y: {
+            grid: {
+              display: false
+            }
+          }
+        }
+    },
+
+  };
+
+  const config_liver_men = {
+    type: 'bar',
+    data: data_liver_men,
+    options: {
+      indexAxis: 'y',
+      scales: {
+              x: {
+                grid: {
+                  display: false
+                }
+              },
+              y: {
+                grid: {
+                  display: false
+                }
+              }
+            }
+        },
+
+      };
+
+      const config_liver_women = {
+        type: 'bar',
+        data: data_liver_women,
+        options: {
+          indexAxis: 'y',
+          scales: {
+                  x: {
+                    grid: {
+                      display: false
+                    }
+                  },
+                  y: {
+                    grid: {
+                      display: false
+                    }
+                  }
+                }
+            },
+
+          };
+
+
+
+const myLiverTotalChart = new Chart(
+document.getElementById('myLiverTotalChart'),
+config_liver_total
+);
+
+const myLiverMenChart = new Chart(
+document.getElementById('myLiverMenChart'),
+config_liver_men
+);
+
+const myLiverWomenChart = new Chart(
+document.getElementById('myLiverWomenChart'),
+config_liver_women
+);
+
+</script>
+
+ <!-- 10TH LIVER DISEASES OVER TIME  -->
+
+<div class="disease_text text longterm">
+  <h3>Liver diseases' long-term results</h3>
+  <p>Altogether, the trend leads towards lesser deaths or at least a stabilization in them.</p>
+  <p>Northern- and Western Europe are having less problems with dealing with liver diseases and have stabilized their death toll at a low rate. </p>
+
+</div>
+
+<div class="fourteen_carousel all_carousels">
+
+<!--image slider start-->
+<div class="slider_fourteen sliderr">
+  <div class="slides_fourteen">
+    <!--radio buttons start-->
+    <input type="radio" name="radio-btn-fourteen" id="radio37">
+    <input type="radio" name="radio-btn-fourteen" id="radio38">
+    <input type="radio" name="radio-btn-fourteen" id="radio39">
+    <!--radio buttons end-->
+    <!--slide images start-->
+    <div class="slide_fourteen fourteen" id="slide37">
+      <div class="chart_container_liver_total_overtime">
+        <canvas id="myLiverTotalTimeChart"></canvas>
+      </div>
+    </div>
+    <div class="slide_fourteen" id="slide38">
+      <div class="chart_container_liver_men_overtime">
+        <canvas id="myLiverMenTimeChart"></canvas>
+      </div>
+    </div>
+    <div class="slide_fourteen" id="slide39">
+      <div class="chart_container_liver_women_overtime">
+        <canvas id="myLiverWomenTimeChart"></canvas>
+      </div>
+    </div>
+
+    <!--slide images end-->
+
+  </div>
+  <!--manual navigation start-->
+  <div class="navigation-manual-fourteen radios_first_carousel">
+    <label for="radio37" class="manual-btn-fourteen">Total</label>
+    <label for="radio38" class="manual-btn-fourteen">Men</label>
+    <label for="radio39" class="manual-btn-fourteen">Women</label>
+  </div>
+  <!--manual navigation end-->
+</div>
+<!--image slider end-->
+</div>
+
+<script>
+
+  const Liver_total_time=[
+    {year:'2011', data:{Romania:51.05,Slovakia:31.05,Hungary:39.86,Netherlands:5.13,Norway:4.5,Iceland:1.09}},
+    {year:'2012', data:{Romania:50.49,Slovakia:33.07,Hungary:34.96,Netherlands:5.13,Norway:4.39,Iceland:2.85}},
+    {year:'2013', data:{Romania:46.73,Slovakia:27.47,Hungary:31.58,Netherlands:4.73,Norway:4.79,Iceland:3.66}},
+    {year:'2014', data:{Romania:47.77,Slovakia:27.25,Hungary:32.36,Netherlands:4.92,Norway:3.77,Iceland:2.82}},
+    {year:'2015', data:{Romania:45.67,Slovakia:29.03,Hungary:30.72,Netherlands:5.04,Norway:4.35,Iceland:4.17}},
+    {year:'2016', data:{Romania:46.5,Slovakia:28.16,Hungary:29.6,Netherlands:5.29,Norway:4.47,Iceland:3.92}},
+    {year:'2017', data:{Romania:47.33,Slovakia:26.04,Hungary:29.61,Netherlands:5.17,Norway:4.91,Iceland:4.84}},
+    {year:'2018', data:{Romania:47.86,Slovakia:32.82,Hungary:30.31,Netherlands:5.18,Norway:3.99,Iceland:3.33}},
+    {year:'2019', data:{Romania:46.79,Slovakia:31.57,Hungary:30.36,Netherlands:5.02,Norway:4.43,Iceland:2.81}},
+  ]
+
+  const Liver_men_time=[
+    {year:'2011', data:{Romania:70.17,Slovakia:49.78,Hungary:64.85,Malta:12.54,Norway:6.61,Iceland:1.29}},
+    {year:'2012', data:{Romania:70.23,Slovakia:52.76,Hungary:57.76,Malta:11.41,Norway:5.59,Iceland:1.57}},
+    {year:'2013', data:{Romania:65.83,Slovakia:44.09,Hungary:53.13,Malta:9.09,Norway:6.1,Iceland:4.92}},
+    {year:'2014', data:{Romania:66.01,Slovakia:43.69,Hungary:53.76,Malta:10.07,Norway:5.04,Iceland:3.99}},
+    {year:'2015', data:{Romania:63.9,Slovakia:46.29,Hungary:50.59,Malta:6.52,Norway:5.95,Iceland:3.83}},
+    {year:'2016', data:{Romania:64.74,Slovakia:44.6,Hungary:49.12,Malta:8.88,Norway:5.96,Iceland:3.52}},
+    {year:'2017', data:{Romania:66.54,Slovakia:38.61,Hungary:47.93,Malta:6.69,Norway:6.37,Iceland:8.71}},
+    {year:'2018', data:{Romania:68.73,Slovakia:51.44,Hungary:50.16,Malta:9.17,Norway:5.19,Iceland:3.71}},
+    {year:'2019', data:{Romania:68.47,Slovakia:49.93,Hungary:49.42,Malta:6.13,Norway:5.9,Iceland:4.31}},
+  ]
+
+  const Liver_women_time=[
+    {year:'2011', data:{Romania:35.2,Slovakia:15.8,Hungary:20.15,Norway:2.5,Greece:3.25,Iceland:0.89}},
+    {year:'2012', data:{Romania:33.95,Slovakia:16.89,Hungary:17.05,Norway:3.27,Greece:3.42,Iceland:4.09}},
+    {year:'2013', data:{Romania:31.08,Slovakia:13.85,Hungary:15.13,Norway:3.59,Greece:3.52,Iceland:2.7}},
+    {year:'2014', data:{Romania:32.57,Slovakia:13.38,Hungary:15.75,Norway:2.53,Greece:3.05,Iceland:1.68}},
+    {year:'2015', data:{Romania:30.43,Slovakia:14.75,Hungary:15.12,Norway:2.81,Greece:2.93,Iceland:4.21}},
+    {year:'2016', data:{Romania:31.04,Slovakia:14.62,Hungary:14.39,Norway:3.12,Greece:2.86,Iceland:3.64}},
+    {year:'2017', data:{Romania:31.07,Slovakia:15.46,Hungary:15.22,Norway:3.45,Greece:3.06,Iceland:1.22}},
+    {year:'2018', data:{Romania:29.81,Slovakia:17.02,Hungary:14.65,Norway:2.96,Greece:2.85,Iceland:3.01}},
+    {year:'2019', data:{Romania:28.2,Slovakia:15.67,Hungary:15.08,Norway:2.94,Greece:2.75,Iceland:1.41}},
+  ]
+
+
+
+  const data_liver_total_time = {
+    datasets: [{
+      label: "Romania's chronic liver deaths per 100 000 people",
+      backgroundColor: '#CB3A13',
+      borderColor: '#CB3A13',
+      data: Liver_total_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Romania'
+      }
+    },
+
+    {
+      label: "Slovakia's chronic liver deaths per 100 000 people",
+      backgroundColor: '#CE6548',
+      borderColor: '#CE6548',
+      data: Liver_total_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Slovakia'
+      }
+    },
+
+    {
+      label: "Hungary's chronic liver deaths per 100 000 people",
+      backgroundColor: '#D18773',
+      borderColor: '#D18773',
+      data: Liver_total_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Hungary'
+      }
+    },
+
+    {
+      label: "Netherlands's chronic liver deaths per 100 000 people",
+      backgroundColor: '#6FEB85',
+      borderColor: '#6FEB85',
+      data: Liver_total_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Netherlands'
+      }
+    },
+
+    {
+      label: "Norway's chronic liver deaths per 100 000 people",
+      backgroundColor: '#3DC255',
+      borderColor: '#3DC255',
+      data: Liver_total_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Norway'
+      }
+    },
+
+    {
+      label: "Iceland's chronic liver deaths per 100 000 people",
+      backgroundColor: '#05A923',
+      borderColor: '#05A923',
+      data: Liver_total_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Iceland'
+      }
+    }
+  ]
+  };
+
+
+  const data_liver_men_time = {
+    datasets: [{
+      label: "Romania's male chronic liver deaths per 100 000 people",
+      backgroundColor: '#CB3A13',
+      borderColor: '#CB3A13',
+      data: Liver_men_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Romania'
+      }
+    },
+
+    {
+      label: "Slovakia's male chronic liver deaths per 100 000 people",
+      backgroundColor: '#CE6548',
+      borderColor: '#CE6548',
+      data: Liver_men_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Slovakia'
+      }
+    },
+
+    {
+      label: "Hungary's male chronic liver deaths per 100 000 people",
+      backgroundColor: '#D18773',
+      borderColor: '#D18773',
+      data: Liver_men_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Hungary'
+      }
+    },
+
+    {
+      label: "Malta's male chronic liver deaths per 100 000 people",
+      backgroundColor: '#6FEB85',
+      borderColor: '#6FEB85',
+      data: Liver_men_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Malta'
+      }
+    },
+
+    {
+      label: "Norway's male chronic liver deaths per 100 000 people",
+      backgroundColor: '#3DC255',
+      borderColor: '#3DC255',
+      data: Liver_men_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Norway'
+      }
+    },
+
+    {
+      label: "Iceland's male chronic liver deaths per 100 000 people",
+      backgroundColor: '#05A923',
+      borderColor: '#05A923',
+      data: Liver_men_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Iceland'
+      }
+    }
+  ]
+  };
+
+
+  const data_liver_women_time = {
+    datasets: [{
+      label: "Romania's female chronic liver deaths per 100 000 people",
+      backgroundColor: '#CB3A13',
+      borderColor: '#CB3A13',
+      data: Liver_women_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Romania'
+      }
+    },
+
+    {
+      label: "Slovakia's female chronic liver deaths per 100 000 people",
+      backgroundColor: '#CE6548',
+      borderColor: '#CE6548',
+      data: Liver_women_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Slovakia'
+      }
+    },
+
+    {
+      label: "Hungary's female chronic liver deaths per 100 000 people",
+      backgroundColor: '#D18773',
+      borderColor: '#D18773',
+      data: Liver_women_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Hungary'
+      }
+    },
+
+    {
+      label: "Norway's female chronic liver deaths per 100 000 people",
+      backgroundColor: '#6FEB85',
+      borderColor: '#6FEB85',
+      data: Liver_women_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Norway'
+      }
+    },
+
+    {
+      label: "Greece's female chronic liver deaths per 100 000 people",
+      backgroundColor: '#3DC255',
+      borderColor: '#3DC255',
+      data: Liver_women_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Greece'
+      }
+    },
+
+    {
+      label: "Iceland's female chronic liver deaths per 100 000 people",
+      backgroundColor: '#05A923',
+      borderColor: '#05A923',
+      data: Liver_women_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Iceland'
+      }
+    }
+  ]
+  };
+
+  const config_liver_total_time = {
+    type: 'line',
+    data: data_liver_total_time,
+    options: {}
+  };
+
+  const config_liver_men_time = {
+    type: 'line',
+    data: data_liver_men_time,
+    options: {}
+  };
+
+  const config_liver_women_time = {
+    type: 'line',
+    data: data_liver_women_time,
+    options: {}
+  };
+
+  const myLiverTotalTimeChart = new Chart(
+    document.getElementById('myLiverTotalTimeChart'),
+    config_liver_total_time
+  );
+
+  const myLiverMenTimeChart = new Chart(
+    document.getElementById('myLiverMenTimeChart'),
+    config_liver_men_time
+  );
+
+  const myLiverWomenTimeChart = new Chart(
+    document.getElementById('myLiverWomenTimeChart'),
+    config_liver_women_time  );
+
+
+</script>
+
+ <!--  11TH CAROUSEL ABOUT NERVOUS DISEASES IN 2019  -->
+
+<div class="disease_text text longterm" id="Nervous">
+  <h3>Nervous diseases' last results</h3>
+  <p>Here we can see something very interesting: Europe’s wealthiest and most advanced countries are the ones struggling with the most deaths per 100 000 due to nervous diseases.</p>
+  <p>Finland (clear winner), Iceland and the United Kingdom are having the most problems, while Romania, Poland and Bulgaria are not struggling as much.</p>
+  <p>Men seem to be more vulnerable, but the difference is not that big.</p>
+  <br>
+  <p>There is a good inverse correlation (-0.5), between dying because of a nervouse disease and living in a smoking country (all smoking levels).</p>
+  <p>As already observed, Northern and Western countries tend to drink, while Eastern countries are more prone to smoking. So, it only makes sense that, inversely, deaths due to nervous diseases tend to occur in drinking countries (0.37).</p>
+
+</div>
+
+<div class="fifteen_carousel all_carousels">
+  <!--image slider start-->
+      <div class="slider_fifteen sliderr">
+        <div class="slides_fifteen">
+          <!--radio buttons start-->
+          <input type="radio" name="radio-btn-fifteen" id="radio40">
+          <input type="radio" name="radio-btn-fifteen" id="radio41">
+          <input type="radio" name="radio-btn-fifteen" id="radio42">
+          <!--radio buttons end-->
+          <!--slide images start-->
+          <div class="slide_fifteen fifteen" id="slide40">
+            <div class="chart_container_nervous_total">
+              <canvas id="myNervousTotalChart"></canvas>
+            </div>
+          </div>
+          <div class="slide_fifteen" id="slide41">
+            <div class="chart_container_nervous_men">
+              <canvas id="myNervousMenChart"></canvas>
+            </div>
+          </div>
+          <div class="slide_fifteen" id="slide42">
+            <div class="chart_container_nervous_women">
+              <canvas id="myNervousWomenChart"></canvas>
+            </div>
+          </div>
+
+          <!--slide images end-->
+
+        </div>
+        <!--manual navigation start-->
+        <div class="navigation-manual-fifteen radios_first_carousel">
+          <label for="radio40" class="manual-btn-fifteen">Total</label>
+          <label for="radio41" class="manual-btn-fifteen">Men</label>
+          <label for="radio42" class="manual-btn-fifteen">Women</label>
+        </div>
+        <!--manual navigation end-->
+      </div>
+      <!--image slider end-->
+      </div>
+<script type="text/javascript">
+const labels_nervous_total = ["Finland","Iceland","United Kingdom","Netherlands","Sweden","France","Norway","Denmark",
+"Spain","Belgium","Ireland","Switzerland","Luxembourg","Czechia","Italy","Cyprus","Austria","Slovenia","Portugal","Germany",
+"Slovakia","Croatia","Lithuania","Greece","Estonia","Malta","Romania","Latvia","Hungary","Poland","Bulgaria"];
+
+const labels_nervous_men = ["Finland","Iceland","United Kingdom","Netherlands","France","Sweden","Norway","Luxembourg",
+"Belgium","Denmark","Ireland","Spain","Switzerland","Czechia","Italy","Germany","Austria","Cyprus","Slovenia","Portugal",
+"Croatia","Estonia","Malta","Lithuania","Slovakia","Latvia","Greece","Hungary","Romania","Poland","Bulgaria"];
+
+const labels_nervous_women = ["Finland","Iceland","United Kingdom","Sweden","Netherlands","France","Spain","Denmark",
+"Norway","Belgium","Ireland","Switzerland","Czechia","Italy","Cyprus","Luxembourg","Slovenia","Austria","Portugal","Slovakia",
+"Germany","Croatia","Greece","Lithuania","Romania","Latvia","Hungary","Estonia","Poland","Malta","Bulgaria"];
+
+
+const data_nervous_total = {
+labels: labels_nervous_total,
+datasets: [{
+  label: "Total deaths due to nervous",
+  barThickness: 8,
+  data: [171.3,105.74,64.07,55.1,54.6,52.64,50.9,49.79,48.57,48.22,45.75,43.39,43.01,39.86,39,38.25,37.7,37.47,
+35.38,35.36,33.19,32.25,27.6,27.04,26.35,24.29,23.42,23.41,22.72,19.36,14.47],
+  backgroundColor: ["#EA961C","#EA961C","#EA961C","#EA961C", "#EA961C","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5", "#9BB0A5","#9BB0A5", "#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5",
+  "#00C57C","#00C57C", "#00C57C"]
+}]
+};
+
+const data_nervous_men = {
+labels: labels_nervous_men,
+datasets: [{
+  label: "Male deaths due to nervous",
+  barThickness: 8,
+  data: [177.39,93.31,66.16,60.01,57.05,56.41,55.93,55.25,54.96,54.54,52.1,49.45,48.37,45.12,44.01,43.32,43.13,
+41.58,40.61,40.15,39.05,38.77,37.75,34.75,33.42,30.72,30.44,28.64,24.95,22.18,18.37],
+
+  backgroundColor: ["#EA961C","#EA961C","#EA961C","#EA961C", "#EA961C","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5", "#9BB0A5","#9BB0A5", "#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5",
+  "#00C57C","#00C57C", "#00C57C"]
+}]
+};
+
+const data_nervous_women = {
+labels: labels_nervous_women,
+datasets: [{
+  label: "Female deaths due to nervous",
+  barThickness: 8,
+  data: [164.65,111,61.49,52.53,51.04,48.71,46.77,46.36,46.34,42.86,39.99,39.53,36.2,35.07,34.73,34.52,34.36,33.34,
+31.91,31.85,29.65,27.98,24.17,23.15,21.99,19.48,19.22,18.93,17.21,15.38,11.8],
+
+  backgroundColor: ["#EA961C","#EA961C","#EA961C","#EA961C", "#EA961C","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5", "#9BB0A5","#9BB0A5", "#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5",
+  "#00C57C","#00C57C", "#00C57C"]
+}]
+};
+
+
+
+
+
+const config_nervous_total = {
+type: 'bar',
+data: data_nervous_total,
+options: {
+  indexAxis: 'y',
+  scales: {
+          x: {
+            grid: {
+              display: false
+            }
+          },
+          y: {
+            grid: {
+              display: false
+            }
+          }
+        }
+    },
+
+  };
+
+  const config_nervous_men = {
+    type: 'bar',
+    data: data_nervous_men,
+    options: {
+      indexAxis: 'y',
+      scales: {
+              x: {
+                grid: {
+                  display: false
+                }
+              },
+              y: {
+                grid: {
+                  display: false
+                }
+              }
+            }
+        },
+
+      };
+
+      const config_nervous_women = {
+        type: 'bar',
+        data: data_nervous_women,
+        options: {
+          indexAxis: 'y',
+          scales: {
+                  x: {
+                    grid: {
+                      display: false
+                    }
+                  },
+                  y: {
+                    grid: {
+                      display: false
+                    }
+                  }
+                }
+            },
+
+          };
+
+
+
+const myNervousTotalChart = new Chart(
+document.getElementById('myNervousTotalChart'),
+config_nervous_total
+);
+
+const myNervousMenChart = new Chart(
+document.getElementById('myNervousMenChart'),
+config_nervous_men
+);
+
+const myNervousWomenChart = new Chart(
+document.getElementById('myNervousWomenChart'),
+config_nervous_women
+);
+
+</script>
+
+ <!--  12TH CAROUSEL ABOUT NERVOUS DISEASES OVER TIME  -->
+
+
+<div class="disease_text text longterm">
+  <h3>Nervous diseases' long-term results</h3>
+  <p>The trend is pretty stable in Eastern countries while in Northern- and Western Europe the trend is clearly rising and might become an even more important issue in the future. </p>
+  <p>It is probably not due to the cold since as we know it can get very cold in Poland, Estonia, Latvia, etc.</p>
+  <p>There might be a higher awareness and better diagnosis towards neurological diseases, but it seems hard to believe that even if that is the case that the Eastern countries would catch up to these high death tolls. There might be a genetical aspect between the populations, or as seen in our findings those countries are also the ones consuming the most alcohol. Also, the countries with less nervous diseases tend to consume the least alcohol.</p>
+  <p>It is probably the effect of a mixture of different things and full environment. Unfortunately, I do not currently possess the understanding to be able to pinpoint exactly, with full confidence, what is going on. </p>
+
+</div>
+
+<div class="sixteen_carousel all_carousels">
+
+<!--image slider start-->
+<div class="slider_sixteen sliderr">
+  <div class="slides_sixteen">
+    <!--radio buttons start-->
+    <input type="radio" name="radio-btn-sixteen" id="radio43">
+    <input type="radio" name="radio-btn-sixteen" id="radio44">
+    <input type="radio" name="radio-btn-sixteen" id="radio45">
+    <!--radio buttons end-->
+    <!--slide images start-->
+    <div class="slide_sixteen sixteen" id="slide31">
+      <div class="chart_container_nervous_total_overtime">
+        <canvas id="myNervousTotalTimeChart"></canvas>
+      </div>
+    </div>
+    <div class="slide_sixteen" id="slide32">
+      <div class="chart_container_nervous_men_overtime">
+        <canvas id="myNervousMenTimeChart"></canvas>
+      </div>
+    </div>
+    <div class="slide_sixteen" id="slide33">
+      <div class="chart_container_nervous_women_overtime">
+        <canvas id="myNervousWomenTimeChart"></canvas>
+      </div>
+    </div>
+
+    <!--slide images end-->
+
+  </div>
+  <!--manual navigation start-->
+  <div class="navigation-manual-sixteen radios_first_carousel">
+    <label for="radio43" class="manual-btn-sixteen">Total</label>
+    <label for="radio44" class="manual-btn-sixteen">Men</label>
+    <label for="radio45" class="manual-btn-sixteen">Women</label>
+  </div>
+  <!--manual navigation end-->
+</div>
+<!--image slider end-->
+</div>
+
+<script>
+
+  const Nervous_total_time=[
+    {year:'2011', data:{Finland:122.52,Iceland:86.97,United_Kingdom:37.99,Hungary:19.66,Poland:17.84,Bulgaria:14.86}},
+    {year:'2012', data:{Finland:136.6,Iceland:88.45,United_Kingdom:43.07,Hungary:21.18,Poland:18.98,Bulgaria:17.53}},
+    {year:'2013', data:{Finland:141.14,Iceland:95.46,United_Kingdom:44.36,Hungary:19.73,Poland:18.66,Bulgaria:14.83}},
+    {year:'2014', data:{Finland:154.99,Iceland:81.56,United_Kingdom:47.59,Hungary:19.91,Poland:16.49,Bulgaria:15.45}},
+    {year:'2015', data:{Finland:157.5,Iceland:91.58,United_Kingdom:54.3,Hungary:22.84,Poland:16.95,Bulgaria:16.38}},
+    {year:'2016', data:{Finland:165.46,Iceland:108.32,United_Kingdom:57.69,Hungary:21.27,Poland:17.6,Bulgaria:14.33}},
+    {year:'2017', data:{Finland:166.46,Iceland:101.84,United_Kingdom:61.62,Hungary:23.53,Poland:19.61,Bulgaria:12.98}},
+    {year:'2018', data:{Finland:173.22,Iceland:114.67,United_Kingdom:64.07,Hungary:24.17,Poland:19.39,Bulgaria:13.45}},
+    {year:'2019', data:{Finland:171.3,Iceland:105.74,United_Kingdom:64.07,Hungary:22.72,Poland:19.36,Bulgaria:14.47}},
+  ]
+
+  const Nervous_men_time=[
+    {year:'2011', data:{Finland:129.99,Iceland:81.99,United_Kingdom:42.07,Romania:20.84,Poland:20.13,Bulgaria:19.39}},
+    {year:'2012', data:{Finland:148.15,Iceland:81.2,United_Kingdom:46.76,Romania:21.18,Poland:21.76,Bulgaria:21.91}},
+    {year:'2013', data:{Finland:146.35,Iceland:89.39,United_Kingdom:48.62,Romania:20.45,Poland:21.03,Bulgaria:17.86}},
+    {year:'2014', data:{Finland:160.26,Iceland:87.03,United_Kingdom:50.79,Romania:22.9,Poland:18.75,Bulgaria:19.94}},
+    {year:'2015', data:{Finland:166.23,Iceland:93.28,United_Kingdom:57.66,Romania:23.91,Poland:19.17,Bulgaria:20.95}},
+    {year:'2016', data:{Finland:175.76,Iceland:102.78,United_Kingdom:60.38,Romania:24.58,Poland:19.93,Bulgaria:17.65}},
+    {year:'2017', data:{Finland:173.33,Iceland:96.11,United_Kingdom:64.03,Romania:25.66,Poland:22.07,Bulgaria:16.26}},
+    {year:'2018', data:{Finland:175.28,Iceland:104.35,United_Kingdom:66.16,Romania:27.4,Poland:21.96,Bulgaria:16.91}},
+    {year:'2019', data:{Finland:177.39,Iceland:93.31,United_Kingdom:66.16,Romania:24.95,Poland:22.18,Bulgaria:18.37}},
+  ]
+
+  const Nervous_women_time=[
+    {year:'2011', data:{Finland:116.08,Iceland:89.31,United_Kingdom:34.82,Poland:16.05,Malta:26.2,Bulgaria:11.67}},
+    {year:'2012', data:{Finland:129.36,Iceland:90.44,United_Kingdom:40.01,Poland:16.97,Malta:11.64,Bulgaria:14.61}},
+    {year:'2013', data:{Finland:136.21,Iceland:98.86,United_Kingdom:40.92,Poland:16.81,Malta:19.55,Bulgaria:12.67}},
+    {year:'2014', data:{Finland:149.81,Iceland:77.94,United_Kingdom:44.86,Poland:14.76,Malta:19.99,Bulgaria:12.4}},
+    {year:'2015', data:{Finland:149.93,Iceland:92.16,United_Kingdom:51.29,Poland:15.16,Malta:23.27,Bulgaria:13.05}},
+    {year:'2016', data:{Finland:157.54,Iceland:113.33,United_Kingdom:55.08,Poland:15.66,Malta:21.66,Bulgaria:11.96}},
+    {year:'2017', data:{Finland:160.92,Iceland:103.68,United_Kingdom:58.83,Poland:17.62,Malta:19.44,Bulgaria:10.66}},
+    {year:'2018', data:{Finland:169.12,Iceland:120.32,United_Kingdom:61.49,Poland:17.25,Malta:22.27,Bulgaria:11.11}},
+    {year:'2019', data:{Finland:164.65,Iceland:111,United_Kingdom:61.49,Poland:17.21,Malta:15.38,Bulgaria:11.8}},
+  ]
+
+
+
+  const data_nervous_total_time = {
+    datasets: [{
+      label: "Finland's deaths per 100 000 people due to nervous",
+      backgroundColor: '#CB3A13',
+      borderColor: '#CB3A13',
+      data: Nervous_total_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Finland'
+      }
+    },
+
+    {
+      label: "Iceland's deaths per 100 000 people due to nervous",
+      backgroundColor: '#CE6548',
+      borderColor: '#CE6548',
+      data: Nervous_total_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Iceland'
+      }
+    },
+
+    {
+      label: "United Kingdom's deaths per 100 000 people due to nervous",
+      backgroundColor: '#D18773',
+      borderColor: '#D18773',
+      data: Nervous_total_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.United_Kingdom'
+      }
+    },
+
+    {
+      label: "Hungary's deaths per 100 000 people due to nervous",
+      backgroundColor: '#6FEB85',
+      borderColor: '#6FEB85',
+      data: Nervous_total_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Hungary'
+      }
+    },
+
+    {
+      label: "Poland's deaths per 100 000 people due to nervous",
+      backgroundColor: '#3DC255',
+      borderColor: '#3DC255',
+      data: Nervous_total_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Poland'
+      }
+    },
+
+    {
+      label: "Bulgaria's deaths per 100 000 people due to nervous",
+      backgroundColor: '#05A923',
+      borderColor: '#05A923',
+      data: Nervous_total_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Bulgaria'
+      }
+    }
+  ]
+  };
+
+
+  const data_nervous_men_time = {
+    datasets: [{
+      label: "Finland's male deaths per 100 000 people due to nervous",
+      backgroundColor: '#CB3A13',
+      borderColor: '#CB3A13',
+      data: Nervous_men_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Finland'
+      }
+    },
+
+    {
+      label: "Iceland's male deaths per 100 000 people due to nervous",
+      backgroundColor: '#CE6548',
+      borderColor: '#CE6548',
+      data: Nervous_men_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Iceland'
+      }
+    },
+
+    {
+      label: "United Kingdom's male deaths per 100 000 people due to nervous",
+      backgroundColor: '#D18773',
+      borderColor: '#D18773',
+      data: Nervous_men_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.United_Kingdom'
+      }
+    },
+
+    {
+      label: "Romania's male deaths per 100 000 people due to nervous",
+      backgroundColor: '#6FEB85',
+      borderColor: '#6FEB85',
+      data: Nervous_men_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Romania'
+      }
+    },
+
+    {
+      label: "Poland's male deaths per 100 000 people due to nervous",
+      backgroundColor: '#3DC255',
+      borderColor: '#3DC255',
+      data: Nervous_men_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Poland'
+      }
+    },
+
+    {
+      label: "Bulgaria's male deaths per 100 000 people due to nervous",
+      backgroundColor: '#05A923',
+      borderColor: '#05A923',
+      data: Nervous_men_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Bulgaria'
+      }
+    }
+  ]
+  };
+
+
+  const data_nervous_women_time = {
+    datasets: [{
+      label: "Finland's female deaths per 100 000 people due to nervous",
+      backgroundColor: '#CB3A13',
+      borderColor: '#CB3A13',
+      data: Nervous_women_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Finland'
+      }
+    },
+
+    {
+      label: "Iceland's female deaths per 100 000 people due to nervous",
+      backgroundColor: '#CE6548',
+      borderColor: '#CE6548',
+      data: Nervous_women_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Iceland'
+      }
+    },
+
+    {
+      label: "United Kingdom's female deaths per 100 000 people due to nervous",
+      backgroundColor: '#D18773',
+      borderColor: '#D18773',
+      data: Nervous_women_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.United_Kingdom'
+      }
+    },
+
+    {
+      label: "Poland's female deaths per 100 000 people due to nervous",
+      backgroundColor: '#6FEB85',
+      borderColor: '#6FEB85',
+      data: Nervous_women_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Poland'
+      }
+    },
+
+    {
+      label: "Malta's female deaths per 100 000 people due to nervous",
+      backgroundColor: '#3DC255',
+      borderColor: '#3DC255',
+      data: Nervous_women_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Malta'
+      }
+    },
+
+    {
+      label: "Bulgaria's female deaths per 100 000 people due to nervous",
+      backgroundColor: '#05A923',
+      borderColor: '#05A923',
+      data: Nervous_women_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Bulgaria'
+      }
+    }
+  ]
+  };
+
+  const config_nervous_total_time = {
+    type: 'line',
+    data: data_nervous_total_time,
+    options: {}
+  };
+
+  const config_nervous_men_time = {
+    type: 'line',
+    data: data_nervous_men_time,
+    options: {}
+  };
+
+  const config_nervous_women_time = {
+    type: 'line',
+    data: data_nervous_women_time,
+    options: {}
+  };
+
+  const myNervousTotalTimeChart = new Chart(
+    document.getElementById('myNervousTotalTimeChart'),
+    config_nervous_total_time
+  );
+
+  const myNervousMenTimeChart = new Chart(
+    document.getElementById('myNervousMenTimeChart'),
+    config_nervous_men_time
+  );
+
+  const myNervousWomenTimeChart = new Chart(
+    document.getElementById('myNervousWomenTimeChart'),
+    config_nervous_women_time  );
+
+
+</script>
+
+ <!--  13TH CAROUSEL AROUND PNEUMONIA IN 2019  -->
+
+
+<div class="disease_text text longterm" id="Pneumonia">
+  <h3>Pneumonia's last results</h3>
+  <p>Here, there is no clear trend location wise. We have Poland, Slovakia and Romania and the United Kingdom as strong leaders in the death toll, while Greece, Croatia and Finland are able to keep it limited.</p>
+</div>
+
+<div class="seventeen_carousel all_carousels">
+  <!--image slider start-->
+      <div class="slider_seventeen sliderr">
+        <div class="slides_seventeen">
+          <!--radio buttons start-->
+          <input type="radio" name="radio-btn-seventeen" id="radio46">
+          <input type="radio" name="radio-btn-seventeen" id="radio47">
+          <input type="radio" name="radio-btn-seventeen" id="radio48">
+          <!--radio buttons end-->
+          <!--slide images start-->
+          <div class="slide_seventeen seventeen" id="slide46">
+            <div class="chart_container_pneumonia_total">
+              <canvas id="myPneumoniaTotalChart"></canvas>
+            </div>
+          </div>
+          <div class="slide_seventeen" id="slide47">
+            <div class="chart_container_pneumonia_men">
+              <canvas id="myPneumoniaMenChart"></canvas>
+            </div>
+          </div>
+          <div class="slide_seventeen" id="slide48">
+            <div class="chart_container_pneumonia_women">
+              <canvas id="myPneumoniaWomenChart"></canvas>
+            </div>
+          </div>
+
+          <!--slide images end-->
+
+        </div>
+        <!--manual navigation start-->
+        <div class="navigation-manual-seventeen radios_first_carousel">
+          <label for="radio46" class="manual-btn-seventeen">Total</label>
+          <label for="radio47" class="manual-btn-seventeen">Men</label>
+          <label for="radio48" class="manual-btn-seventeen">Women</label>
+        </div>
+        <!--manual navigation end-->
+      </div>
+      <!--image slider end-->
+      </div>
+<script type="text/javascript">
+const labels_pneumonia_total = ["Poland","Slovakia","Romania","United Kingdom","Malta","Portugal","Czechia","Belgium",
+"Denmark","Norway","Ireland","Iceland","Luxembourg","Netherlands","Estonia","Bulgaria","Germany","Latvia","Lithuania",
+"Italy","France","Slovenia","Spain","Sweden","Switzerland","Austria","Hungary","Cyprus","Greece","Croatia","Finland"];
+
+const labels_pneumonia_men = ["Poland","Slovakia","Romania","Portugal","United Kingdom","Malta","Czechia","Belgium",
+"Denmark","Norway","Estonia","Luxembourg","Ireland","Lithuania","Latvia","Bulgaria","Netherlands","Germany","Iceland",
+"France","Italy","Spain","Sweden","Switzerland","Slovenia","Austria","Hungary","Cyprus","Greece","Croatia","Finland"];
+
+const labels_pneumonia_women = ["United Kingdom","Poland","Slovakia","Romania","Malta","Portugal","Czechia","Belgium",
+"Ireland","Norway","Denmark","Iceland","Netherlands","Luxembourg","Slovenia","Germany","Bulgaria","Italy","France",
+"Estonia","Latvia","Spain","Sweden","Switzerland","Cyprus","Lithuania","Austria","Hungary","Greece","Croatia","Finland"];
+
+
+const data_pneumonia_total = {
+labels: labels_pneumonia_total,
+datasets: [{
+  label: "total pneumonia deaths",
+  barThickness: 8,
+  data: [55.33,50.97,49.24,47.35,41.39,40.56,38.58,36.2,32.1,30.78,30.14,24.81,24.27,22.49,21.89,21.31,19.46,19.28,
+18.88,18.14,17.81,17.53,16.99,16.46,14.62,12.84,12.58,11.56,8.4,4.3,1.03,],
+  backgroundColor: ["#EA961C","#EA961C","#EA961C","#EA961C", "#EA961C","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5", "#9BB0A5","#9BB0A5", "#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5",
+  "#00C57C","#00C57C", "#00C57C"]
+}]
+};
+
+const data_pneumonia_men = {
+labels: labels_pneumonia_men,
+datasets: [{
+  label: "pneumonia deaths men",
+  barThickness: 8,
+  data: [82.38,70.62,70.09,58.81,56.43,54.95,53.57,49.15,45.82,40.75,39.56,35.11,34.85,33.11,32.08,30.99,29.39,
+27.1,25.84,24.77,24.75,24.04,22.67,19.94,19.8,17.92,16.92,11.55,9.44,6.05,1.53],
+
+  backgroundColor: ["#EA961C","#EA961C","#EA961C","#EA961C", "#EA961C","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5", "#9BB0A5","#9BB0A5", "#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5",
+  "#00C57C","#00C57C", "#00C57C"]
+}]
+};
+
+const data_pneumonia_women = {
+labels: labels_pneumonia_women,
+datasets: [{
+  label: "pneumonia deaths women",
+  barThickness: 8,
+  data: [41.6,39.85,39.44,33.8,32.57,30.63,29.81,28.69,26.82,25.4,24.32,23.64,18.86,17.84,16.15,14.85,14.52,14.41,
+13.98,13.57,12.9,12.67,12.57,11.48,11.25,11.24,10.26,9.97,7.59,3.43,0.65],
+
+  backgroundColor: ["#EA961C","#EA961C","#EA961C","#EA961C", "#EA961C","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5", "#9BB0A5","#9BB0A5", "#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5",
+  "#00C57C","#00C57C", "#00C57C"]
+}]
+};
+
+
+
+
+
+const config_pneumonia_total = {
+type: 'bar',
+data: data_pneumonia_total,
+options: {
+  indexAxis: 'y',
+  scales: {
+          x: {
+            grid: {
+              display: false
+            }
+          },
+          y: {
+            grid: {
+              display: false
+            }
+          }
+        }
+    },
+
+  };
+
+  const config_pneumonia_men = {
+    type: 'bar',
+    data: data_pneumonia_men,
+    options: {
+      indexAxis: 'y',
+      scales: {
+              x: {
+                grid: {
+                  display: false
+                }
+              },
+              y: {
+                grid: {
+                  display: false
+                }
+              }
+            }
+        },
+
+      };
+
+      const config_pneumonia_women = {
+        type: 'bar',
+        data: data_pneumonia_women,
+        options: {
+          indexAxis: 'y',
+          scales: {
+                  x: {
+                    grid: {
+                      display: false
+                    }
+                  },
+                  y: {
+                    grid: {
+                      display: false
+                    }
+                  }
+                }
+            },
+
+          };
+
+
+
+const myPneumoniaTotalChart = new Chart(
+document.getElementById('myPneumoniaTotalChart'),
+config_pneumonia_total
+);
+
+const myPneumoniaMenChart = new Chart(
+document.getElementById('myPneumoniaMenChart'),
+config_pneumonia_men
+);
+
+const myPneumoniaWomenChart = new Chart(
+document.getElementById('myPneumoniaWomenChart'),
+config_pneumonia_women
+);
+
+</script>
+
+
+ <!--  14TH AND FINAL CAROUSEL AROUND PNEUMONIA OVER TIME  -->
+
+<div class="disease_text text longterm">
+  <h3>Pneumonia's long-term results</h3>
+  <p>Even if for the better countries the death rate seems to be declining over time, the inverse is happening for the struggling countries and this especially among men.</p>
+</div>
+
+<div class="eighteen_carousel all_carousels">
+
+<!--image slider start-->
+<div class="slider_eighteen sliderr">
+  <div class="slides_eighteen">
+    <!--radio buttons start-->
+    <input type="radio" name="radio-btn-eighteen" id="radio49">
+    <input type="radio" name="radio-btn-eighteen" id="radio50">
+    <input type="radio" name="radio-btn-eighteen" id="radio51">
+    <!--radio buttons end-->
+    <!--slide images start-->
+    <div class="slide_eighteen eighteen" id="slide49">
+      <div class="chart_container_pneumonia_total_overtime">
+        <canvas id="myPneumoniaTotalTimeChart"></canvas>
+      </div>
+    </div>
+    <div class="slide_eighteen" id="slide50">
+      <div class="chart_container_pneumonia_men_overtime">
+        <canvas id="myPneumoniaMenTimeChart"></canvas>
+      </div>
+    </div>
+    <div class="slide_eighteen" id="slide51">
+      <div class="chart_container_pneumonia_women_overtime">
+        <canvas id="myPneumoniaWomenTimeChart"></canvas>
+      </div>
+    </div>
+
+    <!--slide images end-->
+
+  </div>
+  <!--manual navigation start-->
+  <div class="navigation-manual-eighteen radios_first_carousel">
+    <label for="radio49" class="manual-btn-eighteen">Total</label>
+    <label for="radio50" class="manual-btn-eighteen">Men</label>
+    <label for="radio51" class="manual-btn-eighteen">Women</label>
+  </div>
+  <!--manual navigation end-->
+</div>
+<!--image slider end-->
+</div>
+
+<script>
+
+  const Pneumonia_total_time=[
+    {year:'2011', data:{Poland:37.76,Slovakia:52.81,Romania:30.75,Greece:8.89,Croatia:9.19,Finland:7.68}},
+    {year:'2012', data:{Poland:40.99,Slovakia:49.02,Romania:34.75,Greece:8.73,Croatia:9.24,Finland:5.91}},
+    {year:'2013', data:{Poland:47.82,Slovakia:54.24,Romania:31.8,Greece:10.45,Croatia:9.14,Finland:5.36}},
+    {year:'2014', data:{Poland:42.65,Slovakia:45.02,Romania:32.56,Greece:8.78,Croatia:11.41,Finland:3.56}},
+    {year:'2015', data:{Poland:49.83,Slovakia:57.21,Romania:38.44,Greece:9.45,Croatia:15.18,Finland:2.75}},
+    {year:'2016', data:{Poland:43.31,Slovakia:47.18,Romania:36.48,Greece:9.35,Croatia:16.53,Finland:2.88}},
+    {year:'2017', data:{Poland:51.48,Slovakia:60.77,Romania:40.11,Greece:9.15,Croatia:27.63,Finland:1.6}},
+    {year:'2018', data:{Poland:55.93,Slovakia:55.02,Romania:46.72,Greece:8.67,Croatia:9.25,Finland:1.42}},
+    {year:'2019', data:{Poland:55.33,Slovakia:50.97,Romania:49.24,Greece:8.4,Croatia:4.3,Finland:1.03}},
+  ]
+
+  const Pneumonia_men_time=[
+    {year:'2011', data:{Poland:56.8,Slovakia:76.01,Romania:42.53,Greece:11.52,Croatia:14.63,Finland:12.4}},
+    {year:'2012', data:{Poland:61.23,Slovakia:72.2,Romania:47.84,Greece:10.79,Croatia:15.58,Finland:8.92}},
+    {year:'2013', data:{Poland:70.07,Slovakia:79.24,Romania:44.57,Greece:12.49,Croatia:11.46,Finland:8.2}},
+    {year:'2014', data:{Poland:63.7,Slovakia:67.43,Romania:46.12,Greece:11.04,Croatia:18.56,Finland:6.34}},
+    {year:'2015', data:{Poland:73.27,Slovakia:82.85,Romania:53.13,Greece:11.71,Croatia:21.37,Finland:3.76}},
+    {year:'2016', data:{Poland:65.71,Slovakia:71.53,Romania:50.11,Greece:11.14,Croatia:25.42,Finland:4.02}},
+    {year:'2017', data:{Poland:74.95,Slovakia:85.69,Romania:56.37,Greece:11.03,Croatia:36.48,Finland:1.88}},
+    {year:'2018', data:{Poland:83.12,Slovakia:79.72,Romania:66.69,Greece:10.55,Croatia:13.94,Finland:2.19}},
+    {year:'2019', data:{Poland:82.38,Slovakia:70.62,Romania:70.09,Greece:9.44,Croatia:6.05,Finland:1.53}},
+  ]
+
+  const Pneumonia_women_time=[
+    {year:'2011', data:{United_Kingdom:45.69,Poland:27.72,Slovakia:40.19,Greece:6.95,Croatia:6.68,Finland:5.77}},
+    {year:'2012', data:{United_Kingdom:46.43,Poland:30.23,Slovakia:36.21,Greece:7.31,Croatia:6.33,Finland:4.47}},
+    {year:'2013', data:{United_Kingdom:45.66,Poland:35.61,Slovakia:40.7,Greece:8.92,Croatia:7.55,Finland:4.09}},
+    {year:'2014', data:{United_Kingdom:42.76,Poland:31.24,Slovakia:32.62,Greece:7.07,Croatia:7.85,Finland:2.47}},
+    {year:'2015', data:{United_Kingdom:47.2,Poland:37.09,Slovakia:43.09,Greece:7.65,Croatia:11.78,Finland:2.35}},
+    {year:'2016', data:{United_Kingdom:43.34,Poland:30.86,Slovakia:34.46,Greece:7.93,Croatia:12.06,Finland:2.27}},
+    {year:'2017', data:{United_Kingdom:42.1,Poland:38.66,Slovakia:46.56,Greece:7.67,Croatia:22.71,Finland:1.41}},
+    {year:'2018', data:{United_Kingdom:41.6,Poland:40.74,Slovakia:41.61,Greece:7.23,Croatia:7.39,Finland:1.03}},
+    {year:'2019', data:{United_Kingdom:41.6,Poland:39.85,Slovakia:39.44,Greece:7.59,Croatia:3.43,Finland:0.65}},
+  ]
+
+
+
+  const data_pneumonia_total_time = {
+    datasets: [{
+      label: "Poland's pneumonia deaths per 100 000 people",
+      backgroundColor: '#CB3A13',
+      borderColor: '#CB3A13',
+      data: Pneumonia_total_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Poland'
+      }
+    },
+
+    {
+      label: "Slovakia's pneumonia deaths per 100 000 people",
+      backgroundColor: '#CE6548',
+      borderColor: '#CE6548',
+      data: Pneumonia_total_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Slovakia'
+      }
+    },
+
+    {
+      label: "Romania's pneumonia deaths per 100 000 people",
+      backgroundColor: '#D18773',
+      borderColor: '#D18773',
+      data: Pneumonia_total_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Romania'
+      }
+    },
+
+    {
+      label: "Greece's pneumonia deaths per 100 000 people",
+      backgroundColor: '#6FEB85',
+      borderColor: '#6FEB85',
+      data: Pneumonia_total_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Greece'
+      }
+    },
+
+    {
+      label: "Croatia's pneumonia deaths per 100 000 people",
+      backgroundColor: '#3DC255',
+      borderColor: '#3DC255',
+      data: Pneumonia_total_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Croatia'
+      }
+    },
+
+    {
+      label: "Finland's pneumonia deaths per 100 000 people",
+      backgroundColor: '#05A923',
+      borderColor: '#05A923',
+      data: Pneumonia_total_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Finland'
+      }
+    }
+  ]
+  };
+
+
+  const data_pneumonia_men_time = {
+    datasets: [{
+      label: "Poland's male pneumonia deaths per 100 000 people",
+      backgroundColor: '#CB3A13',
+      borderColor: '#CB3A13',
+      data:Pneumonia_men_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Poland'
+      }
+    },
+
+    {
+      label: "Slovakia's male pneumonia deaths per 100 000 people",
+      backgroundColor: '#CE6548',
+      borderColor: '#CE6548',
+      data: Pneumonia_men_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Slovakia'
+      }
+    },
+
+    {
+      label: "Romania's male pneumonia deaths per 100 000 people",
+      backgroundColor: '#D18773',
+      borderColor: '#D18773',
+      data: Pneumonia_men_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Romania'
+      }
+    },
+
+    {
+      label: "Greece's male pneumonia deaths per 100 000 people",
+      backgroundColor: '#6FEB85',
+      borderColor: '#6FEB85',
+      data: Pneumonia_men_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Greece'
+      }
+    },
+
+    {
+      label: "Croatia's male pneumonia deaths per 100 000 people",
+      backgroundColor: '#3DC255',
+      borderColor: '#3DC255',
+      data: Pneumonia_men_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Croatia'
+      }
+    },
+
+    {
+      label: "Finland's male pneumonia deaths per 100 000 people",
+      backgroundColor: '#05A923',
+      borderColor: '#05A923',
+      data: Pneumonia_men_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Finland'
+      }
+    }
+  ]
+  };
+
+
+  const data_pneumonia_women_time = {
+    datasets: [{
+      label: "United Kingdom's female pneumonia deaths per 100 000 people",
+      backgroundColor: '#CB3A13',
+      borderColor: '#CB3A13',
+      data: Pneumonia_women_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.United_Kingdom'
+      }
+    },
+
+    {
+      label: "Poland's female pneumonia deaths per 100 000 people",
+      backgroundColor: '#CE6548',
+      borderColor: '#CE6548',
+      data: Pneumonia_women_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Poland'
+      }
+    },
+
+    {
+      label: "Slovakia's female pneumonia deaths per 100 000 people",
+      backgroundColor: '#D18773',
+      borderColor: '#D18773',
+      data: Pneumonia_women_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Slovakia'
+      }
+    },
+
+    {
+      label: "Greece's female pneumonia deaths per 100 000 people",
+      backgroundColor: '#6FEB85',
+      borderColor: '#6FEB85',
+      data: Pneumonia_women_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Greece'
+      }
+    },
+
+    {
+      label: "Croatia's female pneumonia deaths per 100 000 people",
+      backgroundColor: '#3DC255',
+      borderColor: '#3DC255',
+      data: Pneumonia_women_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Croatia'
+      }
+    },
+
+    {
+      label: "Finland's female pneumonia deaths per 100 000 people",
+      backgroundColor: '#05A923',
+      borderColor: '#05A923',
+      data: Pneumonia_women_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Finland'
+      }
+    }
+  ]
+  };
+
+  const config_pneumonia_total_time = {
+    type: 'line',
+    data: data_pneumonia_total_time,
+    options: {}
+  };
+
+  const config_pneumonia_men_time = {
+    type: 'line',
+    data: data_pneumonia_men_time,
+    options: {}
+  };
+
+  const config_pneumonia_women_time = {
+    type: 'line',
+    data: data_pneumonia_women_time,
+    options: {}
+  };
+
+  const myPneumoniaTotalTimeChart = new Chart(
+    document.getElementById('myPneumoniaTotalTimeChart'),
+    config_pneumonia_total_time
+  );
+
+  const myPneumoniaMenTimeChart = new Chart(
+    document.getElementById('myPneumoniaMenTimeChart'),
+    config_pneumonia_men_time
+  );
+
+  const myPneumoniaWomenTimeChart = new Chart(
+    document.getElementById('myPneumoniaWomenTimeChart'),
+    config_pneumonia_women_time  );
+
+
+</script>
+
+<div class="disease_text text longterm">
+  <h3>Important note:</h3>
+  <p>The numbers displayed are from 2011 to 2019, so some values probably have changed in the last 3 years. I am waiting for the “new” results of Eurostat and the OECD to update the data. </p>
+</div>
+
+<div class="navigator">
+  <a class="navigator_style" href="#Diabetes">Diabetes mellitus</a><br><br>
+  <a class="navigator_style" href="#Cancer">Cancer</a><br><br>
+  <a class="navigator_style" href="#Heart">Ischemic heart diseases</a><br><br>
+  <a class="navigator_style" href="#Alcohol">Alcohol</a><br><br>
+  <a class="navigator_style" href="#Liver">Chronic liver</a><br><br>
+  <a class="navigator_style" href="#Nervous">Nervous system</a><br><br>
+  <a class="navigator_style" href="#Pneumonia">Pneumonia</a>
+</div>
+
+<div class="foot">
+</div>
+
+  </body>
+</html>

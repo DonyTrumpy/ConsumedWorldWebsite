@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../images/PPIcon.png">
+    <title>Healthy Life</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="../css/css_findings.css">
+
+    <style media="screen">
+      .text{position: relative;width:80%;left:15%;}
+      .long{position: relative;top:100px;}
+      .long h3{margin-bottom:30px;}
+      .long p{margin-bottom:20px;}
+      .life_expectancy_long{margin-bottom:50px;}
+      .carousel{position:relative;top:200px;margin-bottom:200px;}
+      .first_carousel{left:10%;}
+      .second_carousel{left:10%;}
+      .fourth_carousel{left:10%;}
+      .fifth_carousel{left:10%;}
+      .slider{width:90vw;}
+      .slider_fourth{width:90vw;}
+      .chart_container{position: relative;top:200px;left:5%;width:90%;}
+      .foot{position: relative;top:100px;height:300px;width:100%;}
+
+    </style>
+
+  </head>
+  <body>
+
+    <header>
+      <img src="../images/logo_black.png" alt="Logo" id="Logo" onclick="window.location='../index.php'">
+      <ul>
+        <li> <a href="../index.php">Home</a> </li>
+        <li> <a href="#">Health</a> <ul>
+          <li> <a href="../health/findings.html">Findings</a> </li>
+          <li> <a href="../health/bmi.html">BMI</a> </li>
+          <li> <a href="../health/lifestyle.html">Lifestyle</a> </li>
+          <li> <a href="../health/diseases.html">Diseases</a> </li>
+          <li> <a href="../health/healthy_life.html">Healthy life</a> </li>
+          <li> <a href="../health/air_pollution.html">Air pollution</a> </li>
+          <li> <a href="../health/DataCleaning.html">Data cleaning</a> </li>
+        </ul> </li>
+        <li> <a href="#">Coming soon</a>
+          <ul>
+            <li> <a href="#">Consumption</a> </li>
+            <li> <a href="#">Production</a> </li>
+            <li> <a href="#">Wealth</a> </li>
+            <li> <a href="#">Going green</a> </li>
+          </ul>
+        </li>
+        <li> <a href="../index.php#Contact">Contact</a> </li>
+      </ul>
+    </header>
+
+    <div class="alert">
+      <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+    <p> <strong>Attention!</strong> The information displayed on this website is only a superficial glimpse at the data.
+    <br><br> If you wish to see the PowerBi reports with the full dashboards, better visuals, better experience and drill through the data, do not hesitate to contact me!</p>
+    <p>Also, the user experience for phone users on this website is limited. So, if you desire to see the visuals in their full shape please consider using a tablet or computer.</p>  <br><br> <a href="../index.php#Contact">Contact</a>
+    </div>
+
+    <div class="life_expectancy long text">
+      <h3>Where can we grow old and relax on our front porch?</h3>
+      <br>
+      <p>As we can see here below, Northern countries have the longest life expectancy followed by Western countries. At last position we can see the Eastern European countries.</p>
+      <p>Even if women tend to live longer, the difference remains very slim.</p>
+      <br>
+      <p>As mentioned on other places of this website, deaths due to cancer is the strongest factor found against having a high life expectancy at the age of 65; Those two have a -0.74 correlation.</p>
+      <p>Life expectancy also has a -0.64 correlation with deaths due to chronic liver diseases.
+        Funny enough it also has a positive (0.6) correlation with deaths due to ischemic heart diseases as well as another positive correlation (0.31) with drinking heavily at least once a week.</p>
+      <p>This is a friendly reminder that although things can be correlated, it does not mean one is the cause of the other. </p>
+      <p>They simply tend to come in the same environment and give us hints for where to look, what kind of questions to ask and where research might be needed.</p>
+      <br>
+      <p>Life expectancy is also correlated with eating its fruits and vegies; We can see that, on a population scale, not eating its fruits and vegies has a -0.5 correlation against life expectancy and inversely eating them has a 0.6 correlation.</p>
+    </div>
+
+    <div class="first_carousel carousel">
+
+<!--image slider start-->
+    <div class="slider">
+      <div class="slides">
+        <!--radio buttons start-->
+        <input type="radio" name="radio-btn" id="radio1">
+        <input type="radio" name="radio-btn" id="radio2">
+        <input type="radio" name="radio-btn" id="radio3">
+        <!--radio buttons end-->
+        <!--slide images start-->
+        <div class="slide first" id="slide1">
+          <div class="chart_container_overweight">
+            <canvas id="myLifeTotalChart"></canvas>
+          </div>
+        </div>
+        <div class="slide" id="slide2">
+          <div class="chart_container_preobese">
+            <canvas id="myLifeMenChart"></canvas>
+          </div>
+        </div>
+        <div class="slide" id="slide3">
+          <div class="chart_container_obese">
+            <canvas id="myLifeWomenChart"></canvas>
+          </div>
+        </div>
+
+        <!--slide images end-->
+
+      </div>
+      <!--manual navigation start-->
+      <div class="navigation-manual radios_first_carousel">
+        <label for="radio1" class="manual-btn">Total</label>
+        <label for="radio2" class="manual-btn">Men</label>
+        <label for="radio3" class="manual-btn">Women</label>
+      </div>
+      <!--manual navigation end-->
+    </div>
+    <!--image slider end-->
+    </div>
+
+
+<script>
+  const labels_life_total = ["Sweden","Norway","Malta","Ireland","Iceland","Spain","Germany","Denmark",
+"France","Switzerland","Belgium","Italy","Luxembourg","United Kingdom","Bulgaria","Netherlands",
+"Finland","Poland","Slovenia","Czechia","Greece","Austria","Cyprus","Portugal","Hungary","Estonia",
+"Romania","Lithuania","Croatia","Latvia","Slovakia"];
+
+const labels_life_men = ["Sweden","Norway","Malta","Iceland","Ireland","Spain","Germany",
+"Switzerland","Denmark","Italy","Belgium","France","Netherlands","United Kingdom","Luxembourg","Finland",
+"Bulgaria","Slovenia","Greece","Cyprus","Poland","Czechia","Portugal","Austria","Hungary","Romania",
+"Estonia","Lithuania","Croatia","Slovakia","Latvia"];
+
+const labels_life_women = ["Sweden","Norway","Malta","Ireland","Germany","Spain","Denmark","Iceland",
+"France","Belgium","Luxembourg","United Kingdom","Switzerland","Bulgaria","Italy","Netherlands",
+"Finland","Poland","Slovenia","Czechia","Greece","Austria","Hungary","Estonia","Cyprus","Portugal",
+"Romania","Lithuania","Croatia","Latvia","Slovakia"];
+
+  const data_life_total = {
+    labels: labels_life_total,
+    datasets: [{
+      label: "Total life expectancy at 65",
+      barThickness: 8,
+      data: [16.2,15.9,14.8,13.6,12.5,12.4,12.2,11.3,11.0,10.9,10.6,10.4,10.4,10.4,9.9,9.9,
+              9.5,8.6,8.6,8.1,7.9,7.7,7.6,7.3,7.1,6.9,6.6,6.2,4.8,4.7,4.7],
+      backgroundColor: ["#EA961C","#EA961C","#EA961C","#EA961C","#EA961C","#ECF1ED","#ECF1ED","#ECF1ED", "#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED", "#ECF1ED","#ECF1ED","#ECF1ED", "#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED",
+      "#ECF1ED","#ECF1ED","#ECF1ED","#00C57C","#00C57C","#00C57C" ]
+    }]
+  };
+
+  const data_life_men = {
+    labels: labels_life_men,
+    datasets: [{
+      label: "Men's life expectancy at 65",
+      barThickness: 8,
+      data: [15.9,15.8,14.4,13.2,13.1,12.4,11.5,11.2,10.7,10.6,10.5,10.4,10.2,10.2,10.1,9.3,
+9.2,8.7,8.1,8.1,8.1,8.0,7.9,7.7,6.7,6.7,6.4,6.0,4.6,4.6,4.5],
+      backgroundColor: ["#EA961C","#EA961C","#EA961C","#EA961C","#EA961C","#ECF1ED","#ECF1ED","#ECF1ED", "#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED", "#ECF1ED","#ECF1ED","#ECF1ED", "#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED",
+      "#ECF1ED","#ECF1ED","#ECF1ED","#00C57C","#00C57C","#00C57C" ]
+    }]
+  };
+
+  const data_life_women = {
+    labels: labels_life_women,
+    datasets: [{
+      label: "Women's life expectancy at 65",
+      barThickness: 8,
+      data: [16.6,15.8,15.1,14.1,12.8,12.3,11.8,11.8,11.6,10.7,10.6,10.6,10.5,10.4,10.2,9.6,
+              9.6,9.0,8.6,8.2,7.7,7.7,7.4,7.2,7.1,6.9,6.5,6.4,4.9,4.8,4.7],
+      backgroundColor: ["#EA961C","#EA961C","#EA961C","#EA961C","#EA961C","#ECF1ED","#ECF1ED","#ECF1ED", "#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED", "#ECF1ED","#ECF1ED","#ECF1ED", "#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED","#ECF1ED",
+      "#ECF1ED","#ECF1ED","#ECF1ED","#00C57C","#00C57C","#00C57C" ]
+    }]
+  };
+
+
+  const config_life_total = {
+    type: 'bar',
+    data: data_life_total,
+    options: {
+      indexAxis: 'y',
+      scales: {
+  x: {
+    grid: {
+      display: false
+    }
+  },
+  y: {
+    grid: {
+      display: false
+    }
+  }
+}
+    },
+
+  };
+
+  const config_life_men = {
+    type: 'bar',
+    data: data_life_men,
+    options: {
+      indexAxis: 'y',
+      scales: {
+  x: {
+    grid: {
+      display: false
+    }
+  },
+  y: {
+    grid: {
+      display: false
+    }
+  }
+}
+    },
+
+  };
+
+  const config_life_women = {
+    type: 'bar',
+    data: data_life_women,
+    options: {
+      indexAxis: 'y',
+      scales: {
+  x: {
+    grid: {
+      display: false
+    }
+  },
+  y: {
+    grid: {
+      display: false
+    }
+  }
+}
+    },
+
+  };
+
+
+
+
+  const myLifeTotalChart = new Chart(
+    document.getElementById('myLifeTotalChart'),
+    config_life_total
+  );
+
+  const myLifeMenChart = new Chart(
+    document.getElementById('myLifeMenChart'),
+    config_life_men
+  );
+
+  const myLifeWomenChart = new Chart(
+    document.getElementById('myLifeWomenChart'),
+    config_life_women
+  );
+
+
+</script>
+
+<div class="life_expectancy_long long text">
+  <h3>Let's break the limits!</h3>
+  <p>Good news! The worst countries are able to have a stable life expectancy and the better ones are seeing a nice little rise over time!</p>
+  <p>With this said, higher life expectancy does not say anyhting about the quality of life, even if it is probably assumed to go with it.</p>
+  <br>
+  <p>As of today, I am waiting very curiously for the 2020 results to see if the pandemic affected the scores.</p>
+</div>
+
+<div class="second_carousel carousel">
+
+
+<!--image slider start-->
+<div class="slider">
+  <div class="slides">
+    <!--radio buttons start-->
+    <input type="radio" name="radio-btn" id="radio4">
+    <input type="radio" name="radio-btn" id="radio5">
+    <input type="radio" name="radio-btn" id="radio6">
+    <!--radio buttons end-->
+    <!--slide images start-->
+    <div class="slide second" id="slide4">
+      <div class="chart_container_overweight_overtime">
+        <canvas id="myLifeTotalTimeChart"></canvas>
+      </div>
+    </div>
+    <div class="slide" id="slide5">
+      <div class="chart_container_preobese_overtime">
+        <canvas id="myLifeMenTimeChart"></canvas>
+      </div>
+    </div>
+    <div class="slide" id="slide6">
+      <div class="chart_container_obese_overtime">
+        <canvas id="myLifeWomenTimeChart"></canvas>
+      </div>
+    </div>
+
+    <!--slide images end-->
+
+  </div>
+  <!--manual navigation start-->
+  <div class="navigation-manual-two radios_first_carousel">
+    <label for="radio4" class="manual-btn-two">Total</label>
+    <label for="radio5" class="manual-btn-two">Men</label>
+    <label for="radio6" class="manual-btn-two">Women</label>
+  </div>
+  <!--manual navigation end-->
+</div>
+<!--image slider end-->
+</div>
+
+<script>
+
+  const Life_expectancy_total_time=[
+    {year:'2005', data:{Sweden:10.9,Norway:12.5,Malta:10.9,Croatia:5.3,Latvia:5.3,Slovakia:5.2}},
+    {year:'2006', data:{Sweden:13.6,Norway:12.0,Malta:10.1,Croatia:5.2,Latvia:4.3,Slovakia:3.9}},
+    {year:'2007', data:{Sweden:13.4,Norway:12.8,Malta:11.1,Croatia:5.8,Latvia:4.7,Slovakia:4.2}},
+    {year:'2008', data:{Sweden:11.8,Norway:14.5,Malta:11.1,Croatia:6.5,Latvia:4.8,Slovakia:2.8}},
+    {year:'2009', data:{Sweden:12.7,Norway:13.9,Malta:11.6,Croatia:6.5,Latvia:5.2,Slovakia:3.2}},
+    {year:'2010', data:{Sweden:12.9,Norway:15.2,Malta:11.9,Croatia:6.5,Latvia:5.3,Slovakia:3.1}},
+    {year:'2011', data:{Sweden:12.4,Norway:16.7,Malta:11.4,Croatia:7.3,Latvia:4.9,Slovakia:3.2}},
+    {year:'2012', data:{Sweden:12.4,Norway:15.7,Malta:12.4,Croatia:7.8,Latvia:6.0,Slovakia:3.2}},
+    {year:'2013', data:{Sweden:13.3,Norway:15.0,Malta:12.8,Croatia:5.8,Latvia:4.1,Slovakia:3.9}},
+    {year:'2014', data:{Sweden:15.9,Norway:15.6,Malta:13.5,Croatia:5.9,Latvia:4.3,Slovakia:3.9}},
+    {year:'2015', data:{Sweden:16.0,Norway:15.3,Malta:13.7,Croatia:4.6,Latvia:4.1,Slovakia:3.9}},
+    {year:'2016', data:{Sweden:15.9,Norway:15.2,Malta:12.9,Croatia:5.0,Latvia:4.4,Slovakia:4.3}},
+    {year:'2017', data:{Sweden:15.6,Norway:15.7,Malta:13.9,Croatia:4.9,Latvia:4.2,Slovakia:4.0}},
+    {year:'2018', data:{Sweden:15.7,Norway:15.4,Malta:14.3,Croatia:5.0,Latvia:4.5,Slovakia:4.4}},
+    {year:'2019', data:{Sweden:16.2,Norway:15.9,Malta:14.8,Croatia:4.8,Latvia:4.7,Slovakia:4.7}},
+
+  ]
+
+  const Life_expectancy_men_time=[
+  {year:'2005', data:{Sweden:10.7,Norway:12.5,Malta:10.6,Croatia:5.3,Slovakia:4.8,Latvia:5.0}},
+  {year:'2006', data:{Sweden:13.0,Norway:12.4,Malta:10.1,Croatia:5.2,Slovakia:4.0,Latvia:4.4}},
+  {year:'2007', data:{Sweden:13.0,Norway:12.4,Malta:10.6,Croatia:5.8,Slovakia:4.1,Latvia:4.9}},
+  {year:'2008', data:{Sweden:11.5,Norway:14.1,Malta:10.5,Croatia:6.6,Slovakia:3.0,Latvia:4.8}},
+  {year:'2009', data:{Sweden:12.1,Norway:13.6,Malta:11.5,Croatia:6.6,Slovakia:3.5,Latvia:4.6}},
+  {year:'2010', data:{Sweden:12.2,Norway:14.5,Malta:12.0,Croatia:6.6,Slovakia:3.3,Latvia:4.8}},
+  {year:'2011', data:{Sweden:11.8,Norway:15.9,Malta:11.8,Croatia:7.4,Slovakia:3.5,Latvia:4.7}},
+  {year:'2012', data:{Sweden:12.9,Norway:15.3,Malta:12.5,Croatia:7.7,Slovakia:3.5,Latvia:5.3}},
+  {year:'2013', data:{Sweden:12.9,Norway:15.0,Malta:12.8,Croatia:5.5,Slovakia:4.2,Latvia:4.0}},
+  {year:'2014', data:{Sweden:15.1,Norway:15.3,Malta:13.2,Croatia:6.0,Slovakia:4.3,Latvia:4.0}},
+  {year:'2015', data:{Sweden:15.5,Norway:15.3,Malta:13.3,Croatia:4.7,Slovakia:4.1,Latvia:4.1}},
+  {year:'2016', data:{Sweden:15.1,Norway:15.4,Malta:12.8,Croatia:5.2,Slovakia:4.5,Latvia:4.4}},
+  {year:'2017', data:{Sweden:15.4,Norway:15.8,Malta:13.6,Croatia:5.0,Slovakia:3.8,Latvia:4.1}},
+  {year:'2018', data:{Sweden:15.6,Norway:15.3,Malta:14.0,Croatia:5.0,Slovakia:4.0,Latvia:4.2}},
+  {year:'2019', data:{Sweden:15.9,Norway:15.8,Malta:14.4,Croatia:4.6,Slovakia:4.6,Latvia:4.5}},
+  ]
+
+  const Life_expectancy_women_time=[
+  {year:'2005', data:{Sweden:11.1,Norway:12.3,Malta:11.1,Croatia:5.3,Latvia:5.4,Slovakia:5.4}},
+  {year:'2006', data:{Sweden:14.2,Norway:11.8,Malta:9.9,Croatia:5.2,Latvia:4.2,Slovakia:3.8}},
+  {year:'2007', data:{Sweden:13.9,Norway:13.1,Malta:11.5,Croatia:5.8,Latvia:4.6,Slovakia:4.2}},
+  {year:'2008', data:{Sweden:12.0,Norway:14.9,Malta:11.6,Croatia:6.5,Latvia:4.9,Slovakia:2.7}},
+  {year:'2009', data:{Sweden:13.2,Norway:14.0,Malta:11.7,Croatia:6.5,Latvia:5.7,Slovakia:2.9}},
+  {year:'2010', data:{Sweden:13.4,Norway:15.7,Malta:11.7,Croatia:6.5,Latvia:5.5,Slovakia:2.8}},
+  {year:'2011', data:{Sweden:12.9,Norway:17.4,Malta:11.0,Croatia:7.3,Latvia:5.0,Slovakia:2.9}},
+  {year:'2012', data:{Sweden:12.9,Norway:16.0,Malta:12.3,Croatia:7.9,Latvia:6.4,Slovakia:3.1}},
+  {year:'2013', data:{Sweden:13.6,Norway:14.8,Malta:12.7,Croatia:5.9,Latvia:4.2,Slovakia:3.7}},
+  {year:'2014', data:{Sweden:16.6,Norway:15.9,Malta:13.8,Croatia:5.8,Latvia:4.6,Slovakia:3.6}},
+  {year:'2015', data:{Sweden:16.5,Norway:15.3,Malta:13.9,Croatia:4.5,Latvia:4.0,Slovakia:3.8}},
+  {year:'2016', data:{Sweden:16.6,Norway:15.2,Malta:12.9,Croatia:4.9,Latvia:4.5,Slovakia:4.2}},
+  {year:'2017', data:{Sweden:15.8,Norway:15.8,Malta:14.2,Croatia:4.8,Latvia:4.2,Slovakia:4.1}},
+  {year:'2018', data:{Sweden:15.8,Norway:15.6,Malta:14.5,Croatia:5.0,Latvia:4.7,Slovakia:4.6}},
+  {year:'2019', data:{Sweden:16.6,Norway:15.8,Malta:15.1,Croatia:4.9,Latvia:4.8,Slovakia:4.7}},
+  ]
+
+
+
+  const data_life_total_time = {
+    datasets: [{
+      label: "Sweden's life expectancy at 65",
+      backgroundColor: '#05A923',
+      borderColor: '#05A923',
+      data: Life_expectancy_total_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Sweden'
+      }
+    },
+
+    {
+      label: "Norway's life expectancy at 65",
+      backgroundColor: '#3DC255',
+      borderColor: '#3DC255',
+      data: Life_expectancy_total_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Norway'
+      }
+    },
+
+    {
+      label: "Malta's life expectancy at 65",
+      backgroundColor: '#6FEB85',
+      borderColor: '#6FEB85',
+      data: Life_expectancy_total_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Malta'
+      }
+    },
+
+    {
+      label: "Croatia's life expectancy at 65",
+      backgroundColor: '#D18773',
+      borderColor: '#D18773',
+      data: Life_expectancy_total_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Croatia'
+      }
+    },
+
+    {
+      label: "Latvia's life expectancy at 65",
+      backgroundColor: '#CE6548',
+      borderColor: '#CE6548',
+      data: Life_expectancy_total_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Latvia'
+      }
+    },
+
+    {
+      label: "Slovakia's life expectancy at 65",
+      backgroundColor: '#CB3A13',
+      borderColor: '#CB3A13',
+      data: Life_expectancy_total_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Slovakia'
+      }
+    }
+  ]
+  };
+
+
+  const data_life_men_time = {
+    datasets: [{
+      label: "Sweden's life expectancy at 65 for men",
+      backgroundColor: '#05A923',
+      borderColor: '#05A923',
+      data: Life_expectancy_men_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Sweden'
+      }
+    },
+
+    {
+      label: "Norway's life expectancy at 65 for men",
+      backgroundColor: '#3DC255',
+      borderColor: '#3DC255',
+      data: Life_expectancy_men_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Norway'
+      }
+    },
+
+    {
+      label: "Malta's life expectancy at 65 for men",
+      backgroundColor: '#6FEB85',
+      borderColor: '#6FEB85',
+      data: Life_expectancy_men_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Malta'
+      }
+    },
+
+    {
+      label: "Croatia's life expectancy at 65 for men",
+      backgroundColor: '#D18773',
+      borderColor: '#D18773',
+      data: Life_expectancy_men_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Croatia'
+      }
+    },
+
+    {
+      label: "Slovakia's life expectancy at 65 for men",
+      backgroundColor: '#CE6548',
+      borderColor: '#CE6548',
+      data: Life_expectancy_men_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Slovakia'
+      }
+    },
+
+    {
+      label: "Latvia's life expectancy at 65 for men",
+      backgroundColor: '#CB3A13',
+      borderColor: '#CB3A13',
+      data: Life_expectancy_men_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Latvia'
+      }
+    }
+  ]
+  };
+
+
+  const data_life_women_time = {
+    datasets: [{
+      label: "Sweden's life expectancy at 65 for women",
+      backgroundColor: '#05A923',
+      borderColor: '#05A923',
+      data: Life_expectancy_women_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Sweden'
+      }
+    },
+
+    {
+      label: "Norway's life expectancy at 65 for women",
+      backgroundColor: '#3DC255',
+      borderColor: '#3DC255',
+      data: Life_expectancy_women_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Norway'
+      }
+    },
+
+    {
+      label: "Malta's life expectancy at 65 for women",
+      backgroundColor: '#6FEB85',
+      borderColor: '#6FEB85',
+      data: Life_expectancy_women_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Malta'
+      }
+    },
+
+    {
+      label: "Croatia's life expectancy at 65 for women",
+      backgroundColor: '#D18773',
+      borderColor: '#D18773',
+      data: Life_expectancy_women_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Croatia'
+      }
+    },
+
+    {
+      label: "Latvia's life expectancy at 65 for women",
+      backgroundColor: '#CE6548',
+      borderColor: '#CE6548',
+      data: Life_expectancy_women_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Latvia'
+      }
+    },
+
+    {
+      label: "Slovakia's life expectancy at 65 for women",
+      backgroundColor: '#CB3A13',
+      borderColor: '#CB3A13',
+      data: Life_expectancy_women_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Slovakia'
+      }
+    }
+  ]
+  };
+
+  const config_life_total_time = {
+    type: 'line',
+    data: data_life_total_time,
+    options: {}
+  };
+
+  const config_life_men_time = {
+    type: 'line',
+    data: data_life_men_time,
+    options: {}
+  };
+
+  const config_life_women_time = {
+    type: 'line',
+    data: data_life_women_time,
+    options: {}
+  };
+
+  const myLifeTotalTimeChart = new Chart(
+    document.getElementById('myLifeTotalTimeChart'),
+    config_life_total_time
+  );
+
+  const myLifeMenTimeChart = new Chart(
+    document.getElementById('myLifeMenTimeChart'),
+    config_life_men_time
+  );
+
+  const myLifeWomenTimeChart = new Chart(
+    document.getElementById('myLifeWomenTimeChart'),
+    config_life_women_time
+  );
+</script>
+
+<div class="life_expectancy_long long text">
+  <h3>Share of people in good health</h3>
+  <p>Again, Western- and Northern-Europe have a higher proportion of their population than Eastern countries. Ireland, Switzerland and Greece are leading the way. While Portugal, Latvia and Lithuania are having a more difficult time.</p>
+  <p>There are plenty of factors needed for a healthy individual, but one that sometimes gets forgotten is air pollution;</p>
+  <p>Air pollution has a -0.45 correlation against the share of people in countries being in good health; Meaning that the more polution there is, the less healthy individuals tend to be.</p>
+</div>
+
+
+
+<div class="fourth_carousel carousel">
+
+
+  <!--image slider start-->
+      <div class="slider_third">
+        <div class="slides_third">
+          <!--radio buttons start-->
+          <input type="radio" name="radio-btn-third" id="radio8">
+          <input type="radio" name="radio-btn-third" id="radio9">
+          <input type="radio" name="radio-btn-third" id="radio10">
+          <!--radio buttons end-->
+          <!--slide images start-->
+          <div class="slide_third third" id="slide8">
+            <div class="chart_container_health_total">
+              <canvas id="myHealthTotalChart"></canvas>
+            </div>
+          </div>
+          <div class="slide_third" id="slide9">
+            <div class="chart_container_health_men">
+              <canvas id="myHealthMenChart"></canvas>
+            </div>
+          </div>
+          <div class="slide_third" id="slide10">
+            <div class="chart_container_health_women">
+              <canvas id="myHealthWomenChart"></canvas>
+            </div>
+          </div>
+
+          <!--slide images end-->
+
+        </div>
+        <!--manual navigation start-->
+        <div class="navigation-manual-third radios_first_carousel">
+          <label for="radio8" class="manual-btn-third">Total</label>
+          <label for="radio9" class="manual-btn-third">Men</label>
+          <label for="radio10" class="manual-btn-third">Women</label>
+        </div>
+        <!--manual navigation end-->
+      </div>
+      <!--image slider end-->
+      </div>
+<script type="text/javascript">
+const labels_health_total = ["Ireland","Switzerland","Greece","Netherlands","Cyprus","Iceland","Sweden",
+"Malta","Belgium","Norway","Austria","Luxembourg","United Kingdom","Spain","Romania","Italy","Denmark",
+"Finland","France","Slovenia","Bulgaria","Slovakia","Germany","Croatia","Czechia","Hungary","Poland",
+"Estonia","Portugal","Latvia","Lithuania"];
+
+const labels_health_men = ["Switzerland","Ireland","Iceland","Netherlands","Greece","Sweden","Cyprus",
+"Malta","Belgium","Romania","Norway","Italy","Spain","Austria","Luxembourg","United Kingdom","Denmark",
+"Bulgaria","Finland","France","Slovenia","Slovakia","Croatia","Hungary","Germany","Czechia","Poland",
+"Estonia","Portugal","Latvia","Lithuania"];
+
+const labels_health_women = ["Ireland","Switzerland","Greece","Cyprus","Netherlands","Malta","Belgium",
+"Austria","Sweden","Luxembourg","Iceland","Norway","United Kingdom","Spain","Denmark","Italy","Finland",
+"Romania","France","Slovenia","Bulgaria","Germany","Czechia","Slovakia","Croatia","Poland","Hungary",
+"Estonia","Portugal","Latvia","Lithuania"];
+
+
+const data_health_total = {
+labels: labels_health_total,
+datasets: [{
+  label: "health_total",
+  barThickness: 8,
+  data: [83.7,83.3,78.6,77.9,77.5,76.7,76.5,75.7,75.4,74.7,74.0,73.6,73.2,73.0,73.0,72.9,71.3,69.9,
+68.6,67.2,66.7,65.3,64.1,63.7,63.4,62.1,61.6,58.4,51.3,49.7,44.3],
+  backgroundColor: ["#00C57C","#00C57C", "#00C57C","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5", "#9BB0A5","#9BB0A5", "#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5",
+  "#EA961C","#EA961C","#EA961C","#EA961C", "#EA961C"]
+}]
+};
+
+const data_health_men = {
+labels: labels_health_men,
+datasets: [{
+  label: "health_total",
+  barThickness: 8,
+  data: [84.7,84.3,80.6,80.3,80.1,79.7,78.5,77.8,77.6,77.4,77.0,76.0,75.8,74.8,74.4,74.0,72.8,
+70.8,70.5,70.2,69.8,69.0,66.0,65.7,65.4,64.9,64.6,61.3,55.7,54.7,49.5],
+
+  backgroundColor: ["#00C57C","#00C57C", "#00C57C","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5", "#9BB0A5","#9BB0A5", "#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5",
+  "#EA961C","#EA961C","#EA961C","#EA961C", "#EA961C"]
+}]
+};
+
+const data_health_women = {
+labels: labels_health_women,
+datasets: [{
+  label: "health women",
+  barThickness: 8,
+  data: [83.1,81.9,77.1,76.6,75.6,73.5,73.3,73.3,73.3,72.7,72.6,72.4,72.4,70.4,69.9,69.9,69.3,
+69.0,67.1,64.5,62.9,62.8,62.5,61.8,61.5,59.1,58.9,56.3,47.4,45.7,40.9],
+
+  backgroundColor: ["#00C57C","#00C57C", "#00C57C","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5", "#9BB0A5","#9BB0A5", "#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5","#9BB0A5",
+  "#EA961C","#EA961C","#EA961C","#EA961C", "#EA961C"]
+}]
+};
+
+
+
+
+
+const config_health_total = {
+type: 'bar',
+data: data_health_total,
+options: {
+  indexAxis: 'y',
+  scales: {
+          x: {
+            grid: {
+              display: false
+            }
+          },
+          y: {
+            grid: {
+              display: false
+            }
+          }
+        }
+    },
+
+  };
+
+  const config_health_men = {
+    type: 'bar',
+    data: data_health_men,
+    options: {
+      indexAxis: 'y',
+      scales: {
+              x: {
+                grid: {
+                  display: false
+                }
+              },
+              y: {
+                grid: {
+                  display: false
+                }
+              }
+            }
+        },
+
+      };
+
+      const config_health_women = {
+        type: 'bar',
+        data: data_health_women,
+        options: {
+          indexAxis: 'y',
+          scales: {
+                  x: {
+                    grid: {
+                      display: false
+                    }
+                  },
+                  y: {
+                    grid: {
+                      display: false
+                    }
+                  }
+                }
+            },
+
+          };
+
+
+
+const myHealthTotalChart = new Chart(
+document.getElementById('myHealthTotalChart'),
+config_health_total
+);
+
+const myHealthMenChart = new Chart(
+document.getElementById('myHealthMenChart'),
+config_health_men
+);
+
+const myHealthWomenChart = new Chart(
+document.getElementById('myHealthWomenChart'),
+config_health_women
+);
+
+</script>
+
+<div class="life_expectancy_long long text">
+  <h3>A world of difference!</h3>
+  <p>As we can see on the graph below, the share of people being in good health remains stable in the better countries and increases slightly year after year in the last European countries.</p>
+  <br> <p>Even if it is good news that the trend tends to go up, the difference between the top and bottom countries remains stunning! The top countries have almost double the share of people being in good health.</p>
+  <p>Sadly, the bottom countries do not have yet 50% of their population being in good health. Inversely, the top countries have almost 85% of their population in good health. </p>
+</div>
+
+
+<div class="fifth_carousel carousel">
+
+
+<!--image slider start-->
+<div class="slider_fourth">
+  <div class="slides_fourth">
+    <!--radio buttons start-->
+    <input type="radio" name="radio-btn-fourth" id="radio11">
+    <input type="radio" name="radio-btn-fourth" id="radio12">
+    <input type="radio" name="radio-btn-fourth" id="radio13">
+    <!--radio buttons end-->
+    <!--slide images start-->
+    <div class="slide_fourth fourth" id="slide11">
+      <div class="chart_container_health_total_overtime">
+        <canvas id="myHealthTotalTimeChart"></canvas>
+      </div>
+    </div>
+    <div class="slide_fourth" id="slide12">
+      <div class="chart_container_health_men_overtime">
+        <canvas id="myHealthMenTimeChart"></canvas>
+      </div>
+    </div>
+    <div class="slide_fourth" id="slide13">
+      <div class="chart_container_health_women_overtime">
+        <canvas id="myHealthWomenTimeChart"></canvas>
+      </div>
+    </div>
+
+    <!--slide images end-->
+
+  </div>
+  <!--manual navigation start-->
+  <div class="navigation-manual-fourth radios_first_carousel">
+    <label for="radio11" class="manual-btn-fourth">Total</label>
+    <label for="radio12" class="manual-btn-fourth">Men</label>
+    <label for="radio13" class="manual-btn-fourth">Women</label>
+  </div>
+  <!--manual navigation end-->
+</div>
+<!--image slider end-->
+</div>
+
+<script>
+
+  const Good_health_total_time=[
+    {year:'2005', data:{Ireland:82.9,Switzerland:84.0,Greece:77.5,Portugal:45.9,Latvia:35.0,Lithuania:42.6}},
+    {year:'2006', data:{Ireland:83.1,Switzerland:84.0,Greece:76.8,Portugal:48.1,Latvia:40.4,Lithuania:43.5}},
+    {year:'2007', data:{Ireland:84.1,Switzerland:84.0,Greece:76.7,Portugal:45.9,Latvia:42.5,Lithuania:48.8}},
+    {year:'2008', data:{Ireland:84.5,Switzerland:81.2,Greece:76.1,Portugal:48.5,Latvia:43.6,Lithuania:46.6}},
+    {year:'2009', data:{Ireland:83.4,Switzerland:81.0,Greece:75.5,Portugal:47.8,Latvia:46.1,Lithuania:48.3}},
+    {year:'2010', data:{Ireland:83.3,Switzerland:81.6,Greece:75.7,Portugal:49.3,Latvia:47.7,Lithuania:50.2}},
+    {year:'2011', data:{Ireland:83.3,Switzerland:81.3,Greece:76.5,Portugal:49.7,Latvia:46.1,Lithuania:44.2}},
+    {year:'2012', data:{Ireland:82.8,Switzerland:82.0,Greece:75.1,Portugal:48.1,Latvia:46.8,Lithuania:44.6}},
+    {year:'2013', data:{Ireland:82.0,Switzerland:80.7,Greece:74.1,Portugal:46.2,Latvia:45.3,Lithuania:46.3}},
+    {year:'2014', data:{Ireland:82.7,Switzerland:78.4,Greece:73.6,Portugal:46.0,Latvia:45.8,Lithuania:45.0}},
+    {year:'2015', data:{Ireland:82.6,Switzerland:79.6,Greece:74.1,Portugal:46.5,Latvia:46.3,Lithuania:42.8}},
+    {year:'2016', data:{Ireland:82.9,Switzerland:77.7,Greece:74.0,Portugal:47.7,Latvia:47.2,Lithuania:43.4}},
+    {year:'2017', data:{Ireland:83.3,Switzerland:80.2,Greece:74.1,Portugal:48.9,Latvia:44.2,Lithuania:43.9}},
+    {year:'2018', data:{Ireland:84.1,Switzerland:80.7,Greece:76.4,Portugal:49.3,Latvia:47.0,Lithuania:44.0}},
+    {year:'2019', data:{Ireland:84.0,Switzerland:81.3,Greece:79.3,Portugal:50.1,Latvia:47.1,Lithuania:46.2}},
+    {year:'2020', data:{Ireland:83.7,Switzerland:83.3,Greece:78.6,Portugal:51.3,Latvia:49.7,Lithuania:44.3}},
+
+  ]
+
+  const Good_health_men_time=[
+  {year:'2005', data:{Switzerland:86.4,Ireland:83.7,Iceland:82.3,Portugal:51.5,Latvia:40.6,Lithuania:48.2}},
+  {year:'2006', data:{Switzerland:86.4,Ireland:84.3,Iceland:82.3,Portugal:53.3,Latvia:46.6,Lithuania:48.9}},
+  {year:'2007', data:{Switzerland:86.4,Ireland:84.4,Iceland:82.6,Portugal:50.9,Latvia:47.7,Lithuania:54.6}},
+  {year:'2008', data:{Switzerland:83.2,Ireland:85.7,Iceland:82.4,Portugal:54.1,Latvia:48.1,Lithuania:50.8}},
+  {year:'2009', data:{Switzerland:83.5,Ireland:83.9,Iceland:81.8,Portugal:53.5,Latvia:50.9,Lithuania:53.1}},
+  {year:'2010', data:{Switzerland:84.2,Ireland:84.0,Iceland:79.5,Portugal:54.8,Latvia:52.9,Lithuania:54.7}},
+  {year:'2011', data:{Switzerland:84.0,Ireland:83.5,Iceland:79.4,Portugal:55.3,Latvia:50.9,Lithuania:50.0}},
+  {year:'2012', data:{Switzerland:84.1,Ireland:82.9,Iceland:79.0,Portugal:54.1,Latvia:51.4,Lithuania:50.3}},
+  {year:'2013', data:{Switzerland:83.1,Ireland:83.2,Iceland:79.5,Portugal:51.5,Latvia:50.4,Lithuania:52.2}},
+  {year:'2014', data:{Switzerland:80.8,Ireland:83.3,Iceland:79.3,Portugal:50.6,Latvia:50.5,Lithuania:51.1}},
+  {year:'2015', data:{Switzerland:82.1,Ireland:83.2,Iceland:80.1,Portugal:51.5,Latvia:51.4,Lithuania:49.5}},
+  {year:'2016', data:{Switzerland:79.6,Ireland:82.7,Iceland:79.0,Portugal:52.6,Latvia:52.8,Lithuania:49.1}},
+  {year:'2017', data:{Switzerland:81.8,Ireland:82.9,Iceland:79.4,Portugal:54.0,Latvia:49.9,Lithuania:49.6}},
+  {year:'2018', data:{Switzerland:82.8,Ireland:83.8,Iceland:80.6,Portugal:54.5,Latvia:52.1,Lithuania:49.0}},
+  {year:'2019', data:{Switzerland:83.3,Ireland:84.0,Iceland:80.6,Portugal:55.5,Latvia:52.5,Lithuania:51.9}},
+  {year:'2020', data:{Switzerland:84.7,Ireland:84.3,Iceland:80.6,Portugal:55.7,Latvia:54.7,Lithuania:49.5}},
+  ]
+
+  const Good_health_women_time=[
+  {year:'2005', data:{Ireland:82.1,Switzerland:81.8,Greece:74.7,Portugal:40.8,Latvia:30.6,Lithuania:37.9}},
+  {year:'2006', data:{Ireland:82.0,Switzerland:81.8,Greece:73.9,Portugal:43.4,Latvia:35.5,Lithuania:39.0}},
+  {year:'2007', data:{Ireland:83.9,Switzerland:81.8,Greece:74.0,Portugal:41.3,Latvia:38.4,Lithuania:43.9}},
+  {year:'2008', data:{Ireland:83.2,Switzerland:79.4,Greece:73.2,Portugal:43.4,Latvia:40.0,Lithuania:43.8}},
+  {year:'2009', data:{Ireland:82.9,Switzerland:78.5,Greece:72.5,Portugal:42.6,Latvia:42.3,Lithuania:45.0}},
+  {year:'2010', data:{Ireland:82.8,Switzerland:79.0,Greece:73.5,Portugal:44.2,Latvia:43.6,Lithuania:47.1}},
+  {year:'2011', data:{Ireland:83.0,Switzerland:78.7,Greece:74.1,Portugal:44.6,Latvia:42.4,Lithuania:39.9}},
+  {year:'2012', data:{Ireland:82.8,Switzerland:80.0,Greece:72.3,Portugal:42.9,Latvia:43.1,Lithuania:40.7}},
+  {year:'2013', data:{Ireland:82.0,Switzerland:80.7,Greece:74.1,Portugal:41.5,Latvia:41.3,Lithuania:42.2}},
+  {year:'2014', data:{Ireland:82.7,Switzerland:78.4,Greece:73.6,Portugal:42.0,Latvia:42.1,Lithuania:40.6}},
+  {year:'2015', data:{Ireland:82.6,Switzerland:79.6,Greece:74.1,Portugal:42.0,Latvia:42.3,Lithuania:38.5}},
+  {year:'2016', data:{Ireland:82.9,Switzerland:77.7,Greece:74.0,Portugal:43.3,Latvia:42.8,Lithuania:40.0}},
+  {year:'2017', data:{Ireland:83.3,Switzerland:80.2,Greece:74.1,Portugal:44.4,Latvia:39.7,Lithuania:40.2}},
+  {year:'2018', data:{Ireland:84.1,Switzerland:80.7,Greece:76.4,Portugal:44.8,Latvia:43.1,Lithuania:41.1}},
+  {year:'2019', data:{Ireland:84.0,Switzerland:81.3,Greece:79.3,Portugal:45.4,Latvia:42.7,Lithuania:42.5}},
+  {year:'2020', data:{Ireland:83.7,Switzerland:83.3,Greece:78.6,Portugal:47.4,Latvia:45.7,Lithuania:40.9}},
+  ]
+
+
+
+  const data_health_total_time = {
+    datasets: [{
+      label: "Ireland's life expectancy at 65",
+      backgroundColor: '#05A923',
+      borderColor: '#05A923',
+      data: Good_health_total_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Ireland'
+      }
+    },
+
+    {
+      label: "Switzerland's life expectancy at 65",
+      backgroundColor: '#3DC255',
+      borderColor: '#3DC255',
+      data: Good_health_total_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Switzerland'
+      }
+    },
+
+    {
+      label: "Greece's life expectancy at 65",
+      backgroundColor: '#6FEB85',
+      borderColor: '#6FEB85',
+      data: Good_health_total_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Greece'
+      }
+    },
+
+    {
+      label: "Portugal's life expectancy at 65",
+      backgroundColor: '#D18773',
+      borderColor: '#D18773',
+      data: Good_health_total_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Portugal'
+      }
+    },
+
+    {
+      label: "Latvia's life expectancy at 65",
+      backgroundColor: '#CE6548',
+      borderColor: '#CE6548',
+      data: Good_health_total_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Latvia'
+      }
+    },
+
+    {
+      label: "Lithuania's life expectancy at 65",
+      backgroundColor: '#CB3A13',
+      borderColor: '#CB3A13',
+      data: Good_health_total_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Lithuania'
+      }
+    }
+  ]
+  };
+
+
+  const data_health_men_time = {
+    datasets: [{
+      label: "Switzerland's life expectancy at 65 for men",
+      backgroundColor: '#05A923',
+      borderColor: '#05A923',
+      data: Good_health_men_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Switzerland'
+      }
+    },
+
+    {
+      label: "Ireland's life expectancy at 65 for men",
+      backgroundColor: '#3DC255',
+      borderColor: '#3DC255',
+      data: Good_health_men_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Ireland'
+      }
+    },
+
+    {
+      label: "Iceland's life expectancy at 65 for men",
+      backgroundColor: '#6FEB85',
+      borderColor: '#6FEB85',
+      data: Good_health_men_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Iceland'
+      }
+    },
+
+    {
+      label: "Portugal's life expectancy at 65 for men",
+      backgroundColor: '#D18773',
+      borderColor: '#D18773',
+      data: Good_health_men_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Portugal'
+      }
+    },
+
+    {
+      label: "Latvia's life expectancy at 65 for men",
+      backgroundColor: '#CE6548',
+      borderColor: '#CE6548',
+      data: Good_health_men_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Latvia'
+      }
+    },
+
+    {
+      label: "Lithuania's life expectancy at 65 for men",
+      backgroundColor: '#CB3A13',
+      borderColor: '#CB3A13',
+      data: Good_health_men_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Lithuania'
+      }
+    }
+  ]
+  };
+
+
+  const data_health_women_time = {
+    datasets: [{
+      label: "Ireland's life expectancy at 65 for women",
+      backgroundColor: '#05A923',
+      borderColor: '#05A923',
+      data: Good_health_women_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Ireland'
+      }
+    },
+
+    {
+      label: "Switzerland's life expectancy at 65 for women",
+      backgroundColor: '#3DC255',
+      borderColor: '#3DC255',
+      data: Good_health_women_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Switzerland'
+      }
+    },
+
+    {
+      label: "Greece's life expectancy at 65 for women",
+      backgroundColor: '#6FEB85',
+      borderColor: '#6FEB85',
+      data: Good_health_women_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Greece'
+      }
+    },
+
+    {
+      label: "Portugal's life expectancy at 65 for women",
+      backgroundColor: '#D18773',
+      borderColor: '#D18773',
+      data: Good_health_women_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Portugal'
+      }
+    },
+
+    {
+      label: "Latvia's life expectancy at 65 for women",
+      backgroundColor: '#CE6548',
+      borderColor: '#CE6548',
+      data: Good_health_women_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Latvia'
+      }
+    },
+
+    {
+      label: "Lithuania's life expectancy at 65 for women",
+      backgroundColor: '#CB3A13',
+      borderColor: '#CB3A13',
+      data: Good_health_women_time,
+      tension:0.4,
+      parsing:{
+        xAxisKey:'year',
+        yAxisKey:'data.Lithuania'
+      }
+    }
+  ]
+  };
+
+  const config_health_total_time = {
+    type: 'line',
+    data: data_health_total_time,
+    options: {}
+  };
+
+  const config_health_men_time = {
+    type: 'line',
+    data: data_health_men_time,
+    options: {}
+  };
+
+  const config_health_women_time = {
+    type: 'line',
+    data: data_health_women_time,
+    options: {}
+  };
+
+  const myHealthTotalTimeChart = new Chart(
+    document.getElementById('myHealthTotalTimeChart'),
+    config_health_total_time
+  );
+
+  const myHealthMenTimeChart = new Chart(
+    document.getElementById('myHealthMenTimeChart'),
+    config_health_men_time
+  );
+
+  const myHealthWomenTimeChart = new Chart(
+    document.getElementById('myHealthWomenTimeChart'),
+    config_health_women_time
+  );
+</script>
+
+
+<div class="foot">
+</div>
+
+  </body>
+</html>
